@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmileLoader — YouGotaGift</title>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; background: #0E0F0C; overflow: hidden; }
+    #root { width: 100%; height: 100%; }
+
+    /* ─── Loader keyframes ─────────────────────────────────────── */
+
+    @keyframes dotBounce {
+      0%, 100% { transform: translateY(0);     animation-timing-function: cubic-bezier(0.42,0,1,1); }
+      50%       { transform: translateY(-11px); animation-timing-function: cubic-bezier(0,0,0.58,1); }
+    }
+
+    @keyframes uPulse {
+      0%, 100% { transform: scale(1);     }
+      50%       { transform: scale(1.055); }
+    }
+
+    /* Idle state: dots bounce, U pulses */
+    .loader-dot-left  { animation: dotBounce 0.88s ease-in-out infinite; }
+    .loader-dot-right { animation: dotBounce 0.88s ease-in-out infinite 0.27s; }
+    .loader-u         { animation: uPulse 1.55s ease-in-out infinite;
+                        transform-origin: 100px 152px; }
+
+    /* Exit state: dots vanish, logo scales to full-screen portal */
+    .loader-dot-left.exit,
+    .loader-dot-right.exit {
+      animation: none;
+      transform: scale(0);
+      opacity: 0;
+      transition: transform 0.18s ease-in, opacity 0.18s ease-in;
+    }
+    .loader-dot-right.exit { transition-delay: 0.04s; }
+
+    .loader-u.exit {
+      animation: none;
+    }
+
+    /* White backdrop */
+    .loader-backdrop {
+      position: fixed; inset: 0;
+      background: #0E0F0C;
+      z-index: 9998;
+      pointer-events: none;
+      transition: none;
+    }
+    .loader-backdrop.exit {
+      opacity: 0;
+      transition: opacity 0.58s 0.22s cubic-bezier(0.2,0,0,1);
+    }
+
+    /* Logo wrapper — scales up on exit to become the reveal portal */
+    .loader-logo-wrap {
+      position: fixed; inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .loader-logo-inner {
+      transform-origin: center center;
+      transition: none;
+    }
+    .loader-logo-inner.exit {
+      /* scale set via inline style (viewport-relative); fade after peak */
+      transition:
+        transform 0.92s cubic-bezier(0.1, 0.0, 0.08, 1.0),
+        opacity   0.28s 0.80s ease-in;
+      opacity: 0;
+    }
+
+    /* ─── Demo homepage ────────────────────────────────────────── */
+    .demo-page {
+      width: 100%; height: 100vh;
+      background:
+        radial-gradient(ellipse 130% 80% at 50% 115%, rgba(184,0,196,.24) 0%, transparent 56%),
+        #0E0F0C;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0;
+      font-family: 'Syne', system-ui, sans-serif;
+      overflow: hidden;
+      user-select: none;
+    }
+    .demo-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+    }
+    .demo-wordmark {
+      font-size: clamp(42px, 8vw, 86px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      position: relative; z-index: 1;
+    }
+    .demo-wordmark span { color: #B800C4; }
+    .demo-tagline {
+      margin-top: 18px;
+      font-size: clamp(12px, 1.5vw, 18px);
+      color: rgba(255,255,255,0.48);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      position: relative; z-index: 1;
+    }
+    .demo-replay {
+      margin-top: 52px;
+      padding: 11px 28px;
+      background: transparent;
+      color: rgba(255,255,255,0.45);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'Syne', system-ui, sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative; z-index: 1;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .demo-replay:hover {
+      border-color: #B800C4;
+      color: #E07AE9;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo, useCallback, useRef } = React;
+
+    /* ═══════════════════════════════════════════════════════════════
+       SmileLogo  — SVG logo, fully animated via CSS classes
+       ═══════════════════════════════════════════════════════════════
+       The U is drawn as a thick stroke path so arm-tops and the
+       bottom arc are naturally rounded without extra path maths.
+
+       viewBox 0 0 200 242
+         Arms path: M 34,96 L 34,152 A 66,66 0 0 0 166,152 L 166,96
+         strokeWidth 40 → arm width 40 px
+         inner gap:  (166−20) − (34+20) = 92 units  (46 % of 200)
+         arc bottom: 152 + 66 + 20 = 238 ✓ (fits 242 viewBox)
+         arm-top cap apex: 96 − 20 = 76;  dot bottom: 44+23=67  gap=9 ✓
+    ═══════════════════════════════════════════════════════════════ */
+    const SmileLogo = ({ phase }) => {
+      const exit = phase === 'exit';
+      return (
+        <svg
+          viewBox="0 0 200 242"
+          width={114}
+          height={138}
+          style={{ display: 'block', overflow: 'visible' }}
+          aria-hidden="true"
+        >
+          {/* Left eye — centered above left arm (arm centerline x=34) */}
+          <circle
+            className={`loader-dot-left${exit ? ' exit' : ''}`}
+            cx={34} cy={44} r={22}
+            fill="#E07AE9"
+            style={{ transformOrigin: '34px 44px' }}
+          />
+          {/* Right eye — centered above right arm (arm centerline x=166) */}
+          <circle
+            className={`loader-dot-right${exit ? ' exit' : ''}`}
+            cx={166} cy={44} r={22}
+            fill="#E07AE9"
+            style={{ transformOrigin: '166px 44px' }}
+          />
+          {/* U smile */}
+          <path
+            className={`loader-u${exit ? ' exit' : ''}`}
+            d="M 34,96 L 34,152 A 66,66 0 0 0 166,152 L 166,96"
+            stroke="#B800C4"
+            strokeWidth={40}
+            strokeLinecap="round"
+            fill="none"
+          />
+        </svg>
+      );
+    };
+
+    /* ═══════════════════════════════════════════════════════════════
+       Loader  — reusable full-screen preloader component
+
+       Props:
+         onComplete  fn   called when loader finishes
+         children         the page content to reveal
+
+       Embed anywhere:
+         <Loader onComplete={() => console.log('ready!')}>
+           <YourPage />
+         </Loader>
+    ═══════════════════════════════════════════════════════════════ */
+    const Loader = ({ children, onComplete }) => {
+      const [phase, setPhase] = useState('idle'); // 'idle' | 'exit' | 'done'
+      const logoInnerRef = useRef(null);
+
+      /* Scale factor: U interior (92/200 * 114px ≈ 52px) must fill viewport diagonal */
+      const exitScale = useMemo(() => {
+        const interior = (92 / 200) * 114;            // ~52.4 px
+        const diag = Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2);
+        return Math.ceil(diag / interior) + 6;        // +6 for safety margin
+      }, []);
+
+      useEffect(() => {
+        const t1 = setTimeout(() => {
+          setPhase('exit');
+          /* Apply scale via inline style so the CSS transition picks it up */
+          if (logoInnerRef.current) {
+            logoInnerRef.current.style.transform = `scale(${exitScale})`;
+          }
+        }, 1500);
+
+        const t2 = setTimeout(() => {
+          setPhase('done');
+          onComplete?.();
+        }, 2750);
+
+        return () => { clearTimeout(t1); clearTimeout(t2); };
+      }, [exitScale]);
+
+      if (phase === 'done') return <>{children}</>;
+
+      return (
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+          {children}
+
+          {/* ── White backdrop ── */}
+          <div className={`loader-backdrop${phase === 'exit' ? ' exit' : ''}`} />
+
+          {/* ── Logo / portal ── */}
+          <div className="loader-logo-wrap">
+            <div
+              ref={logoInnerRef}
+              className={`loader-logo-inner${phase === 'exit' ? ' exit' : ''}`}
+            >
+              <SmileLogo phase={phase} />
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    /* ═══════════════════════════════════════════════════════════════
+       Demo
+    ═══════════════════════════════════════════════════════════════ */
+    const DemoHomepage = ({ onReplay }) => (
+      <div className="demo-page">
+        <div className="demo-grid" />
+        <div className="demo-wordmark">
+          YOU<span>Gota</span>Gift
+        </div>
+        <div className="demo-tagline">
+          Engineering the Future of Digital Rewards
+        </div>
+        <button className="demo-replay" onClick={onReplay}>
+          ↺ &nbsp; Replay Loader
+        </button>
+      </div>
+    );
+
+    const App = () => {
+      const [key, setKey] = useState(0);
+      const replay = useCallback(() => setKey(k => k + 1), []);
+      return (
+        <div style={{ width: '100%', height: '100vh' }}>
+          <Loader key={key}>
+            <DemoHomepage onReplay={replay} />
+          </Loader>
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

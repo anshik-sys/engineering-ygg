@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trust Center — YOUGotaGift Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/hooskai-chamfered-square" rel="stylesheet">
+<link rel="stylesheet" href="site-styles.css">
+</head>
+<body>
+<!-- SmileLoader overlay -->
+<div id="sl-backdrop"></div>
+<div id="sl-logo-wrap">
+  <div id="sl-logo-inner">
+    <svg viewBox="0 0 200 242" width="92" height="111" style="display:block;overflow:visible" aria-hidden="true">
+      <circle id="sl-dot-l" class="sl-dot-l" cx="34"  cy="44" r="22" fill="#E07AE9" style="transform-origin:34px 44px"/>
+      <circle id="sl-dot-r" class="sl-dot-r" cx="166" cy="44" r="22" fill="#E07AE9" style="transform-origin:166px 44px"/>
+      <path   id="sl-u"     class="sl-u" d="M 34,96 L 34,152 A 66,66 0 0 0 166,152 L 166,96"
+              stroke="#B800C4" stroke-width="40" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+</div>
+
+<div class="page-bg" aria-hidden="true">
+  <div class="pg-stars"></div>
+</div>
+<!-- NAV -->
+<div class="nav-wrap">
+  <a class="nav-logo" href="index.html" aria-label="YOUGotaGift">
+    <img src="assets/yougotagift-logo.png" alt="YOUGotaGift" />
+  </a>
+  <nav class="nav">
+    <div class="brand">
+      <a class="brand-tag" href="index.html" style="text-decoration:none;">Engineering</a>
+    </div>
+    <div class="nav-links">
+      <a href="Stories%20v2.html">Stories</a>
+      <a>Status</a>
+      <a href="Stack%20v2.html">Stack</a>
+      <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
+      <a href="Trust%20Center.html" class="current">Trust Center</a>
+      <a href="Newsroom%20v3.html">Newsroom</a>
+    </div>
+    <div class="nav-cta">
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</div>
+<!-- Top-right floating controls -->
+<div class="top-right-controls">
+  <div class="status-pill">
+    <span class="status-dot-lg"></span>
+    <span class="status-text">
+      <span class="status-title">MyRewards</span>
+      <span class="status-sub">100% uptime</span>
+    </span>
+  </div>
+  <span class="controls-divider"></span>
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+  </button>
+</div>
+<!-- Mobile nav drawer -->
+<div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <nav class="mobile-drawer-links">
+    <a href="Stories%20v2.html">Stories</a>
+    <a>Status</a>
+    <a href="Stack%20v2.html">Stack</a>
+    <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
+    <a href="Trust%20Center.html" class="current">Trust Center</a>
+    <a href="Newsroom%20v3.html">Newsroom</a>
+    <a href="index.html">Home</a>
+  </nav>
+</div>
+<div class="page-breadcrumb">
+  <a href="index.html">Engineering</a>
+  <span class="sep">/</span>
+  <span class="here">Trust Center</span>
+</div>
+<section class="trust subpage-section" data-screen-label="Trust Center" id="trust">
+  <div class="trust-inner">
+
+    <!-- Head: copy left | trust meta right -->
+    <div class="trust-head">
+      <div class="trust-copy">
+        <h2 class="trust-headline">Trust is built into <em>everything</em> we do.</h2>
+        <p class="trust-sub">We maintain clear policies, rigorous controls, and transparent processes to protect your data, ensure reliability, and operate with integrity.</p>
+        <div class="trust-meta-chips">
+          <span class="trust-chip"><span class="trust-chip-dot"></span> PCI-DSS Level 1</span>
+          <span class="trust-chip"><span class="trust-chip-dot"></span> ISO 27001</span>
+          <span class="trust-chip"><span class="trust-chip-dot"></span> SOC 2 Type II</span>
+          <span class="trust-chip"><span class="trust-chip-dot"></span> GDPR</span>
+        </div>
+      </div>
+      <aside class="trust-status-card" aria-label="Compliance status">
+        <div class="trust-status-row">
+          <span class="trust-status-pulse"></span>
+          <span class="trust-status-head">All systems compliant</span>
+        </div>
+        <dl class="trust-status-list">
+          <div class="trust-status-item">
+            <dt>Last security review</dt>
+            <dd>June 2026</dd>
+          </div>
+          <div class="trust-status-item">
+            <dt>Next audit cycle</dt>
+            <dd>Q4 2026</dd>
+          </div>
+          <div class="trust-status-item">
+            <dt>Open incidents</dt>
+            <dd>0 active</dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+
+    <!-- Divider -->
+    <div class="trust-divider"></div>
+
+    <!-- Stats -->
+    <div class="trust-stats">
+      <div class="trust-stat">
+        <svg class="trust-stat-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <path d="M18 4L6 9v9c0 7.18 5.14 13.89 12 15.5C24.86 31.89 30 25.18 30 18V9L18 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M13 18l3.5 3.5L24 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="trust-stat-num">200+</div>
+        <div class="trust-stat-label">Documents</div>
+        <div class="trust-stat-desc">Policies, procedures &amp; frameworks</div>
+      </div>
+      <div class="trust-stat">
+        <svg class="trust-stat-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <circle cx="18" cy="18" r="13" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M18 10v9l5 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="trust-stat-num">24/7</div>
+        <div class="trust-stat-label">Monitoring</div>
+        <div class="trust-stat-desc">Active monitoring and threat detection</div>
+      </div>
+      <div class="trust-stat">
+        <svg class="trust-stat-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <circle cx="18" cy="18" r="13" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M12 18l4 4 8-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="trust-stat-num">99.94%</div>
+        <div class="trust-stat-label">Uptime</div>
+        <div class="trust-stat-desc">Merchant API uptime</div>
+      </div>
+      <div class="trust-stat">
+        <svg class="trust-stat-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect x="11" y="17" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M13 17v-4a5 5 0 0110 0v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="18" cy="23" r="1.5" fill="currentColor"/>
+        </svg>
+        <div class="trust-stat-num">100%</div>
+        <div class="trust-stat-label">Documented Controls</div>
+        <div class="trust-stat-desc">Security and operational controls</div>
+      </div>
+    </div>
+
+    <!-- Approach: copy + media -->
+    <div class="trust-approach">
+      <div class="trust-approach-copy">
+        <h3 class="trust-approach-title">Security woven through <em>every layer.</em></h3>
+        <p class="trust-approach-lead">From the first line of code to the last mile of delivery, controls are designed in — not bolted on. Every system that touches your data is governed by documented policy, continuous monitoring, and independent review.</p>
+        <div class="trust-pillars">
+          <div class="trust-pillar">
+            <div class="trust-pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+            <div>
+              <p class="trust-pillar-title">Encryption by default</p>
+              <p class="trust-pillar-desc">Data is encrypted in transit and at rest with managed keys and strict rotation.</p>
+            </div>
+          </div>
+          <div class="trust-pillar">
+            <div class="trust-pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <div>
+              <p class="trust-pillar-title">Continuous monitoring</p>
+              <p class="trust-pillar-desc">24/7 threat detection, automated alerting, and a tested incident response runbook.</p>
+            </div>
+          </div>
+          <div class="trust-pillar">
+            <div class="trust-pillar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div>
+              <p class="trust-pillar-title">Least-privilege access</p>
+              <p class="trust-pillar-desc">Role-based access, enforced MFA, and quarterly reviews keep entitlements tight.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="trust-media">
+        <image-slot id="trust-approach-img" shape="rect" placeholder="Drop a security / data-center image" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1100&q=80"></image-slot>
+      </div>
+    </div>
+
+    <!-- Feature: media + copy -->
+    <div class="trust-feature">
+      <div class="trust-media">
+        <image-slot id="trust-feature-img" shape="rect" placeholder="Drop a data-protection image" src="https://images.unsplash.com/photo-1614064548237-096f735f344f?auto=format&fit=crop&w=1100&q=80"></image-slot>
+      </div>
+      <div class="trust-feature-copy">
+        <h3 class="trust-approach-title">Your data, protected <em>end to end.</em></h3>
+        <p class="trust-approach-lead">Customer and cardholder data is isolated, minimized, and retained only as long as needed. Access is logged, reviewed, and revocable in real time.</p>
+        <ul class="trust-feature-list">
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l4 4 8-9"/></svg><span><strong>Tokenized payments</strong> — raw card numbers never touch our application layer.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l4 4 8-9"/></svg><span><strong>Regional data residency</strong> across the UAE, KSA, and wider GCC.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l4 4 8-9"/></svg><span><strong>Tested recovery</strong> with documented RTO/RPO and routine restore drills.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l4 4 8-9"/></svg><span><strong>Vendor due diligence</strong> on every third party that processes data.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Policies (final section before footer) -->
+    <div class="trust-policies-section" id="policies">
+      <div class="trust-section-head">
+        <h3 class="trust-section-title">Read the documents behind our controls.</h3>
+        <p class="trust-policies-intro">Every policy below is a living document, reviewed at least annually. Select a card to open the full document.</p>
+      </div>
+    </div>
+
+    <!-- All Policies -->
+    <div class="trust-policy-grid">
+      <a href="documents/information-security-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Information Security Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/incident-management-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Incident Management Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/it-risk-management-framework.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">IT Risk Management Framework</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/disaster-recovery-plan.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Disaster Recovery Plan</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/service-level-agreement-sla.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Service Level Agreement (SLA)</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/access-management-policies-and-procedures.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Access Management Policies &amp; Procedures</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/data-protection-and-privacy-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Data Protection &amp; Privacy Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/business-continuity-plan.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Business Continuity Plan</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/acceptable-use-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Acceptable Use Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/vendor-and-third-party-risk-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Vendor &amp; Third-Party Risk Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/encryption-and-key-management-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Encryption &amp; Key Management Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/vulnerability-management-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Vulnerability Management Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/change-management-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Change Management Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/data-retention-and-disposal-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Data Retention &amp; Disposal Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/network-security-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Network Security Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/pci-dss-compliance-statement.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">PCI-DSS Compliance Statement</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/anti-money-laundering-aml-policy.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Anti-Money Laundering (AML) Policy</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+      <a href="documents/vendor-code-of-conduct.pdf" target="_blank" rel="noopener" class="trust-policy-card">
+        <div class="trust-policy-top"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 2h7l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 2v5h5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 12h6M8 15h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div class="trust-policy-bottom"><span class="trust-policy-name">Vendor Code of Conduct</span><svg class="trust-policy-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer" data-screen-label="Footer">
+  <div class="footer-card">
+    <canvas id="footerGlobe" aria-hidden="true"></canvas>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="assets/yougotagift-logo.png" alt="YOUGotaGift" style="object-fit: contain; object-position: left center;" />
+        <p class="footer-brand-tagline">Building the future of branded payments — infrastructure, rewards, and gifting across the globe.</p>
+        <div class="footer-social-row">
+          <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:currentColor"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-col-links">
+          <li><a href="#">For Businesses</a></li>
+          <li><a href="#">Buy eGift Cards</a></li>
+          <li><a href="#">Start a Group Gift</a></li>
+          <li><a href="#">Buy Gaming Cards</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Policy &amp; Info</p>
+        <ul class="footer-col-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Media Centre</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Engineering</p>
+        <ul class="footer-col-links">
+          <li><a href="Stack%20v2.html">Stack</a></li>
+          <li><a>Status</a></li>
+          <li><a href="Newsroom%20v3.html">Newsroom</a></li>
+          <li><a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
+          <li><a href="Trust%20Center.html">Trust Center</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p class="footer-bar-copy">&#169; 2026 YOUGotaGift.com Ltd. &nbsp;&middot;&nbsp; UAE | Saudi Arabia | Qatar | Bahrain | Oman | Kuwait | India</p>
+      <div class="footer-bar-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-wordmark-wrap" aria-hidden="true">
+    <div class="footer-wordmark"><span>E</span><span>n</span><span>g</span><span class="wm-brand">i</span><span>n</span><span>e</span><span class="wm-brand">e</span><span>r</span><span>i</span><span class="wm-brand">n</span><span>g</span></div>
+
+  </div>
+</footer>
+<script src="image-slot.js"></script>
+<script src="site-shared.js"></script>
+<script src="js/trust.js"></script>
+
+<style>
+/* ---- Reveal animation system ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .rv { opacity: 0; transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
+  .rv.rv-up  { transform: translateY(32px); }
+  .rv.rv-left{ transform: translateX(40px); }
+  .rv.rv-right{ transform: translateX(-40px); }
+  .rv.rv-scale{ transform: scale(.96); }
+  .rv.visible { opacity: 1 !important; transform: none !important; }
+  .rv-expand { transform-origin: left center; transform: scaleX(0); opacity: 1; transition: transform .8s cubic-bezier(.16,1,.3,1); }
+  .rv-expand.visible { transform: scaleX(1); }
+}
+</style>
+
+<script>
+(function(){
+  var mo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(mo) return;
+
+  /* Map sections → reveal directions */
+  function tag(el, cls, delay){
+    el.classList.add('rv', cls);
+    if(delay) el.style.transitionDelay = delay + 'ms';
+  }
+
+  var inner = document.querySelector('.trust-inner');
+  if(!inner) return;
+
+  /* Hero copy & status card */
+  var copy = inner.querySelector('.trust-copy');
+  var card = inner.querySelector('.trust-status-card');
+  if(copy) tag(copy, 'rv-up');
+  if(card) tag(card, 'rv-left', 120);
+
+  /* Divider */
+  var div = inner.querySelector('.trust-divider');
+  if(div){ div.classList.add('rv-expand'); }
+
+  /* Stats — stagger */
+  inner.querySelectorAll('.trust-stat').forEach(function(el, i){
+    tag(el, 'rv-up', i * 80);
+  });
+
+  /* Approach */
+  var apCopy = inner.querySelector('.trust-approach-copy');
+  var apMedia = inner.querySelector('.trust-approach .trust-media');
+  if(apCopy) tag(apCopy, 'rv-up');
+  if(apMedia) tag(apMedia, 'rv-left', 120);
+
+  /* Approach pillars stagger */
+  inner.querySelectorAll('.trust-pillar').forEach(function(el, i){
+    tag(el, 'rv-up', 80 + i * 80);
+  });
+
+  /* Certs section head */
+  var certsHead = inner.querySelector('.trust-certs .trust-section-head');
+  if(certsHead) tag(certsHead, 'rv-up');
+
+  /* Cert cards stagger */
+  inner.querySelectorAll('.trust-cert').forEach(function(el, i){
+    tag(el, 'rv-scale', i * 60);
+  });
+
+  /* Feature */
+  var ftMedia = inner.querySelector('.trust-feature .trust-media');
+  var ftCopy  = inner.querySelector('.trust-feature-copy');
+  if(ftMedia) tag(ftMedia, 'rv-right');
+  if(ftCopy)  tag(ftCopy,  'rv-left', 120);
+
+  /* Feature list items stagger */
+  inner.querySelectorAll('.trust-feature-list li').forEach(function(el, i){
+    tag(el, 'rv-up', 80 + i * 60);
+  });
+
+  /* Policies section head */
+  var polHead = inner.querySelector('.trust-policies-section .trust-section-head');
+  if(polHead) tag(polHead, 'rv-up');
+
+  /* Policy cards stagger */
+  inner.querySelectorAll('.trust-policy-card').forEach(function(el, i){
+    tag(el, 'rv-up', i * 40);
+  });
+
+  /* IntersectionObserver */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  inner.querySelectorAll('.rv, .rv-expand').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

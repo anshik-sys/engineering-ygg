@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Life at YOUGotaGift — Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/hooskai-chamfered-square" rel="stylesheet">
+<link rel="stylesheet" href="site-styles.css">
+<style>
+/* ============================================================
+   LIFE AT YOUGOTAGIFT — clean editorial redesign
+   No grid backgrounds · refined card hovers · each photo once
+   ============================================================ */
+
+.lf-wrap { position: relative; z-index: 5; }
+.lf-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* shared section spacing */
+.lf-section { position: relative; z-index: 2; padding: 76px 0; }
+.lf-section.first { padding-top: 16px; }
+
+/* shared section header */
+.lf-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--brand-soft);
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-bottom: 16px;
+}
+.lf-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
+.lf-title {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(32px, 3.6vw, 52px);
+  line-height: 1.04; letter-spacing: -0.035em;
+  color: var(--ink); margin: 0;
+}
+.lf-title em {
+  font-style: italic; font-weight: 300;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0BCF5 50%, #B800C4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; font-variation-settings: "wdth" 90;
+  padding-right: .1em; display: inline-block;
+}
+html[data-theme="light"] .lf-title em {
+  background: linear-gradient(180deg, #2A0F30 0%, #B800C4 55%, #7A0084 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lf-lead {
+  font-family: var(--font-ui); font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.62; color: var(--ink-dim); margin: 16px 0 0; max-width: 54ch;
+}
+
+/* ── HERO ── */
+.lf-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(36px, 4.5vw, 72px);
+  align-items: center;
+}
+.lf-hero-copy { display: flex; flex-direction: column; }
+.lf-hero-h1 {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(46px, 5.4vw, 82px);
+  line-height: 1.0; letter-spacing: -0.04em;
+  color: var(--ink); margin: 14px 0 24px;
+}
+.lf-hero-h1 .ln { display: block; }
+.lf-hero-h1 .gr {
+  font-style: italic;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0BCF5 50%, #B800C4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; font-variation-settings: "wdth" 90;
+  padding-right: .1em; display: inline-block;
+}
+html[data-theme="light"] .lf-hero-h1 .gr {
+  background: linear-gradient(180deg, #2A0F30 0%, #B800C4 55%, #7A0084 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lf-hero-lead {
+  font-family: var(--font-ui); font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.62; color: var(--ink-dim); max-width: 40ch; margin: 0 0 32px;
+}
+.lf-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 999px;
+  background: var(--brand); color: #fff;
+  font-family: var(--font-ui); font-size: 14px; font-weight: 600;
+  text-decoration: none; letter-spacing: -0.01em; align-self: flex-start;
+  transition: filter .25s ease, transform .22s ease;
+}
+.lf-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.lf-btn svg { flex-shrink: 0; }
+
+/* hero feature photo */
+.lf-hero-photo {
+  position: relative;
+  border-radius: 24px; overflow: hidden;
+  aspect-ratio: 4/3;
+  border: 1px solid var(--line);
+}
+.lf-hero-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .8s cubic-bezier(.2,0,0,1);
+}
+.lf-hero-photo:hover img { transform: scale(1.04); }
+.lf-hero-photo figcaption {
+  position: absolute; bottom: 14px; left: 14px;
+  font-family: var(--font-mono); font-size: 9.5px;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.85);
+  background: rgba(0,0,0,.45); backdrop-filter: blur(8px);
+  padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+/* hero stats strip */
+.lf-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  margin-top: 56px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+.lf-stat { padding: 24px 26px; border-right: 1px solid var(--line); transition: background .25s; }
+.lf-stat:last-child { border-right: none; }
+.lf-stat:hover { background: rgba(184,0,196,.05); }
+html[data-theme="light"] .lf-stat:hover { background: rgba(184,0,196,.04); }
+.lf-stat-num {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(28px, 3vw, 42px); line-height: 1;
+  letter-spacing: -0.04em; color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.lf-stat-num .sup { color: var(--brand-soft); font-size: .5em; }
+.lf-stat-lbl {
+  font-family: var(--font-mono); font-size: 9.5px;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-faint); margin-top: 8px;
+}
+
+/* ── VALUES ── */
+.lf-values-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-top: 48px;
+}
+.lf-card {
+  position: relative;
+  display: flex; flex-direction: column;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(26,20,30,.95), rgba(16,12,20,.97));
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.03) inset,
+    0 24px 48px -20px rgba(0,0,0,.80);
+  padding: 28px 22px;
+  /* entrance: start offset, slide to place when .in is set on parent */
+  transform: translateY(44px) scale(0.95);
+  transition: transform .4s cubic-bezier(.2,0,0,1),
+              border-color .3s cubic-bezier(.2,0,0,1),
+              box-shadow .4s cubic-bezier(.2,0,0,1),
+              opacity .4s cubic-bezier(.2,0,0,1);
+  opacity: 0;
+}
+html[data-theme="light"] .lf-card {
+  background: rgba(255,255,255,.75);
+  border-color: rgba(26,14,28,.07);
+  box-shadow: 0 18px 44px -20px rgba(26,14,28,.14), 0 0 0 1px rgba(255,255,255,.7) inset;
+}
+/* After section gets .in — slide cards to resting position */
+.lf-values-grid.in .lf-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition-delay: var(--d, 0s);
+}
+/* Hover only fires after entrance is done */
+.lf-values-grid.in .lf-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  transition-delay: 0s;
+  z-index: 4;
+  border-color: rgba(184,0,196,.38);
+  box-shadow:
+    0 0 0 1px rgba(184,0,196,.18) inset,
+    0 32px 56px -22px rgba(0,0,0,.85),
+    0 0 48px -16px rgba(184,0,196,.42);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lf-card { opacity: 1 !important; transform: none !important; }
+}
+.lf-card-ico {
+  width: 46px; height: 46px; border-radius: 13px;
+  background: rgba(184,0,196,.1);
+  border: 1px solid rgba(184,0,196,.24);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--brand-soft); margin-bottom: 22px; flex-shrink: 0;
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+html[data-theme="light"] .lf-card-ico { color: var(--brand); }
+.lf-card:hover .lf-card-ico {
+  background: rgba(184,0,196,.18); border-color: rgba(184,0,196,.4);
+}
+.lf-card h3 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: 18px; line-height: 1.2; letter-spacing: -0.02em;
+  color: var(--ink); margin: 0 0 10px;
+}
+.lf-card p {
+  font-family: var(--font-ui); font-size: 13.5px;
+  line-height: 1.62; color: var(--ink-dim); margin: 0;
+}
+
+/* ── LIFE IN PHOTOS ── */
+.lf-photos {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px; margin-top: 48px;
+  height: 580px;
+}
+.lf-photo { position: relative; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); }
+.lf-photo.tall { grid-row: 1 / 3; }
+.lf-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .8s cubic-bezier(.2,0,0,1);
+}
+.lf-photo:hover img { transform: scale(1.05); }
+.lf-photo-cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 44px 22px 20px;
+  background: linear-gradient(0deg, rgba(0,0,0,.72), transparent);
+  transform: translateY(8px); opacity: 0;
+  transition: transform .4s cubic-bezier(.2,0,0,1), opacity .4s ease;
+}
+.lf-photo:hover .lf-photo-cap { transform: none; opacity: 1; }
+.lf-photo-cap .t {
+  display: block; font-family: var(--font-display); font-weight: 500;
+  font-size: 16px; letter-spacing: -0.01em; color: #fff;
+}
+.lf-photo-cap .s {
+  display: block; margin-top: 3px;
+  font-family: var(--font-mono); font-size: 9.5px;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+}
+
+/* ── PERKS ── */
+.lf-perks-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; margin-top: 48px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 18px; overflow: hidden;
+}
+.lf-perk {
+  background: var(--bg);
+  padding: 30px 28px;
+  transition: background .25s ease, transform .4s cubic-bezier(.2,0,0,1);
+}
+.lf-perk:hover {
+  background: rgba(184,0,196,.04);
+  transform: translateY(-3px);
+}
+.lf-perk-ico {
+  color: var(--brand-soft); margin-bottom: 16px;
+  display: inline-flex;
+}
+html[data-theme="light"] .lf-perk-ico { color: var(--brand); }
+.lf-perk h4 {
+  font-family: var(--font-ui); font-size: 15px; font-weight: 600;
+  letter-spacing: -0.01em; color: var(--ink); margin: 0 0 8px;
+}
+.lf-perk p {
+  font-family: var(--font-ui); font-size: 13px; line-height: 1.55;
+  color: var(--ink-dim); margin: 0;
+}
+
+/* ── JOIN ── */
+.lf-join {
+  border-radius: 26px;
+  background: linear-gradient(135deg, rgba(184,0,196,.14) 0%, rgba(70,0,80,.08) 55%, rgba(20,16,22,.9) 100%);
+  border: 1px solid rgba(184,0,196,.24);
+  padding: 64px 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 40px;
+}
+html[data-theme="light"] .lf-join {
+  background: linear-gradient(135deg, rgba(184,0,196,.08) 0%, rgba(70,0,80,.04) 55%, rgba(255,255,255,.95) 100%);
+}
+.lf-join-t {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(30px, 3.4vw, 52px); letter-spacing: -0.035em;
+  color: var(--ink); margin: 0 0 12px; line-height: 1.04;
+}
+.lf-join-t em {
+  font-style: italic;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0BCF5 50%, #B800C4 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-variation-settings: "wdth" 90; padding-right: .1em; display: inline-block;
+}
+html[data-theme="light"] .lf-join-t em {
+  background: linear-gradient(180deg, #2A0F30 0%, #B800C4 55%, #7A0084 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lf-join-s {
+  font-family: var(--font-ui); font-size: clamp(14px, 1.05vw, 16px);
+  color: var(--ink-dim); max-width: 44ch; margin: 0; line-height: 1.6;
+}
+.lf-join-action { flex-shrink: 0; }
+
+/* ════════════════════════════════════════════
+   ORIGINAL-SITE STRUCTURE — brand-styled + animated
+   ════════════════════════════════════════════ */
+
+/* ── HERO COLLAGE (replaces single photo) ── */
+.lf-hero-collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-height: 460px;
+  grid-template-rows: 1.35fr 1fr;
+  gap: 12px;
+  aspect-ratio: 1/1;
+}
+.lf-hc { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); }
+.lf-hc.wide { grid-column: 1 / 3; grid-row: 1; }
+.lf-hc img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s cubic-bezier(.2,0,0,1); }
+.lf-hc:hover img { transform: scale(1.05); }
+.lf-hc-cap {
+  position: absolute; bottom: 12px; left: 12px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.85); background: rgba(0,0,0,.45); backdrop-filter: blur(8px);
+  padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.14);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lf-hc { opacity: 0; transform: translateY(18px) scale(.97); animation: lfHcIn .8s cubic-bezier(.2,0,0,1) forwards; }
+  .lf-hc.wide { animation-delay: .08s; }
+  .lf-hc:nth-child(2) { animation-delay: .2s; }
+  .lf-hc:nth-child(3) { animation-delay: .3s; }
+}
+@keyframes lfHcIn { to { opacity: 1; transform: none; } }
+
+/* ── TRIO: Connected / Inclusive / Flexible ── */
+.lf-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 24px; }
+.lf-trio-item { padding-top: 22px; border-top: 1px solid var(--line); }
+.lf-trio-ico {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: rgba(184,0,196,.1); border: 1px solid rgba(184,0,196,.24);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--brand-soft); margin-bottom: 18px;
+}
+html[data-theme="light"] .lf-trio-ico { color: var(--brand); }
+.lf-trio-item h3 {
+  font-family: var(--font-display); font-weight: 600; font-size: 19px;
+  letter-spacing: -0.02em; color: var(--ink); margin: 0 0 10px;
+}
+.lf-trio-item p {
+  font-family: var(--font-ui); font-size: 14px; line-height: 1.62;
+  color: var(--ink-dim); margin: 0;
+}
+
+/* ── CORE VALUES ── */
+.lf-core { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px, 5vw, 80px); align-items: center; }
+.lf-core-copy .lf-lead { max-width: 46ch; }
+.lf-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.lf-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px; border-radius: 999px;
+  border: 1px solid var(--line-2); background: var(--glass);
+  font-family: var(--font-ui); font-size: 13.5px; font-weight: 500; color: var(--ink);
+  transition: border-color .25s ease, color .25s ease, transform .25s ease, background .25s ease;
+}
+.lf-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
+.lf-chip:hover { border-color: rgba(184,0,196,.45); color: var(--brand-soft); transform: translateY(-2px); background: rgba(184,0,196,.06); }
+html[data-theme="light"] .lf-chip:hover { color: var(--brand); }
+
+/* ── ANIMATED BRAND VISUAL PANEL ── */
+.lf-visual {
+  position: relative; border-radius: 24px; overflow: hidden;
+  aspect-ratio: 4/3;
+  background:
+    radial-gradient(120% 120% at 30% 20%, rgba(184,0,196,.22), transparent 55%),
+    linear-gradient(150deg, rgba(40,18,46,.9), rgba(16,12,20,.96));
+  border: 1px solid rgba(184,0,196,.22);
+  display: flex; align-items: center; justify-content: center;
+}
+html[data-theme="light"] .lf-visual {
+  background:
+    radial-gradient(120% 120% at 30% 20%, rgba(184,0,196,.14), transparent 55%),
+    linear-gradient(150deg, rgba(255,255,255,.9), rgba(248,240,250,.96));
+}
+.lf-visual .v-core {
+  position: relative; z-index: 3;
+  width: 110px; height: 110px; border-radius: 28px;
+  background: rgba(184,0,196,.14); border: 1px solid rgba(184,0,196,.4);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--brand-soft);
+  box-shadow: 0 0 50px -10px rgba(184,0,196,.5);
+  animation: lfBob 5s ease-in-out infinite;
+}
+html[data-theme="light"] .lf-visual .v-core { color: var(--brand); }
+@keyframes lfBob { 0%,100% { transform: translateY(-6px); } 50% { transform: translateY(6px); } }
+.lf-visual .v-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(184,0,196,.22);
+}
+.lf-visual .v-ring.r1 { width: 58%; height: 58%; animation: lfSpin 26s linear infinite; }
+.lf-visual .v-ring.r2 { width: 82%; height: 82%; border-style: dashed; animation: lfSpin 40s linear infinite reverse; }
+@keyframes lfSpin { to { transform: rotate(360deg); } }
+.lf-visual .v-dot {
+  position: absolute; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--brand-soft); box-shadow: 0 0 16px rgba(224,122,233,.8);
+}
+.lf-visual .v-dot.d1 { top: 16%; left: 22%; animation: lfFloat 6s ease-in-out infinite; }
+.lf-visual .v-dot.d2 { bottom: 20%; right: 18%; width: 8px; height: 8px; animation: lfFloat 7.5s ease-in-out infinite .6s; }
+.lf-visual .v-dot.d3 { top: 30%; right: 24%; width: 6px; height: 6px; opacity: .7; animation: lfFloat 5.5s ease-in-out infinite 1.1s; }
+@keyframes lfFloat { 0%,100% { transform: translate(0,0); } 50% { transform: translate(0,-14px); } }
+@media (prefers-reduced-motion: reduce) {
+  .lf-visual .v-core, .lf-visual .v-ring, .lf-visual .v-dot { animation: none !important; }
+}
+
+/* image-slot panels match visual sizing */
+.lf-feature-media image-slot { display: block; width: 100%; height: auto; aspect-ratio: 4/3; border-radius: 24px; overflow: hidden; }
+
+/* ── ZIGZAG FEATURE ROWS ── */
+.lf-feature { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 84px); align-items: center; }
+.lf-feature + .lf-feature { margin-top: clamp(64px, 7vw, 104px); }
+.lf-feature.reverse .lf-feature-media { order: -1; }
+.lf-feature-photo { position: relative; aspect-ratio: 4/3; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); }
+.lf-feature-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s cubic-bezier(.2,0,0,1); }
+.lf-feature-photo:hover img { transform: scale(1.04); }
+.lf-feature-kicker {
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--brand-soft); margin: 0 0 14px;
+}
+.lf-feature-copy h2 {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(28px, 2.8vw, 40px); line-height: 1.08; letter-spacing: -0.03em;
+  color: var(--ink); margin: 0 0 16px;
+}
+.lf-feature-copy h2 em {
+  font-style: italic; font-weight: 300;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0BCF5 50%, #B800C4 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-variation-settings: "wdth" 90; padding-right: .08em; display: inline-block;
+}
+html[data-theme="light"] .lf-feature-copy h2 em {
+  background: linear-gradient(180deg, #2A0F30 0%, #B800C4 55%, #7A0084 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lf-feature-copy p {
+  font-family: var(--font-ui); font-size: clamp(14px, 1.05vw, 16px); line-height: 1.66;
+  color: var(--ink-dim); margin: 0; max-width: 48ch;
+}
+.lf-tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+.lf-tag {
+  font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: var(--ink-dim);
+  border: 1px solid var(--line-2); border-radius: 999px; padding: 6px 14px;
+  transition: color .2s ease, border-color .2s ease;
+}
+.lf-tag:hover { color: var(--brand-soft); border-color: rgba(184,0,196,.4); }
+
+/* ── GLASSDOOR REVIEWS ── */
+.lf-reviews { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 48px; }
+.lf-review {
+  padding: 30px 30px 26px; border-radius: 22px;
+  background: rgba(255,255,255,.025); border: 1px solid var(--line);
+  transition: border-color .3s ease, transform .35s cubic-bezier(.2,0,0,1), box-shadow .35s ease;
+}
+html[data-theme="light"] .lf-review { background: rgba(255,255,255,.78); border-color: rgba(26,14,28,.07); }
+.lf-review:hover { transform: translateY(-4px); border-color: rgba(184,0,196,.32); box-shadow: 0 24px 48px -24px rgba(0,0,0,.6); }
+.lf-stars { display: flex; gap: 3px; margin-bottom: 16px; color: var(--brand-soft); }
+.lf-review-q {
+  font-family: var(--font-display); font-weight: 500; font-size: 17px; line-height: 1.4;
+  letter-spacing: -0.01em; color: var(--ink); margin: 0 0 10px;
+}
+.lf-review-b { font-family: var(--font-ui); font-size: 13.5px; line-height: 1.6; color: var(--ink-dim); margin: 0 0 18px; }
+.lf-review-meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
+
+/* directional reveals */
+.lf-rv-l, .lf-rv-r {
+  opacity: 0;
+  transition: opacity .8s cubic-bezier(.2,0,0,1), transform .8s cubic-bezier(.2,0,0,1);
+}
+.lf-rv-l { transform: translateX(-44px); }
+.lf-rv-r { transform: translateX(44px); }
+.lf-rv-l.visible, .lf-rv-r.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .lf-rv-l, .lf-rv-r { opacity: 1 !important; transform: none !important; }
+}
+
+/* responsive for new sections */
+@media (max-width: 900px) {
+  .lf-trio { grid-template-columns: 1fr; gap: 22px; }
+  .lf-core { grid-template-columns: 1fr; gap: 36px; }
+  .lf-feature { grid-template-columns: 1fr; gap: 32px; }
+  .lf-feature.reverse .lf-feature-media { order: 0; }
+  .lf-feature-media { order: -1; }
+  .lf-reviews { grid-template-columns: 1fr; }
+  .lf-hero-collage { aspect-ratio: 16/11; }
+  .lf-rv-l, .lf-rv-r { transform: translateY(26px); }
+}
+
+/* ── Hero word-by-word entrance — gated on html[data-page-ready] ── */
+html[data-page-ready] .lf-hero-h1 .ln,
+html[data-page-ready] .lf-hero-h1 .gr {
+  animation: lfWordIn .9s cubic-bezier(.2,0,0,1) forwards;
+}
+html[data-page-ready] .lf-hero-h1 .ln   { animation-delay: .05s; }
+html[data-page-ready] .lf-hero-h1 .gr   { animation-delay: .22s; }
+html[data-page-ready] .lf-hero-lead     { animation: lfWordIn .85s cubic-bezier(.2,0,0,1) .42s forwards; }
+html[data-page-ready] .lf-btn-hero      { animation: lfWordIn .75s cubic-bezier(.2,0,0,1) .6s  forwards; }
+html[data-page-ready] .lf-hc           { animation: lfHcIn   .85s cubic-bezier(.2,0,0,1) forwards; }
+html[data-page-ready] .lf-hc.wide     { animation-delay: .1s;  }
+html[data-page-ready] .lf-hc:nth-child(2){ animation-delay: .22s; }
+html[data-page-ready] .lf-hc:nth-child(3){ animation-delay: .32s; }
+
+/* base hidden states — before page-ready */
+.lf-hero-h1 .ln,
+.lf-hero-h1 .gr  { display: block; opacity: 0; transform: translateY(36px); }
+.lf-hero-lead    { opacity: 0; transform: translateY(20px); }
+.lf-btn-hero     { opacity: 0; transform: translateY(16px); }
+/* collage cells hidden until ready */
+.lf-hc           { opacity: 0; transform: translateY(18px) scale(.97); }
+
+@keyframes lfWordIn { to { opacity: 1; transform: none; } }
+@keyframes lfHcIn   { to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .lf-hero-h1 .ln, .lf-hero-h1 .gr, .lf-hero-lead,
+  .lf-btn-hero, .lf-hc {
+    opacity: 1 !important; transform: none !important; animation: none !important;
+  }
+}
+.lf-rv {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity .75s cubic-bezier(.2,0,0,1), transform .75s cubic-bezier(.2,0,0,1);
+}
+.lf-rv.visible { opacity: 1; transform: none; }
+.lf-rv[data-d="1"] { transition-delay: .06s; }
+.lf-rv[data-d="2"] { transition-delay: .14s; }
+.lf-rv[data-d="3"] { transition-delay: .22s; }
+.lf-rv[data-d="4"] { transition-delay: .30s; }
+@media (prefers-reduced-motion: reduce) { .lf-rv { opacity: 1 !important; transform: none !important; } }
+
+/* stat number highlight on reveal */
+.lf-stat { position: relative; overflow: hidden; }
+
+/* SVG placeholder panels */
+.lf-ph-panel {
+  position: relative; border-radius: 24px; overflow: hidden;
+  aspect-ratio: 4/3;
+  background: linear-gradient(145deg, rgba(40,18,46,.9), rgba(16,12,20,.97));
+  border: 1px solid rgba(184,0,196,.2);
+  display: flex; align-items: center; justify-content: center;
+}
+html[data-theme="light"] .lf-ph-panel {
+  background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(248,240,252,.96));
+  border-color: rgba(184,0,196,.15);
+}
+.lf-ph-panel svg { width: 70%; height: 70%; opacity: .9; }
+.lf-ph-label {
+  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-faint); white-space: nowrap;
+}
+
+/* ── responsive ── */
+@media (max-width: 1080px) {
+  .lf-values-grid { grid-template-columns: repeat(2, 1fr); }
+  .lf-perks-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .lf-inner { padding: 0 32px; }
+  .lf-hero { grid-template-columns: 1fr; gap: 36px; }
+  .lf-hero-photo { aspect-ratio: 16/10; }
+  .lf-join { flex-direction: column; align-items: flex-start; padding: 44px 32px; }
+}
+@media (max-width: 680px) {
+  .lf-section { padding: 56px 0; }
+  .lf-inner { padding: 0 22px; }
+  .lf-stats { grid-template-columns: repeat(4, 1fr); overflow-x: auto; }
+  .lf-stat { min-width: 80px; padding: 18px 14px; }
+  .lf-values-grid { grid-template-columns: 1fr; }
+  .lf-perks-grid { grid-template-columns: 1fr; }
+  .lf-photos { grid-template-columns: 1fr; grid-template-rows: 260px 220px 220px; height: auto; }
+  .lf-photo.tall { grid-row: auto; }
+  .lf-photo-cap { opacity: 1; transform: none; }
+}
+@media (max-width: 480px) {
+  .lf-hero-h1 { font-size: clamp(42px, 11vw, 64px); }
+  .lf-join { padding: 34px 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SmileLoader overlay -->
+<div id="sl-backdrop"></div>
+<div id="sl-logo-wrap">
+  <div id="sl-logo-inner">
+    <svg viewBox="0 0 200 242" width="92" height="111" style="display:block;overflow:visible" aria-hidden="true">
+      <circle id="sl-dot-l" class="sl-dot-l" cx="34"  cy="44" r="22" fill="#E07AE9" style="transform-origin:34px 44px"/>
+      <circle id="sl-dot-r" class="sl-dot-r" cx="166" cy="44" r="22" fill="#E07AE9" style="transform-origin:166px 44px"/>
+      <path   id="sl-u"     class="sl-u" d="M 34,96 L 34,152 A 66,66 0 0 0 166,152 L 166,96"
+              stroke="#B800C4" stroke-width="40" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+</div>
+
+<div class="page-bg" aria-hidden="true">
+  <div class="pg-grid"></div>
+  <div class="pg-grid fine"></div>
+  <div class="pg-stars"></div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <a class="nav-logo" href="index.html" aria-label="YOUGotaGift">
+    <img src="assets/yougotagift-logo.png" alt="YOUGotaGift" />
+  </a>
+  <nav class="nav">
+    <div class="brand">
+      <a class="brand-tag" href="index.html" style="text-decoration:none;">Engineering</a>
+    </div>
+    <div class="nav-links">
+      <a href="Stories%20v2.html">Stories</a>
+      <a>Status</a>
+      <a href="Stack%20v2.html">Stack</a>
+      <a href="Life%20at%20YOUGotaGift%20v2.html" class="current">Life at YOUGotaGift</a>
+      <a href="Trust%20Center.html">Trust Center</a>
+      <a href="Newsroom%20v3.html">Newsroom</a>
+    </div>
+    <div class="nav-cta">
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</div>
+
+<!-- Top-right controls -->
+<div class="top-right-controls">
+  <div class="status-pill">
+    <span class="status-dot-lg"></span>
+    <span class="status-text">
+      <span class="status-title">MyRewards</span>
+      <span class="status-sub">100% uptime</span>
+    </span>
+  </div>
+  <span class="controls-divider"></span>
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+  </button>
+</div>
+
+<!-- Mobile drawer -->
+<div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <nav class="mobile-drawer-links">
+    <a href="Stories%20v2.html">Stories</a>
+    <a>Status</a>
+    <a href="Stack%20v2.html">Stack</a>
+    <a href="Life%20at%20YOUGotaGift%20v2.html" class="current">Life at YOUGotaGift</a>
+    <a href="Trust%20Center.html">Trust Center</a>
+    <a href="Newsroom%20v3.html">Newsroom</a>
+    <a href="index.html">Home</a>
+  </nav>
+</div>
+
+<div class="page-breadcrumb">
+  <a href="index.html">Engineering</a>
+  <span class="sep">/</span>
+  <span class="here">Life at YOUGotaGift</span>
+</div>
+
+<div class="lf-wrap">
+
+  <!-- ═══ HERO — Work With Us ═══ -->
+  <section class="lf-section first" data-screen-label="Hero">
+    <div class="lf-inner">
+      <div class="lf-hero">
+        <div class="lf-hero-copy">
+          <h1 class="lf-hero-h1">
+            <span class="ln">Where people</span>
+            <span class="gr">come first.</span>
+          </h1>
+          <p class="lf-hero-lead">Join us in building an experience that values flexibility, fair pay, and meaningful work — alongside a team that genuinely has your back.</p>
+          <a href="#open-roles" class="lf-btn lf-btn-hero">
+            View Careers
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="lf-hero-collage">
+          <div class="lf-hc wide">
+            <img src="uploads/culture_image_4.png" alt="Engineers working at the Kozhikode office" />
+          </div>
+          <div class="lf-hc">
+            <img src="uploads/culture_image_3.png" alt="Team coffee break on the terrace" />
+          </div>
+          <div class="lf-hc">
+            <img src="uploads/culture_image.png" alt="The team celebrating together" />
+          </div>
+        </div>
+      </div>
+
+      <div class="lf-stats">
+        <div class="lf-stat">
+          <div class="lf-stat-num">150<span class="sup">+</span></div>
+          <div class="lf-stat-lbl">Team members</div>
+        </div>
+        <div class="lf-stat">
+          <div class="lf-stat-num">7</div>
+          <div class="lf-stat-lbl">Markets served</div>
+        </div>
+        <div class="lf-stat">
+          <div class="lf-stat-num">12<span class="sup">+</span></div>
+          <div class="lf-stat-lbl">Years growing</div>
+        </div>
+        <div class="lf-stat">
+          <div class="lf-stat-num">6<span class="sup">+</span></div>
+          <div class="lf-stat-lbl">Offices · 2 locations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONNECTED / INCLUSIVE / FLEXIBLE ═══ -->
+  <section class="lf-section" data-screen-label="How we work">
+    <div class="lf-inner">
+      <div class="lf-trio">
+        <div class="lf-trio-item lf-rv" data-d="1">
+          <div class="lf-trio-ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>Connected</h3>
+          <p>No matter the time zone, region, or office — we move as one team with one goal.</p>
+        </div>
+        <div class="lf-trio-item lf-rv" data-d="2">
+          <div class="lf-trio-ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Inclusive</h3>
+          <p>We embrace a wealth of perspectives, united by a shared commitment to help everyone thrive.</p>
+        </div>
+        <div class="lf-trio-item lf-rv" data-d="3">
+          <div class="lf-trio-ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+          <h3>Flexible</h3>
+          <p>We meet people where they are — backgrounds, schedules, and ambitions — and grow from there.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ OUR CORE VALUES ═══ -->
+  <section class="lf-section" id="culture" data-screen-label="Core Values">
+    <div class="lf-inner">
+      <div class="lf-core">
+        <div class="lf-core-copy lf-rv-l">
+          <h2 class="lf-title">Our <em>core values.</em></h2>
+          <p class="lf-lead">At the heart of everything we do are values that guide not just what we build, but how we treat each other. We have no time-up-for-our-own's-sake team, and we exist to make building a platform that protects and value what makes for people to express themselves, connect deeply, and stay true through the power of giving.</p>
+          <p class="lf-lead" style="margin-top:14px;">We're passionate about making giving more thoughtful, personal, and effortless — so they reach the moments that matter most.</p>
+          <div class="lf-chips">
+            <span class="lf-chip">Empathy</span>
+            <span class="lf-chip">Thankfulness</span>
+            <span class="lf-chip">Curiosity</span>
+            <span class="lf-chip">Gratitude</span>
+          </div>
+        </div>
+        <div class="lf-core-visual lf-rv-r">
+          <div class="lf-visual">
+            <span class="v-ring r1"></span>
+            <span class="v-ring r2"></span>
+            <span class="v-dot d1"></span>
+            <span class="v-dot d2"></span>
+            <span class="v-dot d3"></span>
+            <span class="v-core">
+              <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ZIGZAG FEATURE SECTIONS ═══ -->
+  <section class="lf-section" data-screen-label="Life features">
+    <div class="lf-inner">
+
+      <!-- Working & Thriving — photo right -->
+      <div class="lf-feature">
+        <div class="lf-feature-copy lf-rv-l">
+          <p class="lf-feature-kicker">Growth</p>
+          <h2>Working and <em>thriving.</em></h2>
+          <p>We invest in a wide range of benefits designed to help our team feel their best both in and out of the workplace. From comprehensive insurance and mental-wellness support to flexible time off and space to grow, we make sure you have everything you need to maintain a healthy mind and body — to thrive both personally and professionally.</p>
+        </div>
+        <div class="lf-feature-media lf-rv-r">
+          <figure class="lf-feature-photo">
+            <img src="uploads/culture_image_5.jpeg" alt="Team in front of the company milestone wall" />
+          </figure>
+        </div>
+      </div>
+
+      <!-- Internal Events — visual left (reverse) -->
+      <div class="lf-feature reverse">
+        <div class="lf-feature-copy lf-rv-r">
+          <p class="lf-feature-kicker">Together</p>
+          <h2>Internal <em>events.</em></h2>
+          <p>From offsites to team lunches and birthday celebrations, we create moments that bring people together — and turn coworkers into friends. A calm rhythm of shared rituals keeps the culture warm and the connections real, far beyond the everyday flow of work.</p>
+          <div class="lf-tags">
+            <span class="lf-tag">Team Lunches</span>
+            <span class="lf-tag">Outings</span>
+            <span class="lf-tag">Cultural Events</span>
+            <span class="lf-tag">Birthday Celebrations</span>
+          </div>
+        </div>
+        <div class="lf-feature-media lf-rv-l">
+          <div class="lf-visual">
+            <span class="v-ring r1"></span>
+            <span class="v-ring r2"></span>
+            <span class="v-dot d1"></span>
+            <span class="v-dot d2"></span>
+            <span class="v-dot d3"></span>
+            <span class="v-core">
+              <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Employee Engagement — slot right -->
+      <div class="lf-feature">
+        <div class="lf-feature-copy lf-rv-l">
+          <p class="lf-feature-kicker">Engagement</p>
+          <h2>Employee engagement <em>activities.</em></h2>
+          <p>Our continuous engagement initiatives are thoughtfully designed to please connection, collaboration, and encourage personal growth. By strengthening the bonds between team members, we create a workplace where everyone feels valued, connected, and inspired to bring their best selves forward — where these connections flourish, our collective effectiveness moves with them.</p>
+        </div>
+        <div class="lf-feature-media lf-rv-r">
+          <div class="lf-ph-panel">
+            <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="48" r="18" fill="rgba(184,0,196,.18)" stroke="rgba(184,0,196,.5)" stroke-width="1.5"/>
+              <rect x="42" y="72" width="36" height="44" rx="18" fill="rgba(184,0,196,.14)" stroke="rgba(184,0,196,.4)" stroke-width="1.5"/>
+              <circle cx="100" cy="40" r="22" fill="rgba(184,0,196,.28)" stroke="rgba(184,0,196,.7)" stroke-width="1.5"/>
+              <rect x="78" y="68" width="44" height="52" rx="22" fill="rgba(184,0,196,.22)" stroke="rgba(184,0,196,.55)" stroke-width="1.5"/>
+              <circle cx="140" cy="48" r="18" fill="rgba(184,0,196,.18)" stroke="rgba(184,0,196,.5)" stroke-width="1.5"/>
+              <rect x="122" y="72" width="36" height="44" rx="18" fill="rgba(184,0,196,.14)" stroke="rgba(184,0,196,.4)" stroke-width="1.5"/>
+              <line x1="78" y1="56" x2="60" y2="56" stroke="rgba(224,122,233,.4)" stroke-width="1" stroke-dasharray="4 3"/>
+              <line x1="122" y1="56" x2="140" y2="56" stroke="rgba(224,122,233,.4)" stroke-width="1" stroke-dasharray="4 3"/>
+              <path d="M100 22 C100 22 94 16 89 19 C84 22 84 29 100 36 C116 29 116 22 111 19 C106 16 100 22 100 22Z" fill="rgba(224,122,233,.7)"/>
+              <circle cx="32" cy="32" r="3" fill="rgba(224,122,233,.5)"/>
+              <circle cx="168" cy="32" r="2" fill="rgba(224,122,233,.4)"/>
+              <circle cx="100" cy="140" r="2.5" fill="rgba(184,0,196,.5)"/>
+            </svg>
+            <span class="lf-ph-label">Engagement · photo coming soon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Employee Benefits — visual left (reverse) -->
+      <div class="lf-feature reverse">
+        <div class="lf-feature-copy lf-rv-r">
+          <p class="lf-feature-kicker">Care</p>
+          <h2>Employee <em>benefits.</em></h2>
+          <p>Dedicated to creating an environment where people feel supported, respected, and equipped to do their best work. Our benefits go beyond the basics — with comprehensive medical coverage, generous protected leave, high-quality equipment, and a flexible workspace that once again both keeps and stretches your productivity. At the core is a culture of openness and trust: every benefit was designed to make work and life better.</p>
+        </div>
+        <div class="lf-feature-media lf-rv-l">
+          <div class="lf-visual">
+            <span class="v-ring r1"></span>
+            <span class="v-ring r2"></span>
+            <span class="v-dot d1"></span>
+            <span class="v-dot d2"></span>
+            <span class="v-dot d3"></span>
+            <span class="v-core">
+              <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-4V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM10 5h4v2h-4z"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Female Engagement — slot right -->
+      <div class="lf-feature">
+        <div class="lf-feature-copy lf-rv-l">
+          <p class="lf-feature-kicker">Empowerment</p>
+          <h2>Female <em>engagement.</em></h2>
+          <p>Passionate about building a truly inclusive workplace, we are committed to supporting our expanding women-in-tech community at every stage of their journey. From mentorship and a dedicated network to equal growth opportunities and a culture where every woman is heard, we strive to create a workplace where talent thrives, leads, and is supported.</p>
+        </div>
+        <div class="lf-feature-media lf-rv-r">
+          <div class="lf-ph-panel">
+            <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="52" r="26" fill="rgba(184,0,196,.22)" stroke="rgba(184,0,196,.6)" stroke-width="1.5"/>
+              <rect x="74" y="84" width="52" height="56" rx="26" fill="rgba(184,0,196,.18)" stroke="rgba(184,0,196,.5)" stroke-width="1.5"/>
+              <path d="M100 14 L103.5 24 L114 24 L105.8 30 L109 40 L100 34.2 L91 40 L94.2 30 L86 24 L96.5 24 Z" fill="rgba(224,122,233,.8)" stroke="rgba(184,0,196,.6)" stroke-width="1"/>
+              <line x1="100" y1="148" x2="100" y2="124" stroke="rgba(184,0,196,.55)" stroke-width="2" stroke-linecap="round"/>
+              <polyline points="92,132 100,124 108,132" stroke="rgba(184,0,196,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <circle cx="44" cy="72" r="14" fill="rgba(184,0,196,.12)" stroke="rgba(184,0,196,.3)" stroke-width="1.2"/>
+              <rect x="32" y="90" width="24" height="30" rx="12" fill="rgba(184,0,196,.1)" stroke="rgba(184,0,196,.25)" stroke-width="1.2"/>
+              <circle cx="156" cy="72" r="14" fill="rgba(184,0,196,.12)" stroke="rgba(184,0,196,.3)" stroke-width="1.2"/>
+              <rect x="144" y="90" width="24" height="30" rx="12" fill="rgba(184,0,196,.1)" stroke="rgba(184,0,196,.25)" stroke-width="1.2"/>
+              <circle cx="28" cy="44" r="3" fill="rgba(224,122,233,.5)"/>
+              <circle cx="172" cy="44" r="2.5" fill="rgba(224,122,233,.4)"/>
+            </svg>
+            <span class="lf-ph-label">Empowerment · photo coming soon</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ GLASSDOOR REVIEWS ═══ -->
+  <section class="lf-section" data-screen-label="Reviews">
+    <div class="lf-inner">
+      <div class="lf-rv">
+        <h2 class="lf-title">In their <em>own words.</em></h2>
+        <p class="lf-lead">A few of the things our team has shared about life at YOUGotaGift.</p>
+      </div>
+      <div class="lf-reviews">
+        <div class="lf-review lf-rv" data-d="1">
+          <div class="lf-stars" aria-label="5 out of 5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="lf-review-q">"A place that truly invests in its people."</p>
+          <p class="lf-review-b">Great work culture with supportive leadership and the freedom to own meaningful problems from day one.</p>
+          <p class="lf-review-meta">Software Engineer · Glassdoor</p>
+        </div>
+        <div class="lf-review lf-rv" data-d="2">
+          <div class="lf-stars" aria-label="5 out of 5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="lf-review-q">"Outstanding onboarding experience."</p>
+          <p class="lf-review-b">Teams work across functas really with mutual respect and an open communication. Design is valued from the start, not just bought in at the end.</p>
+          <p class="lf-review-meta">Product Designer · Glassdoor</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ JOIN ═══ -->
+  <section class="lf-section" id="open-roles" data-screen-label="Join CTA">
+    <div class="lf-inner">
+      <div class="lf-join lf-rv">
+        <div>
+          <h2 class="lf-join-t">Come build with <em>us.</em></h2>
+          <p class="lf-join-s">We're hiring across engineering, product, and design. If you care about craft and collaboration, you'll feel right at home.</p>
+        </div>
+        <div class="lf-join-action">
+          <a href="#" class="lf-btn">
+            View Open Roles
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer" data-screen-label="Footer">
+  <div class="footer-card">
+    <canvas id="footerGlobe" aria-hidden="true"></canvas>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="assets/yougotagift-logo.png" alt="YOUGotaGift" style="object-fit:contain;object-position:left center;" />
+        <p class="footer-brand-tagline">Building the future of branded payments — infrastructure, rewards, and gifting across the globe.</p>
+        <div class="footer-social-row">
+          <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-col-links">
+          <li><a href="#">For Businesses</a></li>
+          <li><a href="#">Buy eGift Cards</a></li>
+          <li><a href="#">Start a Group Gift</a></li>
+          <li><a href="#">Buy Gaming Cards</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Policy &amp; Info</p>
+        <ul class="footer-col-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Media Centre</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Engineering</p>
+        <ul class="footer-col-links">
+          <li><a href="Stack%20v2.html">Stack</a></li>
+          <li><a>Status</a></li>
+          <li><a href="Newsroom%20v3.html">Newsroom</a></li>
+          <li><a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
+          <li><a href="Trust%20Center.html">Trust Center</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p class="footer-bar-copy">&#169; 2026 YOUGotaGift.com Ltd. &nbsp;&middot;&nbsp; UAE | Saudi Arabia | Qatar | Bahrain | Oman | Kuwait | India</p>
+      <div class="footer-bar-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-wordmark-wrap" aria-hidden="true">
+    <div class="footer-wordmark"><span>E</span><span>n</span><span>g</span><span class="wm-brand">i</span><span>n</span><span>e</span><span class="wm-brand">e</span><span>r</span><span>i</span><span class="wm-brand">n</span><span>g</span></div>
+  </div>
+</footer>
+
+<script src="site-shared.js"></script>
+<script>
+/* ─── Page-ready gate (fires immediately after paint) ─── */
+setTimeout(function () {
+  document.documentElement.setAttribute('data-page-ready', '1');
+  /* Hard fallback: guarantee all hero elements are visible
+     after their longest animation (.6s delay + .75s dur = 1.35s) */
+  setTimeout(function () {
+    var heroEls = document.querySelectorAll(
+      '.lf-hero-h1 .ln, .lf-hero-h1 .gr, .lf-hero-lead, .lf-btn-hero, .lf-hc'
+    );
+    heroEls.forEach(function (el) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }, 1500);
+}, 60);
+
+/* ─── Scroll reveal: .lf-rv, .lf-rv-l, .lf-rv-r ─── */
+(function () {
+  var all = document.querySelectorAll('.lf-rv, .lf-rv-l, .lf-rv-r');
+  if (!all.length) return;
+  function show(el) { el.classList.add('visible'); }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { show(e.target); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+  all.forEach(function (el) {
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight || 768;
+    if (r.top < vh - 40) {
+      /* in view on load — show after page-ready delay */
+      setTimeout(function () { show(el); }, 120);
+    } else {
+      io.observe(el);
+    }
+  });
+  /* hard failsafe */
+  setTimeout(function () { all.forEach(show); }, 5000);
+})();
+
+/* ─── Stats strip reveal + counter animation ─── */
+(function () {
+  var stats = document.querySelectorAll('.lf-stat');
+  if (!stats.length) return;
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function animateCount(el) {
+    if (el.dataset.counted) return;
+    el.dataset.counted = '1';
+    el.classList.add('counted');
+    var numEl = el.querySelector('.lf-stat-num');
+    if (!numEl) return;
+    var raw = numEl.textContent.replace(/[^0-9]/g, '');
+    var target = parseInt(raw, 10);
+    if (!target) return;
+    var sup = numEl.querySelector('.sup') ? numEl.querySelector('.sup').outerHTML : '';
+    var duration = 1100, start = null;
+    function tick(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      numEl.textContent = Math.round(easeOut(p) * target);
+      if (sup) numEl.insertAdjacentHTML('beforeend', sup);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { animateCount(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  stats.forEach(function (s) { io.observe(s); });
+  /* trigger for stats that are already in view */
+  setTimeout(function () {
+    stats.forEach(function (s) {
+      var r = s.getBoundingClientRect();
+      if (r.top < (window.innerHeight || 768)) animateCount(s);
+    });
+  }, 3000);
+})();
+
+/* ─── Values grid hover gate ─── */
+(function () {
+  var grid = document.querySelector('.lf-values-grid');
+  if (!grid) return;
+  function on() { grid.classList.add('in'); }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (e) {
+      e.forEach(function (x) { if (x.isIntersecting) { on(); io.disconnect(); } });
+    }, { threshold: 0.18 });
+    io.observe(grid);
+    requestAnimationFrame(function () {
+      var r = grid.getBoundingClientRect();
+      if (r.top < (window.innerHeight || 768) && r.bottom > 0) { on(); io.disconnect(); }
+    });
+  } else on();
+  setTimeout(on, 3500);
+})();
+</script>
+</body>
+</html>

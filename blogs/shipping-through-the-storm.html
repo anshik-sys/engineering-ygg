@@ -1,0 +1,291 @@
+<!doctype html>
+<!--
+  ============================================================
+  CLAUDE CODE — DEVELOPER INSTRUCTIONS (Blog Detail Page)
+  ============================================================
+
+  ROUTING
+  -------
+  Single dynamic route handles all blog slugs:
+    Next.js:   /pages/blog/[slug].tsx
+    React SPA: <Route path="/blog/:slug" element={<BlogDetail />} />
+
+  DATA FETCHING
+  -------------
+    GET /api/blogs?filters[slug][$eq]=shipping-through-the-storm&populate=author,tags,cover
+
+  Expected response shape: see project-management-zen.html for full schema.
+
+  CONTENT RENDERING
+  -----------------
+  Replace ALL static article text below with dynamically rendered content.
+  Sanitise HTML with DOMPurify before injecting into .art-body.
+
+  DYNAMIC TITLE/OG TAGS
+  ---------------------
+  Set document.title and og:* meta tags from fetched blog data on mount.
+
+  ============================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shipping through the storm: the infra story — YOUGotaGift Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/hooskai-chamfered-square" rel="stylesheet">
+<link rel="stylesheet" href="../site-styles.css">
+<style>
+.article-section{ position:relative; z-index:2; padding:100px 0 130px; min-height:100vh; }
+.article-section::before{ content:""; position:absolute; inset:0; background: none; z-index:0; }
+.article-inner{ position:relative; z-index:5; max-width:960px; margin:0 auto; padding:0 48px; }
+.art-crumb{ display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:48px; }
+.art-crumb a{ color:var(--ink-dim); text-decoration:none; transition:color .18s ease; }
+.art-crumb a:hover{ color:var(--ink); }
+.art-crumb .sep{ opacity:.4; }
+.art-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px; }
+.art-tag{ font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--brand-soft); border:1px solid rgba(184,0,196,.3); border-radius:999px; padding:5px 14px; }
+.art-title{ font-family:var(--font-display); font-weight:600; font-size:clamp(32px,5vw,56px); line-height:1.06; letter-spacing:-0.03em; color:var(--ink); margin:0 0 20px; text-wrap:balance; }
+.art-excerpt{ font-family:var(--font-ui); font-size:18px; line-height:1.62; color:var(--ink-dim); margin:0 0 32px; }
+.art-meta{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding:20px 0; margin-bottom:48px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.art-meta-avatar{ width:42px; height:42px; border-radius:50%; object-fit:cover; border:1px solid var(--line-2); flex-shrink:0; }
+.art-meta-name{ font-family:var(--font-ui); font-size:14px; font-weight:600; color:var(--ink); }
+.art-meta-role{ font-family:var(--font-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin-top:2px; }
+.art-meta-sep{ width:1px; height:28px; background:var(--line-2); flex-shrink:0; }
+.art-meta-date,.art-meta-read{ font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); }
+.art-hero{ aspect-ratio:16/9; border-radius:20px; overflow:hidden; border:1px solid var(--line); margin-bottom:56px; }
+.art-hero img{ width:100%; height:100%; object-fit:cover; display:block; }
+.art-body h2{ font-family:var(--font-display); font-weight:600; font-size:clamp(22px,2.8vw,30px); letter-spacing:-0.025em; line-height:1.16; color:var(--ink); margin:52px 0 18px; }
+.art-body h3{ font-family:var(--font-display); font-weight:600; font-size:18px; letter-spacing:-0.015em; color:var(--ink); margin:34px 0 12px; }
+.art-body p{ font-family:var(--font-ui); font-size:17px; line-height:1.76; color:var(--ink-dim); margin:0 0 22px; text-wrap:pretty; }
+.art-body blockquote{ margin:40px 0; padding:22px 26px; border-left:3px solid var(--brand); background:rgba(184,0,196,.06); border-radius:0 14px 14px 0; }
+.art-body blockquote p{ font-family:var(--font-display); font-style:italic; font-weight:500; font-size:19px; line-height:1.5; color:var(--ink); margin:0; }
+.art-body ul,.art-body ol{ font-family:var(--font-ui); font-size:17px; line-height:1.76; color:var(--ink-dim); padding-left:26px; margin:0 0 22px; }
+.art-body li{ margin-bottom:8px; }
+.art-body strong{ color:var(--ink); font-weight:600; }
+.art-body code{ font-family:var(--font-mono); font-size:14px; background:var(--glass); border:1px solid var(--line-2); border-radius:6px; padding:2px 7px; color:var(--brand-soft); }
+.art-rule{ height:1px; background:var(--line); margin:52px 0; }
+.art-footer{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; padding-top:40px; border-top:1px solid var(--line); margin-top:64px; }
+.art-footer-back{ display:inline-flex; align-items:center; gap:9px; font-family:var(--font-ui); font-size:14px; font-weight:500; color:var(--ink-dim); text-decoration:none; transition:color .18s ease; }
+.art-footer-back:hover{ color:var(--ink); }
+.art-footer-back svg{ width:14px; height:14px; }
+.art-footer-label{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); }
+@media(max-width:900px){ .article-section{ padding:120px 0 80px; } .article-inner{ padding:0 28px; } }
+@media(max-width:560px){ .article-inner{ padding:0 20px; } .art-body p{ font-size:16px; } }
+
+</style>
+</head>
+<body>
+<div id="sl-backdrop"></div>
+<div id="sl-logo-wrap">
+  <div id="sl-logo-inner">
+    <svg viewBox="0 0 200 242" width="92" height="111" style="display:block;overflow:visible" aria-hidden="true">
+      <circle id="sl-dot-l" class="sl-dot-l" cx="34"  cy="44" r="22" fill="#E07AE9" style="transform-origin:34px 44px"/>
+      <circle id="sl-dot-r" class="sl-dot-r" cx="166" cy="44" r="22" fill="#E07AE9" style="transform-origin:166px 44px"/>
+      <path   id="sl-u"     class="sl-u" d="M 34,96 L 34,152 A 66,66 0 0 0 166,152 L 166,96" stroke="#B800C4" stroke-width="40" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+</div>
+<div class="page-bg" aria-hidden="true">
+  <div class="pg-grid"></div><div class="pg-grid fine"></div><div class="pg-stars"></div>
+</div>
+<div class="nav-wrap">
+  <a class="nav-logo" href="../index.html" aria-label="YOUGotaGift">
+    <img src="../assets/yougotagift-logo.png" alt="YOUGotaGift" />
+  </a>
+  <nav class="nav">
+    <div class="brand"><a class="brand-tag" href="../index.html" style="text-decoration:none;">Engineering</a></div>
+    <div class="nav-links">
+      <a href="../Stories%20v2.html" class="current">Stories</a>
+      <a>Status</a>
+      <a href="../Stack.html">Stack</a>
+      <a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
+      <a href="../Trust%20Center.html">Trust Center</a>
+      <a href="../Newsroom.html">Newsroom</a>
+    </div>
+    <div class="nav-cta">
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</div>
+<div class="top-right-controls">
+  <div class="status-pill">
+    <span class="status-dot-lg"></span>
+    <span class="status-text"><span class="status-title">MyRewards</span><span class="status-sub">100% uptime</span></span>
+  </div>
+  <span class="controls-divider"></span>
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+  </button>
+</div>
+<div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <nav class="mobile-drawer-links">
+    <a href="../Stories%20v2.html" class="current">Stories</a>
+    <a>Status</a>
+    <a href="../Stack.html">Stack</a>
+    <a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
+    <a href="../Trust%20Center.html">Trust Center</a>
+    <a href="../Newsroom.html">Newsroom</a>
+    <a href="../index.html">Home</a>
+  </nav>
+</div>
+
+<section class="article-section">
+  <div class="article-inner">
+
+    <div class="art-crumb">
+      <a href="../index.html">Engineering</a>
+      <span class="sep">/</span>
+      <a href="../Stories%20v2.html">Stories</a>
+      <span class="sep">/</span>
+      <span>DevOps</span>
+    </div>
+
+    <div class="art-tags">
+      <span class="art-tag">DevOps</span>
+      <span class="art-tag">Infrastructure</span>
+      <span class="art-tag">Reliability</span>
+    </div>
+
+    <h1 class="art-title">Shipping through the storm: the infra story.</h1>
+    <p class="art-excerpt">The behind-the-scenes of keeping YOUGotaGift online through traffic spikes, region failovers and peak-season storms.</p>
+
+    <div class="art-meta">
+      <img class="art-meta-avatar" src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/Image_Gen_Apr_2_2025_09_58_53_AM_332bbd4caf.png" alt="Shameem Khalid" loading="lazy" />
+      <div>
+        <div class="art-meta-name">Shameem Khalid</div>
+        <div class="art-meta-role">DevOps</div>
+      </div>
+      <div class="art-meta-sep"></div>
+      <div class="art-meta-date">Mar 31, 2025</div>
+      <div class="art-meta-sep"></div>
+      <div class="art-meta-read">10 min read</div>
+    </div>
+
+    <div class="art-hero">
+      <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/Chat_GPT_Image_Apr_2_2025_2_ce2807e954.png" alt="Infrastructure story" loading="lazy" />
+    </div>
+
+    <div class="art-body">
+
+      <p>Gifting has a heartbeat. It spikes on Valentine's Day, on Eid, on birthdays that cluster around school-year rhythms, on last-minute campaign pushes from corporate clients who decide to send 10,000 gift cards on a Tuesday afternoon with no advance notice. Our infrastructure has to breathe with it.</p>
+
+      <p>This is the story of how we went from an infrastructure that survived spikes to one that barely notices them.</p>
+
+      <h2>The architecture we inherited</h2>
+
+      <p>When the team was small, everything lived in a single AWS region. Auto-scaling was configured, but not well-tuned — the scale-out trigger was too conservative, and by the time new instances were warm, the spike had already caused queuing. Database connections were pooled, but pool exhaustion under load was a recurring incident.</p>
+
+      <p>The symptom was always the same: response times would climb, then errors would start, then the on-call engineer's phone would buzz at 2am. We got good at incident response. We needed to get better at incident prevention.</p>
+
+      <blockquote>
+        <p>"The goal isn't to respond faster to incidents. The goal is to make your system so boring that incidents stop being interesting."</p>
+      </blockquote>
+
+      <h2>Multi-region and the failover problem</h2>
+
+      <p>Our first major architectural change was introducing a standby region. Active-passive across two AWS regions: primary traffic runs in <code>me-central-1</code> (UAE), with a warm standby in a secondary region. RDS read replicas, S3 replication, and Route 53 health checks form the backbone of the failover mechanism.</p>
+
+      <p>The tricky part was DNS TTL. We had TTLs set to five minutes — reasonable in theory, but in practice, a five-minute failover window when payments are in flight is a long time. We reduced TTLs to 30 seconds and added circuit-breaker patterns at the application layer so transient failures during failover don't cascade into user-visible errors.</p>
+
+      <h2>Taming peak traffic</h2>
+
+      <p>Peak-season traffic is predictable in timing but not in magnitude. We know Eid is coming; we don't know if this year will be 2x or 4x normal traffic. Our approach:</p>
+
+      <ul>
+        <li><strong>Pre-warming.</strong> We schedule capacity increases 48 hours before known peak windows. Auto-scaling handles the unexpected; pre-warming handles the expected.</li>
+        <li><strong>CDN-first architecture.</strong> Product catalogue, brand assets, and any response that doesn't change per-user is aggressively cached at the edge. Peak traffic never reaches the origin for these requests.</li>
+        <li><strong>Queue-based workload offloading.</strong> Non-blocking operations — notification delivery, analytics events, PDF generation for vouchers — are queued via SQS and processed async. The checkout path stays thin and fast.</li>
+        <li><strong>Load shedding.</strong> If we detect saturation, non-critical read paths gracefully degrade before the critical purchase and redemption paths are affected.</li>
+      </ul>
+
+      <h2>Observability as a first-class concern</h2>
+
+      <p>We can't fix what we can't see. We moved to a unified observability stack: distributed tracing with OpenTelemetry, metrics in CloudWatch with custom dashboards, and structured logging that makes log queries fast enough to be useful during an incident rather than after it.</p>
+
+      <p>Our SLOs are defined at the service level and reported weekly. If we're degrading toward a threshold, the alert fires before the breach, not after. This shift from reactive monitoring to proactive SLO tracking has been the single biggest cultural change in how the team relates to production.</p>
+
+      <h2>What a calm night on-call feels like</h2>
+
+      <p>The measure of good infrastructure work is not dramatic war stories — it's the absence of them. In the last two peak seasons, our on-call rotation has been quiet. Not because nothing happened, but because the systems handled it. Traffic spiked, auto-scaling responded, CDN absorbed the read load, and the databases never blinked. The engineers slept.</p>
+
+      <p>That's the goal. Infrastructure work done well is invisible.</p>
+
+    </div>
+
+    <div class="art-rule"></div>
+    <div class="art-footer">
+      <a class="art-footer-back" href="../Stories%20v2.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back to Stories
+      </a>
+      <span class="art-footer-label">YOUGotaGift Engineering</span>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer" data-screen-label="Footer">
+  <div class="footer-card">
+    <canvas id="footerGlobe" aria-hidden="true"></canvas>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="../assets/yougotagift-logo.png" alt="YOUGotaGift" style="object-fit: contain; object-position: left center;" />
+        <p class="footer-brand-tagline">Building the future of branded payments — infrastructure, rewards, and gifting across the globe.</p>
+        <div class="footer-social-row">
+          <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:currentColor"/></svg></a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="X / Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-col-links">
+          <li><a href="#">For Businesses</a></li>
+          <li><a href="#">Buy eGift Cards</a></li>
+          <li><a href="#">Start a Group Gift</a></li>
+          <li><a href="#">Buy Gaming Cards</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Policy &amp; Info</p>
+        <ul class="footer-col-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Media Centre</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Engineering</p>
+        <ul class="footer-col-links">
+          <li><a href="../Stories%20v2.html">Stories</a></li>
+          <li><a href="../Stack.html">Stack</a></li>
+          <li><a>Status</a></li>
+          <li><a href="../Newsroom.html">Newsroom</a></li>
+          <li><a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
+          <li><a href="../Trust%20Center.html">Trust Center</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p class="footer-bar-copy">&#169; 2026 YOUGotaGift.com Ltd. &nbsp;&middot;&nbsp; UAE | Saudi Arabia | Qatar | Bahrain | Oman | Kuwait | India</p>
+      <div class="footer-bar-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-wordmark-wrap" aria-hidden="true">
+    <div class="footer-wordmark"><span>E</span><span>n</span><span>g</span><span class="wm-brand">i</span><span>n</span><span>e</span><span class="wm-brand">e</span><span>r</span><span>i</span><span class="wm-brand">n</span><span>g</span></div>
+  </div>
+</footer>
+<script src="../site-shared.js"></script>
+</body>
+</html>

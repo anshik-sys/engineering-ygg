@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Newsroom — YOUGotaGift Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/hooskai-chamfered-square" rel="stylesheet">
+<link rel="stylesheet" href="site-styles.css">
+<style>
+/* ====================== NEWSROOM — EDITORIAL ====================== */
+
+/* Page header */
+.nr-page-header {
+  padding: 48px 0 0;
+  position: relative;
+  z-index: 2;
+}
+.nr-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.nr-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--brand-soft);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nr-eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--brand-soft);
+  flex-shrink: 0;
+}
+.nr-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.8vw, 72px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+.nr-title .t-grad {
+  font-style: italic;
+  font-weight: 300;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0BCF5 50%, #B800C4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  font-variation-settings: "wdth" 90;
+  padding-right: .12em;
+  display: inline-block;
+}
+html[data-theme="light"] .nr-title .t-grad {
+  background: linear-gradient(180deg, #2A0F30 0%, #B800C4 55%, #7A0084 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.nr-sub {
+  font-size: 15px;
+  color: var(--ink-dim);
+  max-width: 52ch;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+.nr-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0;
+}
+.nr-tab {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-dim);
+  background: none;
+  border: none;
+  padding: 10px 18px;
+  cursor: pointer;
+  position: relative;
+  transition: color .2s;
+  letter-spacing: -0.01em;
+  bottom: -1px;
+}
+.nr-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--brand-soft);
+  transform: scaleX(0);
+  transition: transform .2s var(--ease);
+}
+.nr-tab.active { color: var(--ink); }
+.nr-tab.active::after { transform: scaleX(1); }
+.nr-tab:hover { color: var(--ink); }
+
+/* Body */
+.nr-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 40px 100px;
+  position: relative;
+  position: relative;
+  z-index: 2;
+}
+
+/* ---- Featured hero ---- */
+.nr-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  margin-bottom: 48px;
+  background: var(--glass);
+  min-height: 320px;
+  transition: border-color .2s;
+}
+.nr-featured:hover { border-color: var(--line-2); }
+.nr-featured-img {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a002e 0%, #4a006a 40%, #7a0084 70%, #b800c4 100%);
+  min-height: 280px;
+}
+.nr-featured-img-inner {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(184,0,196,.35), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(120,0,160,.25), transparent 60%);
+}
+.nr-featured-img-label {
+  position: absolute;
+  bottom: 20px; left: 20px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  background: rgba(0,0,0,.35);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+/* Decorative grid lines on featured image */
+.nr-featured-img::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 1;
+}
+.nr-featured-content {
+  padding: 36px 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.nr-featured-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nr-cat {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.nr-cat.company    { background: rgba(184,0,196,.18); color: var(--brand-soft); }
+.nr-cat.engineering{ background: rgba(29,100,200,.2); color: #7eb8f7; }
+.nr-cat.security   { background: rgba(16,140,90,.2);  color: #5ecfa0; }
+.nr-cat.partnership{ background: rgba(200,140,0,.18); color: #f0c060; }
+.nr-cat.product    { background: rgba(200,60,100,.18);color: #f07090; }
+.nr-cat.culture    { background: rgba(80,80,200,.2);  color: #a0a8f8; }
+.nr-cat.regulatory { background: rgba(160,100,0,.2);  color: #d4a060; }
+
+.nr-featured-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: .03em;
+}
+.nr-featured-headline {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.nr-featured-excerpt {
+  font-size: 14px;
+  color: var(--ink-dim);
+  line-height: 1.6;
+  margin: 0;
+}
+.nr-featured-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nr-author-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.nr-author-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-deep), var(--brand-soft));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.nr-author-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-dim);
+}
+.nr-read-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-ui);
+  font-size: 13px; font-weight: 500;
+  color: var(--brand-soft);
+  text-decoration: none;
+  transition: gap .2s, color .2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nr-read-btn:hover { color: var(--ink); gap: 11px; }
+.nr-read-btn svg { width: 14px; height: 14px; }
+
+/* ---- Layout grid ---- */
+.nr-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ---- Sidebar ---- */
+.nr-sidebar {
+  position: sticky;
+  top: 88px;
+}
+.nr-sidebar-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 16px;
+}
+.nr-filter-list {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.nr-filter-list li button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--ink-dim);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px;
+  transition: background .15s, color .15s;
+}
+.nr-filter-list li button:hover { background: var(--glass-2); color: var(--ink); }
+.nr-filter-list li button.active { background: var(--glass-2); color: var(--ink); font-weight: 500; }
+.nr-filter-count {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-faint);
+  background: var(--glass);
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+.nr-filter-list li button.active .nr-filter-count { color: var(--brand-soft); }
+
+/* ---- Main content ---- */
+.nr-main {}
+
+/* Search */
+.nr-search-wrap {
+  position: relative;
+  margin-bottom: 28px;
+}
+.nr-search-wrap svg {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  width: 15px; height: 15px;
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+.nr-search {
+  width: 100%;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 16px 11px 40px;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color .2s, background .2s;
+}
+.nr-search::placeholder { color: var(--ink-faint); }
+.nr-search:focus { border-color: rgba(184,0,196,.4); background: rgba(255,255,255,.06); }
+html[data-theme="light"] .nr-search { background: rgba(26,14,28,.04); border-color: rgba(26,14,28,.12); color: var(--ink); }
+html[data-theme="light"] .nr-search:focus { border-color: rgba(184,0,196,.45); }
+
+/* Results count */
+.nr-results-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: .04em;
+  margin-bottom: 20px;
+}
+
+/* ---- Article list ---- */
+.nr-articles { display: flex; flex-direction: column; gap: 0; }
+.nr-article {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: background .15s;
+  cursor: pointer;
+}
+.nr-article:first-child { border-top: 1px solid var(--line); }
+.nr-article:hover .nr-article-headline { color: var(--brand-soft); }
+
+.nr-article-thumb {
+  width: 120px; height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+.nr-article-thumb-inner {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+/* per-category thumb colors */
+.nr-article[data-category="company"]     .nr-article-thumb-inner { background: linear-gradient(135deg,#2a0040,#7a0084); }
+.nr-article[data-category="engineering"] .nr-article-thumb-inner { background: linear-gradient(135deg,#001a3a,#0d4fa0); }
+.nr-article[data-category="security"]    .nr-article-thumb-inner { background: linear-gradient(135deg,#001a12,#0d7a5c); }
+.nr-article[data-category="partnership"] .nr-article-thumb-inner { background: linear-gradient(135deg,#2a1a00,#8a5a00); }
+.nr-article[data-category="product"]     .nr-article-thumb-inner { background: linear-gradient(135deg,#2a001a,#8a1a40); }
+.nr-article[data-category="culture"]     .nr-article-thumb-inner { background: linear-gradient(135deg,#0a0a2a,#1a1a7a); }
+.nr-article[data-category="regulatory"]  .nr-article-thumb-inner { background: linear-gradient(135deg,#1a1000,#6a4400); }
+
+.nr-article-thumb-inner svg {
+  width: 28px; height: 28px;
+  color: rgba(255,255,255,.22);
+}
+/* Grid overlay on thumbs */
+.nr-article-thumb-inner::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.nr-article-content { display: flex; flex-direction: column; gap: 6px; justify-content: center; }
+.nr-article-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.nr-article-date {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  letter-spacing: .03em;
+}
+.nr-article-headline {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+  transition: color .2s;
+  text-wrap: pretty;
+}
+.nr-article-excerpt {
+  font-size: 13px;
+  color: var(--ink-faint);
+  line-height: 1.55;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.nr-article-footer {
+  display: flex; align-items: center; gap: 10px; margin-top: 4px;
+}
+.nr-article-author {
+  display: flex; align-items: center; gap: 7px;
+}
+.nr-article-avatar {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--brand-deep), var(--brand-soft));
+}
+.nr-article-author-name {
+  font-size: 12px; color: var(--ink-dim); font-weight: 400;
+}
+.nr-article-read-time {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  padding-left: 10px;
+  border-left: 1px solid var(--line);
+}
+
+/* Empty state */
+.nr-empty {
+  padding: 60px 0;
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 14px;
+  display: none;
+}
+.nr-empty svg { display: block; margin: 0 auto 16px; opacity: .3; }
+
+/* ---- Light theme overrides ---- */
+html[data-theme="light"] .nr-featured { border-color: rgba(26,14,28,.1); }
+html[data-theme="light"] .nr-article { border-bottom-color: rgba(26,14,28,.08); }
+html[data-theme="light"] .nr-article:first-child { border-top-color: rgba(26,14,28,.08); }
+html[data-theme="light"] .nr-filter-list li button:hover,
+html[data-theme="light"] .nr-filter-list li button.active { background: rgba(26,14,28,.06); }
+html[data-theme="light"] .nr-tabs { border-bottom-color: rgba(26,14,28,.1); }
+
+/* ---- Responsive ---- */
+@media (max-width: 960px) {
+  .nr-layout { grid-template-columns: 1fr; }
+  .nr-sidebar { position: static; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .nr-sidebar-title { display: none; }
+  .nr-filter-list { flex-direction: row; }
+  .nr-filter-list li button { padding: 6px 14px; font-size: 12.5px; }
+  .nr-filter-count { display: none; }
+  .nr-featured { grid-template-columns: 1fr; min-height: auto; }
+  .nr-featured-img { min-height: 200px; }
+}
+/* ── Layout ── */
+.nr-section {
+  position: relative; z-index: 2;
+  padding: 80px 0 120px;
+}
+.nr-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── Header ── */
+.nr-header { margin-bottom: 64px; }
+.nr-eyebrow {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--brand-soft);
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-bottom: 18px;
+}
+.nr-eyebrow .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 12px rgba(184,0,196,.7);
+}
+.nr-title {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(36px, 4.8vw, 72px);
+  letter-spacing: -0.035em; line-height: 1.02;
+  margin: 0; color: var(--ink);
+}
+.nr-title em {
+  font-style: italic; font-weight: 300;
+  background: linear-gradient(180deg,#FFFFFF 0%,#F0BCF5 50%,#B800C4 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-variation-settings: "wdth" 90;
+  padding-right: .12em; display: inline-block;
+}
+html[data-theme="light"] .nr-title em {
+  background: linear-gradient(180deg,#2A0F30 0%,#B800C4 55%,#7A0084 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ── Source badge ── */
+.nr-source {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-ui); font-size: 12px; font-weight: 600;
+  color: var(--ink-dim);
+  background: var(--glass); border: 1px solid var(--line-2);
+  padding: 5px 12px; border-radius: 999px;
+  letter-spacing: 0;
+}
+.nr-source svg { width: 13px; height: 13px; flex-shrink: 0; }
+html[data-theme="light"] .nr-source { background: rgba(26,14,28,.05); }
+
+/* ── Hero card ── */
+.nr-hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 48px;
+  padding: 48px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(184,0,196,.12) 0%, rgba(184,0,196,.04) 60%, transparent 100%),
+              linear-gradient(180deg, rgba(255,255,255,.028), rgba(255,255,255,.014));
+  border: 1px solid rgba(184,0,196,.25);
+  text-decoration: none; color: inherit;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s ease, box-shadow .3s ease, transform .4s cubic-bezier(.2,0,0,1);
+}
+
+.nr-hero:hover {
+  border-color: rgba(184,0,196,.45);
+  box-shadow: 0 24px 60px -20px rgba(184,0,196,.28);
+  transform: translateY(-3px);
+}
+html[data-theme="light"] .nr-hero {
+  background: linear-gradient(135deg, rgba(184,0,196,.08) 0%, rgba(184,0,196,.02) 60%, transparent 100%),
+              rgba(255,255,255,.7);
+  border-color: rgba(184,0,196,.2);
+}
+.nr-hero-left { min-width: 0; }
+.nr-hero-meta {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 24px; flex-wrap: wrap;
+}
+.nr-hero-date {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.nr-hero-headline {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(26px, 3vw, 44px);
+  line-height: 1.08; letter-spacing: -0.03em;
+  color: var(--ink); margin: 0 0 16px;
+  text-wrap: balance;
+}
+.nr-hero-excerpt {
+  font-family: var(--font-ui); font-size: 15px;
+  line-height: 1.65; color: var(--ink-dim);
+  margin: 0; max-width: 64ch;
+}
+.nr-hero-right { flex-shrink: 0; }
+.nr-cta {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-ui); font-size: 14px; font-weight: 600;
+  color: #fff; background: var(--brand);
+  padding: 11px 22px; border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: filter .25s ease, transform .25s ease, box-shadow .25s ease;
+  box-shadow: 0 4px 20px -6px rgba(184,0,196,.5);
+}
+.nr-cta svg { width: 14px; height: 14px; }
+.nr-hero:hover .nr-cta {
+  filter: brightness(1.1); transform: translateY(-2px);
+  box-shadow: 0 8px 30px -6px rgba(184,0,196,.65);
+}
+
+/* ── Grid ── */
+.nr-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ── Card image ── */
+.nr-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+  background: var(--glass);
+  flex-shrink: 0;
+  margin: -32px -34px 24px;
+  width: calc(100% + 68px);
+}
+.nr-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .6s cubic-bezier(.2,0,0,1);
+}
+.nr-card:hover .nr-card-img img { transform: scale(1.04); }
+
+/* Hero image */
+.nr-hero-img {
+  width: 320px; height: 220px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--glass);
+  align-self: center;
+}
+.nr-hero-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .6s cubic-bezier(.2,0,0,1);
+}
+.nr-hero:hover .nr-hero-img img { transform: scale(1.04); }
+@media (max-width: 860px) { .nr-hero-img { width: 100%; height: 200px; align-self: stretch; } }
+@media (max-width: 700px) { .nr-hero-img { height: 180px; } }
+
+/* ── Card ── */
+.nr-card {
+  display: flex; flex-direction: column;
+  padding: 32px 34px 30px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255,255,255,.028), rgba(255,255,255,.014));
+  border: 1px solid var(--line-2);
+  text-decoration: none; color: inherit;
+  transition: border-color .3s ease, box-shadow .3s ease, transform .4s cubic-bezier(.2,0,0,1), background .3s ease;
+  position: relative; overflow: hidden;
+}
+.nr-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-soft));
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.nr-card:hover {
+  border-color: rgba(184,0,196,.3);
+  box-shadow: 0 20px 50px -20px rgba(0,0,0,.4), 0 0 40px -16px rgba(184,0,196,.2);
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.038);
+}
+.nr-card:hover::before { opacity: 1; }
+html[data-theme="light"] .nr-card {
+  background: rgba(255,255,255,.75);
+  box-shadow: 0 2px 12px -4px rgba(26,14,28,.08);
+}
+html[data-theme="light"] .nr-card:hover {
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 16px 40px -16px rgba(26,14,28,.16), 0 0 32px -12px rgba(184,0,196,.14);
+}
+.nr-card-meta {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 12px;
+  margin-bottom: 20px; flex-wrap: wrap;
+}
+.nr-card-date {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.nr-card-headline {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(18px, 1.8vw, 24px);
+  line-height: 1.15; letter-spacing: -0.02em;
+  color: var(--ink); margin: 0 0 12px;
+  text-wrap: balance;
+  transition: color .2s ease;
+}
+.nr-card:hover .nr-card-headline { color: var(--brand-soft); }
+html[data-theme="light"] .nr-card:hover .nr-card-headline { color: var(--brand); }
+.nr-card-excerpt {
+  font-family: var(--font-ui); font-size: 14px;
+  line-height: 1.6; color: var(--ink-dim);
+  margin: 0 0 24px; flex: 1;
+}
+.nr-card-footer {
+  margin-top: auto;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 12px;
+  padding-top: 18px; border-top: 1px solid var(--line);
+}
+.nr-card-read {
+  font-family: var(--font-ui); font-size: 13px; font-weight: 600;
+  color: var(--brand-soft);
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: gap .2s ease;
+}
+.nr-card-read svg { width: 13px; height: 13px; }
+.nr-card:hover .nr-card-read { gap: 10px; }
+
+/* ── Entrance reveal ── */
+.nr-hero, .nr-card { opacity: 0; transform: translateY(24px); }
+.nr-hero.revealed, .nr-card.revealed {
+  opacity: 1; transform: none;
+  transition: opacity .65s cubic-bezier(.2,0,0,1), transform .65s cubic-bezier(.2,0,0,1),
+              border-color .3s ease, box-shadow .3s ease;
+  transition-delay: var(--rd, 0ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nr-hero, .nr-card { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1000px) { .nr-inner { padding: 0 32px; } }
+@media (max-width: 860px) {
+  .nr-hero { grid-template-columns: 1fr; gap: 28px; padding: 36px; }
+  .nr-hero-right { align-self: flex-start; }
+}
+@media (max-width: 700px) {
+  .nr-section { padding: 60px 0 80px; }
+  .nr-inner { padding: 0 20px; }
+  .nr-grid { grid-template-columns: 1fr; }
+  .nr-header { margin-bottom: 44px; }
+}
+</style>
+</head>
+<body>
+<!-- SmileLoader overlay -->
+<div id="sl-backdrop"></div>
+<div id="sl-logo-wrap">
+  <div id="sl-logo-inner">
+    <svg viewBox="0 0 200 242" width="92" height="111" style="display:block;overflow:visible" aria-hidden="true">
+      <circle id="sl-dot-l" class="sl-dot-l" cx="34"  cy="44" r="22" fill="#E07AE9" style="transform-origin:34px 44px"/>
+      <circle id="sl-dot-r" class="sl-dot-r" cx="166" cy="44" r="22" fill="#E07AE9" style="transform-origin:166px 44px"/>
+      <path   id="sl-u"     class="sl-u" d="M 34,96 L 34,152 A 66,66 0 0 0 166,152 L 166,96"
+              stroke="#B800C4" stroke-width="40" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+</div>
+
+<div class="page-bg" aria-hidden="true">
+  <div class="pg-grid"></div>
+  <div class="pg-grid fine"></div>
+  <div class="pg-stars"></div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <a class="nav-logo" href="index.html" aria-label="YOUGotaGift">
+    <img src="assets/yougotagift-logo.png" alt="YOUGotaGift" />
+  </a>
+  <nav class="nav">
+    <div class="brand">
+      <a class="brand-tag" href="index.html" style="text-decoration:none;">Engineering</a>
+    </div>
+    <div class="nav-links">
+      <a href="Stories%20v2.html">Stories</a>
+      <a>Status</a>
+      <a href="Stack%20v2.html">Stack</a>
+      <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
+      <a href="Trust%20Center.html">Trust Center</a>
+      <a href="Newsroom%20v3.html" class="current">Newsroom</a>
+    </div>
+    <div class="nav-cta">
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</div>
+<!-- Top-right floating controls -->
+<div class="top-right-controls">
+  <div class="status-pill">
+    <span class="status-dot-lg"></span>
+    <span class="status-text">
+      <span class="status-title">MyRewards</span>
+      <span class="status-sub">100% uptime</span>
+    </span>
+  </div>
+  <span class="controls-divider"></span>
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+  </button>
+</div>
+<!-- Mobile nav drawer -->
+<div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <nav class="mobile-drawer-links">
+    <a href="Stories%20v2.html">Stories</a>
+    <a>Status</a>
+    <a href="Stack%20v2.html">Stack</a>
+    <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
+    <a href="Trust%20Center.html">Trust Center</a>
+    <a href="Newsroom%20v3.html" class="current">Newsroom</a>
+    <a href="index.html">Home</a>
+  </nav>
+</div>
+
+<div class="page-breadcrumb">
+  <a href="index.html">Engineering</a>
+  <span class="sep">/</span>
+  <span class="here">Newsroom</span>
+</div>
+
+<!-- ====================== NEWSROOM ====================== -->
+<section class="nr-section subpage-section" data-screen-label="Newsroom">
+
+  <div class="nr-inner">
+
+    <!-- Header -->
+    <header class="nr-header">
+      <div class="nr-eyebrow"><span class="dot"></span> Press &amp; Announcements</div>
+      <h1 class="nr-title">Latest from <em>YOUGotaGift</em></h1>
+    </header>
+
+    <!-- Hero item -->
+    <a class="nr-hero" href="https://yougotagift.tech" target="_blank" rel="noopener">
+      <div class="nr-hero-left">
+        <div class="nr-hero-meta">
+          <span class="nr-source">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </span>
+          <span class="nr-hero-date">Jun 10, 2025</span>
+        </div>
+        <h2 class="nr-hero-headline">YOUGotaGift Opens Kochi Engineering Center — Doubling Down on Deep Tech</h2>
+        <p class="nr-hero-excerpt">A 120-seat hub for platform, infrastructure, and AI/ML teams, built to accelerate the next decade of digital gifting across the Middle East and beyond.</p>
+      </div>
+      <div class="nr-hero-right">
+        <div class="nr-hero-img">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80" alt="" loading="lazy" />
+        </div>
+        <div style="margin-top:20px;text-align:right">
+          <span class="nr-cta">Read on LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Grid -->
+    <div class="nr-grid">
+
+      <!-- Card 1 -->
+      <a class="nr-card" href="https://yougotagift.tech" target="_blank" rel="noopener" style="--rd:0ms">
+        <div class="nr-card-img"><img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=900&q=80" alt="" loading="lazy" /></div>
+        <div class="nr-card-meta">
+          <span class="nr-source"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</span>
+          <span class="nr-card-date">Jun 10, 2025</span>
+        </div>
+        <h3 class="nr-card-headline">YOUGotaGift Opens Kochi Engineering Center</h3>
+        <p class="nr-card-excerpt">A 120-seat engineering hub in Kerala dedicated to platform, infrastructure, and AI/ML innovation for the gifting ecosystem.</p>
+        <div class="nr-card-footer">
+          <span class="nr-source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Company News</span>
+          <span class="nr-card-read">Read on LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a class="nr-card" href="https://yougotagift.tech" target="_blank" rel="noopener" style="--rd:80ms">
+        <div class="nr-card-img"><img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=900&q=80" alt="" loading="lazy" /></div>
+        <div class="nr-card-meta">
+          <span class="nr-source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9"/></svg>Gulf News</span>
+          <span class="nr-card-date">Mar 15, 2025</span>
+        </div>
+        <h3 class="nr-card-headline">Gifttee Partnership Brings Digital Gifting to Japan</h3>
+        <p class="nr-card-excerpt">YOUGotaGift teams up with Gifttee to bring localised e-gift cards and rewards to Japanese consumers and enterprises.</p>
+        <div class="nr-card-footer">
+          <span class="nr-source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Partnership</span>
+          <span class="nr-card-read">Read on Gulf News <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a class="nr-card" href="https://yougotagift.tech" target="_blank" rel="noopener" style="--rd:160ms">
+        <div class="nr-card-img"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80" alt="" loading="lazy" /></div>
+        <div class="nr-card-meta">
+          <span class="nr-source"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</span>
+          <span class="nr-card-date">Nov 8, 2024</span>
+        </div>
+        <h3 class="nr-card-headline">AWS Aurora Migration: Zero Downtime, Full Speed Ahead</h3>
+        <p class="nr-card-excerpt">How we moved 200+ tables to Amazon Aurora with no service interruptions, slashing query latency by 40%.</p>
+        <div class="nr-card-footer">
+          <span class="nr-source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Engineering</span>
+          <span class="nr-card-read">Read on LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Card 4 -->
+      <a class="nr-card" href="https://yougotagift.tech" target="_blank" rel="noopener" style="--rd:240ms">
+        <div class="nr-card-img"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="" loading="lazy" /></div>
+        <div class="nr-card-meta">
+          <span class="nr-source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9"/></svg>Khaleej Times</span>
+          <span class="nr-card-date">Aug 20, 2024</span>
+        </div>
+        <h3 class="nr-card-headline">YOUGotaGift × Noon: Powering 10M+ Gift Deliveries</h3>
+        <p class="nr-card-excerpt">Our integration with Noon's marketplace means millions of shoppers across the UAE and KSA can now send digital gifts seamlessly.</p>
+        <div class="nr-card-footer">
+          <span class="nr-source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Partnership</span>
+          <span class="nr-card-read">Read on Khaleej Times <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Card 5 -->
+      <a class="nr-card" href="https://yougotagift.tech" target="_blank" rel="noopener" style="--rd:320ms">
+        <div class="nr-card-img"><img src="https://images.unsplash.com/photo-1579389083046-e3df9c2b3325?auto=format&fit=crop&w=900&q=80" alt="" loading="lazy" /></div>
+        <div class="nr-card-meta">
+          <span class="nr-source"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</span>
+          <span class="nr-card-date">Jun 3, 2024</span>
+        </div>
+        <h3 class="nr-card-headline">100 Million Digital Gifts Redeemed — A Milestone Story</h3>
+        <p class="nr-card-excerpt">Crossing 100M redemptions across the Middle East and beyond — the infrastructure choices that got us here.</p>
+        <div class="nr-card-footer">
+          <span class="nr-source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Company News</span>
+          <span class="nr-card-read">Read on LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span>
+        </div>
+      </a>
+
+    </div><!-- /nr-grid -->
+  </div><!-- /nr-inner -->
+</section>
+
+
+
+<footer class="site-footer" data-screen-label="Footer">
+  <div class="footer-card">
+    <canvas id="footerGlobe" aria-hidden="true"></canvas>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="assets/yougotagift-logo.png" alt="YOUGotaGift" style="object-fit:contain;object-position:left center;" />
+        <p class="footer-brand-tagline">Building the future of branded payments — infrastructure, rewards, and gifting across the globe.</p>
+        <div class="footer-social-row">
+          <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-col-links">
+          <li><a href="#">For Businesses</a></li>
+          <li><a href="#">Buy eGift Cards</a></li>
+          <li><a href="#">Start a Group Gift</a></li>
+          <li><a href="#">Buy Gaming Cards</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Policy &amp; Info</p>
+        <ul class="footer-col-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Engineering</p>
+        <ul class="footer-col-links">
+          <li><a href="Stack%20v2.html">Stack</a></li>
+          <li><a>Status</a></li>
+          <li><a href="Newsroom%20v3.html">Newsroom</a></li>
+          <li><a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
+          <li><a href="Trust%20Center.html">Trust Center</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p class="footer-bar-copy">© 2026 YOUGotaGift.com Ltd. &nbsp;·&nbsp; UAE | Saudi Arabia | Qatar | Bahrain | Oman | Kuwait | India</p>
+      <div class="footer-bar-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-wordmark-wrap" aria-hidden="true">
+    <div class="footer-wordmark"><span>E</span><span>n</span><span>g</span><span class="wm-brand">i</span><span>n</span><span>e</span><span class="wm-brand">e</span><span>r</span><span>i</span><span class="wm-brand">n</span><span>g</span></div>
+
+  </div>
+</footer>
+
+<script src="site-shared.js"></script>
+<script>
+(function(){
+  var items = Array.prototype.slice.call(document.querySelectorAll('.nr-hero, .nr-card'));
+  if (!items.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    items.forEach(function(el){ el.classList.add('revealed'); }); return;
+  }
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function(el){ el.classList.add('revealed'); }); return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting){ en.target.classList.add('revealed'); io.unobserve(en.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+  items.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

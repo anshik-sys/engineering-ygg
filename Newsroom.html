@@ -1,0 +1,1104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Newsroom — YOUGotaGift Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/hooskai-chamfered-square" rel="stylesheet">
+<link rel="stylesheet" href="site-styles.css">
+<style>
+/* ====================== NEWSROOM REDESIGN ====================== */
+
+/* Page header */
+.nr-page-header {
+  padding: 48px 0 0;
+  position: relative;
+  z-index: 2;
+}
+.nr-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.nr-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--brand-soft);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nr-eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--brand-soft);
+  flex-shrink: 0;
+}
+.nr-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.8vw, 72px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+.nr-title .t-grad {
+  font-style: italic;
+  font-weight: 300;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0BCF5 50%, #B800C4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  font-variation-settings: "wdth" 90;
+  padding-right: .12em;
+  display: inline-block;
+}
+html[data-theme="light"] .nr-title .t-grad {
+  background: linear-gradient(180deg, #2A0F30 0%, #B800C4 55%, #7A0084 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.nr-sub {
+  font-size: 15px;
+  color: var(--ink-dim);
+  max-width: 52ch;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+.nr-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0;
+}
+.nr-tab {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-dim);
+  background: none;
+  border: none;
+  padding: 10px 18px;
+  cursor: pointer;
+  position: relative;
+  transition: color .2s;
+  letter-spacing: -0.01em;
+  bottom: -1px;
+}
+.nr-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--brand-soft);
+  transform: scaleX(0);
+  transition: transform .2s var(--ease);
+}
+.nr-tab.active { color: var(--ink); }
+.nr-tab.active::after { transform: scaleX(1); }
+.nr-tab:hover { color: var(--ink); }
+
+/* Body */
+.nr-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 40px 100px;
+  position: relative;
+  position: relative;
+  z-index: 2;
+}
+
+/* ---- Featured hero ---- */
+.nr-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  margin-bottom: 48px;
+  background: var(--glass);
+  min-height: 320px;
+  transition: border-color .2s;
+}
+.nr-featured:hover { border-color: var(--line-2); }
+.nr-featured-img {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a002e 0%, #4a006a 40%, #7a0084 70%, #b800c4 100%);
+  min-height: 280px;
+}
+.nr-featured-img-inner {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(184,0,196,.35), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(120,0,160,.25), transparent 60%);
+}
+.nr-featured-img-label {
+  position: absolute;
+  bottom: 20px; left: 20px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  background: rgba(0,0,0,.35);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+/* Decorative grid lines on featured image */
+.nr-featured-img::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 1;
+}
+.nr-featured-content {
+  padding: 36px 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.nr-featured-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nr-cat {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.nr-cat.company    { background: rgba(184,0,196,.18); color: var(--brand-soft); }
+.nr-cat.engineering{ background: rgba(29,100,200,.2); color: #7eb8f7; }
+.nr-cat.security   { background: rgba(16,140,90,.2);  color: #5ecfa0; }
+.nr-cat.partnership{ background: rgba(200,140,0,.18); color: #f0c060; }
+.nr-cat.product    { background: rgba(200,60,100,.18);color: #f07090; }
+.nr-cat.culture    { background: rgba(80,80,200,.2);  color: #a0a8f8; }
+.nr-cat.regulatory { background: rgba(160,100,0,.2);  color: #d4a060; }
+
+.nr-featured-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: .03em;
+}
+.nr-featured-headline {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.nr-featured-excerpt {
+  font-size: 14px;
+  color: var(--ink-dim);
+  line-height: 1.6;
+  margin: 0;
+}
+.nr-featured-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nr-author-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.nr-author-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-deep), var(--brand-soft));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.nr-author-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-dim);
+}
+.nr-read-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-ui);
+  font-size: 13px; font-weight: 500;
+  color: var(--brand-soft);
+  text-decoration: none;
+  transition: gap .2s, color .2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nr-read-btn:hover { color: var(--ink); gap: 11px; }
+.nr-read-btn svg { width: 14px; height: 14px; }
+
+/* ---- Layout grid ---- */
+.nr-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ---- Sidebar ---- */
+.nr-sidebar {
+  position: sticky;
+  top: 88px;
+}
+.nr-sidebar-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 16px;
+}
+.nr-filter-list {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.nr-filter-list li button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--ink-dim);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px;
+  transition: background .15s, color .15s;
+}
+.nr-filter-list li button:hover { background: var(--glass-2); color: var(--ink); }
+.nr-filter-list li button.active { background: var(--glass-2); color: var(--ink); font-weight: 500; }
+.nr-filter-count {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-faint);
+  background: var(--glass);
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+.nr-filter-list li button.active .nr-filter-count { color: var(--brand-soft); }
+
+/* ---- Main content ---- */
+.nr-main {}
+
+/* Search */
+.nr-search-wrap {
+  position: relative;
+  margin-bottom: 28px;
+}
+.nr-search-wrap svg {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  width: 15px; height: 15px;
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+.nr-search {
+  width: 100%;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 16px 11px 40px;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color .2s, background .2s;
+}
+.nr-search::placeholder { color: var(--ink-faint); }
+.nr-search:focus { border-color: rgba(184,0,196,.4); background: rgba(255,255,255,.06); }
+html[data-theme="light"] .nr-search { background: rgba(26,14,28,.04); border-color: rgba(26,14,28,.12); color: var(--ink); }
+html[data-theme="light"] .nr-search:focus { border-color: rgba(184,0,196,.45); }
+
+/* Results count */
+.nr-results-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: .04em;
+  margin-bottom: 20px;
+}
+
+/* ---- Article list ---- */
+.nr-articles { display: flex; flex-direction: column; gap: 0; }
+.nr-article {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: background .15s;
+  cursor: pointer;
+}
+.nr-article:first-child { border-top: 1px solid var(--line); }
+.nr-article:hover .nr-article-headline { color: var(--brand-soft); }
+
+.nr-article-thumb {
+  width: 120px; height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+.nr-article-thumb-inner {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+/* per-category thumb colors */
+.nr-article[data-category="company"]     .nr-article-thumb-inner { background: linear-gradient(135deg,#2a0040,#7a0084); }
+.nr-article[data-category="engineering"] .nr-article-thumb-inner { background: linear-gradient(135deg,#001a3a,#0d4fa0); }
+.nr-article[data-category="security"]    .nr-article-thumb-inner { background: linear-gradient(135deg,#001a12,#0d7a5c); }
+.nr-article[data-category="partnership"] .nr-article-thumb-inner { background: linear-gradient(135deg,#2a1a00,#8a5a00); }
+.nr-article[data-category="product"]     .nr-article-thumb-inner { background: linear-gradient(135deg,#2a001a,#8a1a40); }
+.nr-article[data-category="culture"]     .nr-article-thumb-inner { background: linear-gradient(135deg,#0a0a2a,#1a1a7a); }
+.nr-article[data-category="regulatory"]  .nr-article-thumb-inner { background: linear-gradient(135deg,#1a1000,#6a4400); }
+
+.nr-article-thumb-inner svg {
+  width: 28px; height: 28px;
+  color: rgba(255,255,255,.22);
+}
+/* Grid overlay on thumbs */
+.nr-article-thumb-inner::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.nr-article-content { display: flex; flex-direction: column; gap: 6px; justify-content: center; }
+.nr-article-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.nr-article-date {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  letter-spacing: .03em;
+}
+.nr-article-headline {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+  transition: color .2s;
+  text-wrap: pretty;
+}
+.nr-article-excerpt {
+  font-size: 13px;
+  color: var(--ink-faint);
+  line-height: 1.55;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.nr-article-footer {
+  display: flex; align-items: center; gap: 10px; margin-top: 4px;
+}
+.nr-article-author {
+  display: flex; align-items: center; gap: 7px;
+}
+.nr-article-avatar {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--brand-deep), var(--brand-soft));
+}
+.nr-article-author-name {
+  font-size: 12px; color: var(--ink-dim); font-weight: 400;
+}
+.nr-article-read-time {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  padding-left: 10px;
+  border-left: 1px solid var(--line);
+}
+
+/* Empty state */
+.nr-empty {
+  padding: 60px 0;
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 14px;
+  display: none;
+}
+.nr-empty svg { display: block; margin: 0 auto 16px; opacity: .3; }
+
+/* ---- Light theme overrides ---- */
+html[data-theme="light"] .nr-featured { border-color: rgba(26,14,28,.1); }
+html[data-theme="light"] .nr-article { border-bottom-color: rgba(26,14,28,.08); }
+html[data-theme="light"] .nr-article:first-child { border-top-color: rgba(26,14,28,.08); }
+html[data-theme="light"] .nr-filter-list li button:hover,
+html[data-theme="light"] .nr-filter-list li button.active { background: rgba(26,14,28,.06); }
+html[data-theme="light"] .nr-tabs { border-bottom-color: rgba(26,14,28,.1); }
+
+/* ---- Responsive ---- */
+@media (max-width: 960px) {
+  .nr-layout { grid-template-columns: 1fr; }
+  .nr-sidebar { position: static; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .nr-sidebar-title { display: none; }
+  .nr-filter-list { flex-direction: row; }
+  .nr-filter-list li button { padding: 6px 14px; font-size: 12.5px; }
+  .nr-filter-count { display: none; }
+  .nr-featured { grid-template-columns: 1fr; min-height: auto; }
+  .nr-featured-img { min-height: 200px; }
+}
+@media (max-width: 680px) {
+  .nr-header-inner, .nr-body { padding-left: 20px; padding-right: 20px; }
+  .nr-article { grid-template-columns: 88px 1fr; gap: 14px; }
+  .nr-article-thumb { width: 88px; height: 60px; }
+  .nr-article-excerpt { display: none; }
+  .nr-layout { gap: 24px; }
+}
+</style>
+</head>
+<body>
+<!-- SmileLoader overlay -->
+<div id="sl-backdrop"></div>
+<div id="sl-logo-wrap">
+  <div id="sl-logo-inner">
+    <svg viewBox="0 0 200 242" width="92" height="111" style="display:block;overflow:visible" aria-hidden="true">
+      <circle id="sl-dot-l" class="sl-dot-l" cx="34"  cy="44" r="22" fill="#E07AE9" style="transform-origin:34px 44px"/>
+      <circle id="sl-dot-r" class="sl-dot-r" cx="166" cy="44" r="22" fill="#E07AE9" style="transform-origin:166px 44px"/>
+      <path   id="sl-u"     class="sl-u" d="M 34,96 L 34,152 A 66,66 0 0 0 166,152 L 166,96"
+              stroke="#B800C4" stroke-width="40" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+</div>
+
+<div class="page-bg" aria-hidden="true">
+  <div class="pg-grid"></div>
+  <div class="pg-grid fine"></div>
+  <div class="pg-stars"></div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <a class="nav-logo" href="index.html" aria-label="YOUGotaGift">
+    <img src="assets/yougotagift-logo.png" alt="YOUGotaGift" />
+  </a>
+  <nav class="nav">
+    <div class="brand">
+      <a class="brand-tag" href="index.html" style="text-decoration:none;">Engineering</a>
+    </div>
+    <div class="nav-links">
+      <a href="Stories%20v2.html">Stories</a>
+      <a>Status</a>
+      <a href="Stack.html">Stack</a>
+      <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
+      <a href="Trust%20Center.html">Trust Center</a>
+      <a href="Newsroom.html" class="current">Newsroom</a>
+    </div>
+    <div class="nav-cta">
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</div>
+<!-- Top-right floating controls -->
+<div class="top-right-controls">
+  <div class="status-pill">
+    <span class="status-dot-lg"></span>
+    <span class="status-text">
+      <span class="status-title">MyRewards</span>
+      <span class="status-sub">100% uptime</span>
+    </span>
+  </div>
+  <span class="controls-divider"></span>
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+  </button>
+</div>
+<!-- Mobile nav drawer -->
+<div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <nav class="mobile-drawer-links">
+    <a href="Stories%20v2.html">Stories</a>
+    <a>Status</a>
+    <a href="Stack.html">Stack</a>
+    <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
+    <a href="Trust%20Center.html">Trust Center</a>
+    <a href="Newsroom.html" class="current">Newsroom</a>
+    <a href="index.html">Home</a>
+  </nav>
+</div>
+
+<div class="page-breadcrumb">
+  <a href="index.html">Engineering</a>
+  <span class="sep">/</span>
+  <span class="here">Newsroom</span>
+</div>
+
+<!-- ====================== PAGE HEADER ====================== -->
+<div class="nr-page-header" data-screen-label="Newsroom Header">
+  <div class="nr-header-inner">
+    <h1 class="nr-title">Latest from<br><span class="t-grad">YOUGotaGift</span></h1>
+    <p class="nr-sub">Company milestones, engineering announcements, partnerships, and the stories behind our growth.</p>
+    <div class="nr-tabs">
+      <button class="nr-tab active" data-tab="latest">Latest</button>
+      <button class="nr-tab" data-tab="archive">Archive</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== BODY ====================== -->
+<div class="nr-body" data-screen-label="Newsroom Body">
+
+  <!-- Featured article -->
+  <div class="nr-featured" id="nrFeatured">
+    <div class="nr-featured-img">
+      <div class="nr-featured-img-inner"></div>
+      <span class="nr-featured-img-label">Kochi, India · Jun 2025</span>
+    </div>
+    <div class="nr-featured-content">
+      <div>
+        <div class="nr-featured-meta">
+          <span class="nr-cat company">Company News</span>
+          <span class="nr-featured-date">June 10, 2025</span>
+        </div>
+      </div>
+      <h2 class="nr-featured-headline">YOUGotaGift Opens Kochi Engineering Center — Doubling Down on Deep Tech</h2>
+      <p class="nr-featured-excerpt">A 120-seat hub for platform, infrastructure, and AI/ML teams, built to accelerate the next decade of digital gifting.</p>
+      <div class="nr-featured-footer">
+        <div class="nr-author-row">
+          <div class="nr-author-avatar">AK</div>
+          <span class="nr-author-name">Ashin KN, VP Engineering</span>
+        </div>
+        <a class="nr-read-btn" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          Read story
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layout: sidebar + main -->
+  <div class="nr-layout">
+
+    <!-- Sidebar -->
+    <aside class="nr-sidebar" aria-label="Filter by category">
+      <p class="nr-sidebar-title">Filter by</p>
+      <ul class="nr-filter-list" id="nrFilterList">
+        <li><button class="active" data-cat="all">All categories <span class="nr-filter-count" id="countAll">10</span></button></li>
+        <li><button data-cat="company">Company News <span class="nr-filter-count" id="countCompany">3</span></button></li>
+        <li><button data-cat="partnership">Partnerships <span class="nr-filter-count" id="countPartnership">2</span></button></li>
+        <li><button data-cat="engineering">Engineering <span class="nr-filter-count" id="countEngineering">2</span></button></li>
+        <li><button data-cat="security">Security <span class="nr-filter-count" id="countSecurity">2</span></button></li>
+        <li><button data-cat="product">Product <span class="nr-filter-count" id="countProduct">1</span></button></li>
+        <li><button data-cat="regulatory">Regulatory <span class="nr-filter-count" id="countRegulatory">1</span></button></li>
+        <li><button data-cat="culture">Culture <span class="nr-filter-count" id="countCulture">1</span></button></li>
+      </ul>
+    </aside>
+
+    <!-- Main -->
+    <main class="nr-main">
+      <!-- Search -->
+      <div class="nr-search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="nr-search" id="nrSearch" type="search" placeholder="Search news…" aria-label="Search articles" autocomplete="off" />
+      </div>
+
+      <p class="nr-results-count" id="nrCount">Showing 10 articles</p>
+
+      <!-- Articles -->
+      <div class="nr-articles" id="nrArticles">
+
+        <!-- Article 1 -->
+        <a class="nr-article" data-category="company" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat company">Company News</span>
+              <span class="nr-article-date">Jun 10, 2025</span>
+            </div>
+            <h3 class="nr-article-headline">YOUGotaGift Opens Kochi Engineering Center</h3>
+            <p class="nr-article-excerpt">A 120-seat engineering hub in Kerala dedicated to platform, infrastructure, and AI/ML innovation for the gifting ecosystem.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">AK</div>
+                <span class="nr-article-author-name">Ashin KN</span>
+              </div>
+              <span class="nr-article-read-time">5 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 2 -->
+        <a class="nr-article" data-category="partnership" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat partnership">Partnership</span>
+              <span class="nr-article-date">Mar 15, 2025</span>
+            </div>
+            <h3 class="nr-article-headline">Gifttee Partnership Brings Digital Gifting to Japan</h3>
+            <p class="nr-article-excerpt">We teamed up with Gifttee to bring localised e-gift cards and rewards to Japanese consumers and enterprises.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">SK</div>
+                <span class="nr-article-author-name">Shameem Khalid</span>
+              </div>
+              <span class="nr-article-read-time">4 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 3 -->
+        <a class="nr-article" data-category="engineering" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat engineering">Engineering</span>
+              <span class="nr-article-date">Nov 8, 2024</span>
+            </div>
+            <h3 class="nr-article-headline">AWS Aurora Migration: Zero Downtime, Full Speed Ahead</h3>
+            <p class="nr-article-excerpt">How we moved 200+ tables to Amazon Aurora with no service interruptions, slashing query latency by 40%.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">SB</div>
+                <span class="nr-article-author-name">Sarin Babu</span>
+              </div>
+              <span class="nr-article-read-time">8 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 4 -->
+        <a class="nr-article" data-category="partnership" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat partnership">Partnership</span>
+              <span class="nr-article-date">Aug 20, 2024</span>
+            </div>
+            <h3 class="nr-article-headline">YOUGotaGift × Noon: Powering 10M+ Gift Deliveries</h3>
+            <p class="nr-article-excerpt">Our integration with Noon's marketplace means millions of shoppers across the UAE and KSA can now send digital gifts seamlessly.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">AA</div>
+                <span class="nr-article-author-name">Aneesha Ali</span>
+              </div>
+              <span class="nr-article-read-time">4 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 5 -->
+        <a class="nr-article" data-category="company" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat company">Company News</span>
+              <span class="nr-article-date">Jun 3, 2024</span>
+            </div>
+            <h3 class="nr-article-headline">100 Million Digital Gifts Redeemed — A Milestone Story</h3>
+            <p class="nr-article-excerpt">Crossing 100M redemptions across the Middle East and beyond — the infrastructure choices that got us here.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">AK</div>
+                <span class="nr-article-author-name">Ahammed K M</span>
+              </div>
+              <span class="nr-article-read-time">6 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 6 -->
+        <a class="nr-article" data-category="security" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat security">Security</span>
+              <span class="nr-article-date">Jan 22, 2024</span>
+            </div>
+            <h3 class="nr-article-headline">PCI-DSS Level 1: Our Journey to Full Compliance</h3>
+            <p class="nr-article-excerpt">What it takes to achieve and maintain PCI-DSS Level 1 certification for a high-volume digital payments platform.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">SK</div>
+                <span class="nr-article-author-name">Shameem Khalid</span>
+              </div>
+              <span class="nr-article-read-time">7 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 7 -->
+        <a class="nr-article" data-category="product" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat product">Product</span>
+              <span class="nr-article-date">Oct 14, 2023</span>
+            </div>
+            <h3 class="nr-article-headline">Introducing MyRewards 2.0: Enterprise Rewards at Scale</h3>
+            <p class="nr-article-excerpt">A complete redesign of our rewards engine — new APIs, real-time analytics, and multi-currency payout support.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">AA</div>
+                <span class="nr-article-author-name">Aneesha Ali</span>
+              </div>
+              <span class="nr-article-read-time">5 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 8 -->
+        <a class="nr-article" data-category="security" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat security">Security</span>
+              <span class="nr-article-date">Jul 5, 2023</span>
+            </div>
+            <h3 class="nr-article-headline">SOC 2 Type II Completed: What It Means for Our Customers</h3>
+            <p class="nr-article-excerpt">We completed our SOC 2 Type II audit — here's what the process looked like and what assurances it gives our enterprise partners.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">SB</div>
+                <span class="nr-article-author-name">Sarin Babu</span>
+              </div>
+              <span class="nr-article-read-time">6 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 9 -->
+        <a class="nr-article" data-category="engineering" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat engineering">Engineering</span>
+              <span class="nr-article-date">Apr 18, 2023</span>
+            </div>
+            <h3 class="nr-article-headline">Building Multi-Currency at Scale for the Gulf Region</h3>
+            <p class="nr-article-excerpt">AED, SAR, QAR, BHD, OMR, KWD — simultaneously. The architecture decisions behind our currency engine.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">AK</div>
+                <span class="nr-article-author-name">Ashin KN</span>
+              </div>
+              <span class="nr-article-read-time">9 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 10 -->
+        <a class="nr-article" data-category="regulatory" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat regulatory">Regulatory</span>
+              <span class="nr-article-date">Feb 9, 2023</span>
+            </div>
+            <h3 class="nr-article-headline">SAMA Compliance: How We Operate in the Saudi Market</h3>
+            <p class="nr-article-excerpt">A deep dive into our approach to SAMA's e-payment regulations, data residency requirements, and ongoing compliance posture.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">AK</div>
+                <span class="nr-article-author-name">Ahammed K M</span>
+              </div>
+              <span class="nr-article-read-time">5 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 11 -->
+        <a class="nr-article" data-category="culture" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat culture">Culture</span>
+              <span class="nr-article-date">Dec 12, 2022</span>
+            </div>
+            <h3 class="nr-article-headline">YOUGotaGift Named Top Fintech Employer in the UAE</h3>
+            <p class="nr-article-excerpt">Recognised for our culture of growth, flexibility, and engineering excellence by LinkedIn's 2022 Top Companies list.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">AA</div>
+                <span class="nr-article-author-name">Aneesha Ali</span>
+              </div>
+              <span class="nr-article-read-time">3 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 12 -->
+        <a class="nr-article" data-category="company" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+          <div class="nr-article-thumb">
+            <div class="nr-article-thumb-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+          </div>
+          <div class="nr-article-content">
+            <div class="nr-article-meta">
+              <span class="nr-cat company">Company News</span>
+              <span class="nr-article-date">Sep 5, 2022</span>
+            </div>
+            <h3 class="nr-article-headline">Expanding to Qatar and Bahrain: What's Next for the Gulf</h3>
+            <p class="nr-article-excerpt">Two new markets, local compliance, and localised gifting catalogues — how we expanded our footprint in 90 days.</p>
+            <div class="nr-article-footer">
+              <div class="nr-article-author">
+                <div class="nr-article-avatar">SK</div>
+                <span class="nr-article-author-name">Shameem Khalid</span>
+              </div>
+              <span class="nr-article-read-time">4 min read</span>
+            </div>
+          </div>
+        </a>
+
+      </div><!-- /nr-articles -->
+
+      <div class="nr-empty" id="nrEmpty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        No articles match your search.
+      </div>
+
+    </main><!-- /nr-main -->
+  </div><!-- /nr-layout -->
+</div><!-- /nr-body -->
+
+<footer class="site-footer" data-screen-label="Footer">
+  <div class="footer-card">
+    <canvas id="footerGlobe" aria-hidden="true"></canvas>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="assets/yougotagift-logo.png" alt="YOUGotaGift" style="object-fit:contain;object-position:left center;" />
+        <p class="footer-brand-tagline">Building the future of branded payments — infrastructure, rewards, and gifting across the globe.</p>
+        <div class="footer-social-row">
+          <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-col-links">
+          <li><a href="#">For Businesses</a></li>
+          <li><a href="#">Buy eGift Cards</a></li>
+          <li><a href="#">Start a Group Gift</a></li>
+          <li><a href="#">Buy Gaming Cards</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Policy &amp; Info</p>
+        <ul class="footer-col-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Engineering</p>
+        <ul class="footer-col-links">
+          <li><a href="Stack.html">Stack</a></li>
+          <li><a>Status</a></li>
+          <li><a href="Newsroom.html">Newsroom</a></li>
+          <li><a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
+          <li><a href="Trust%20Center.html">Trust Center</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p class="footer-bar-copy">© 2026 YOUGotaGift.com Ltd. &nbsp;·&nbsp; UAE | Saudi Arabia | Qatar | Bahrain | Oman | Kuwait | India</p>
+      <div class="footer-bar-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-wordmark-wrap" aria-hidden="true">
+    <div class="footer-wordmark"><span>E</span><span>n</span><span>g</span><span class="wm-brand">i</span><span>n</span><span>e</span><span class="wm-brand">e</span><span>r</span><span>i</span><span class="wm-brand">n</span><span>g</span></div>
+
+  </div>
+</footer>
+
+<script src="site-shared.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var articles = Array.from(document.querySelectorAll('.nr-article'));
+  var searchInput = document.getElementById('nrSearch');
+  var countEl = document.getElementById('nrCount');
+  var emptyEl = document.getElementById('nrEmpty');
+  var filterBtns = document.querySelectorAll('#nrFilterList button');
+
+  var activeCat = 'all';
+  var activeSearch = '';
+
+  // Category counts
+  var catCounts = {};
+  articles.forEach(function (a) {
+    var c = a.dataset.category;
+    catCounts[c] = (catCounts[c] || 0) + 1;
+  });
+  document.getElementById('countAll').textContent = articles.length;
+  Object.keys(catCounts).forEach(function (c) {
+    var el = document.getElementById('count' + c.charAt(0).toUpperCase() + c.slice(1));
+    if (el) el.textContent = catCounts[c];
+  });
+
+  function applyFilters() {
+    var q = activeSearch.toLowerCase().trim();
+    var visible = 0;
+    articles.forEach(function (a) {
+      var cat = a.dataset.category;
+      var text = a.querySelector('.nr-article-headline').textContent.toLowerCase()
+        + ' ' + (a.querySelector('.nr-article-excerpt') ? a.querySelector('.nr-article-excerpt').textContent.toLowerCase() : '');
+      var catOk = activeCat === 'all' || cat === activeCat;
+      var searchOk = !q || text.includes(q);
+      var show = catOk && searchOk;
+      a.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    countEl.textContent = 'Showing ' + visible + ' article' + (visible !== 1 ? 's' : '');
+    emptyEl.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeCat = btn.dataset.cat;
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', function () {
+    activeSearch = searchInput.value;
+    applyFilters();
+  });
+
+  // Tab: archive = articles before 2024
+  var tabs = document.querySelectorAll('.nr-tab');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      var isArchive = tab.dataset.tab === 'archive';
+      articles.forEach(function (a) {
+        var dateStr = a.querySelector('.nr-article-date').textContent;
+        var year = parseInt(dateStr.split(', ')[1] || dateStr.slice(-4));
+        a.style.display = isArchive ? (year < 2024 ? '' : 'none') : '';
+      });
+      document.getElementById('nrFeatured').style.display = isArchive ? 'none' : '';
+      activeCat = 'all';
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      filterBtns[0].classList.add('active');
+      applyFilters();
+    });
+  });
+
+  // Entrance animation
+  var io = ('IntersectionObserver' in window) && new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) {
+        en.target.style.opacity = '1';
+        en.target.style.transform = 'translateY(0)';
+        io.unobserve(en.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.04 });
+
+  articles.forEach(function (a, i) {
+    a.style.opacity = '0';
+    a.style.transform = 'translateY(18px)';
+    a.style.transition = 'opacity .55s ' + (i * 0.06) + 's cubic-bezier(.2,0,0,1), transform .55s ' + (i * 0.06) + 's cubic-bezier(.2,0,0,1)';
+    if (io) io.observe(a);
+  });
+
+})();
+</script>
+</body>
+</html>

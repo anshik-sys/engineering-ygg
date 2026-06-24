@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stories — YOUGotaGift Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/hooskai-chamfered-square" rel="stylesheet">
+<link rel="stylesheet" href="site-styles.css">
+<style>
+  /* ============ BLOG GRID (Stories) ============ */
+  .blog{
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    padding: 96px 0 110px;
+    overflow: hidden;
+    min-height: 100vh;
+  }
+  .blog::before{
+    content:"";
+    position:absolute; inset:0;
+    background: none;
+    z-index:0;
+  }
+  html[data-theme="light"] .blog::before{
+    background: none;
+  }
+  .blog-inner{
+    position: relative;
+    z-index: 5;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ---- Hero ---- */
+  .blog-hero{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 56px;
+  }
+  .blog-hero-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+  .blog-hero-left{
+    flex: 1;
+    min-width: 0;
+  }
+  .blog-eyebrow{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--brand-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .blog-eyebrow .dot{
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--brand);
+    box-shadow: 0 0 12px rgba(184,0,196,.7);
+  }
+  .blog-title{
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(32px, 4.5vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin: 0;
+    max-width: none;
+    white-space: normal;
+  }
+  .blog-title em{
+    font-style: italic;
+    font-weight: 300;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F0BCF5 50%, #B800C4 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    font-variation-settings: "wdth" 90;
+    padding-right: .12em;
+    display: inline-block;
+  }
+  html[data-theme="light"] .blog-title em{
+    background: linear-gradient(180deg, #2A0F30 0%, #B800C4 55%, #7A0084 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+
+  /* ---- Search ---- */
+  .blog-search{
+    position: relative;
+    width: min(400px, 40%);
+    flex-shrink: 0;
+    margin: 0;
+  }
+  .blog-search svg{
+    position: absolute;
+    left: 24px; top: 50%;
+    transform: translateY(-50%);
+    width: 18px; height: 18px;
+    color: var(--ink-faint);
+    pointer-events: none;
+  }
+  .blog-search input{
+    width: 100%;
+    font-family: var(--font-ui);
+    font-size: 15.5px;
+    color: var(--ink);
+    background: var(--glass);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    padding: 17px 24px 17px 56px;
+    outline: none;
+    transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+  }
+  .blog-search input::placeholder{ color: var(--ink-faint); }
+  .blog-search input:focus{
+    border-color: rgba(184,0,196,.55);
+    background: var(--glass-2);
+    box-shadow: 0 0 0 4px rgba(184,0,196,.12);
+  }
+  html[data-theme="light"] .blog-search input{
+    background: rgba(255,255,255,.7);
+    border-color: rgba(26,14,28,.12);
+  }
+
+  /* ---- Filter chips ---- */
+  .blog-filters{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+    max-width: 720px;
+  }
+  .chip{
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    color: var(--ink-dim);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 9px 18px;
+    cursor: pointer;
+    transition: color .18s ease, background .18s ease, border-color .18s ease;
+    white-space: nowrap;
+  }
+  .chip:hover{
+    color: var(--ink);
+    background: var(--glass);
+  }
+  .chip.active{
+    color: var(--ink);
+    background: rgba(255,255,255,.12);
+    border-color: rgba(255,255,255,.22);
+    box-shadow: none;
+  }
+  html[data-theme="light"] .chip.active{
+    color: var(--ink);
+    background: rgba(26,14,28,.1);
+    border-color: rgba(26,14,28,.22);
+  }
+  html[data-theme="light"] .chip:hover{ background: rgba(26,14,28,.05); color: var(--ink); }
+  html[data-theme="light"] .chip.active{ color: #fff; }
+
+  /* ---- Grid ---- */
+  .blog-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 36px;
+    row-gap: 64px;
+  }
+  .post{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  .post.is-hidden{ display: none; }
+  .post-top{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-family: var(--font-ui);
+    font-size: 15px;
+    color: var(--ink-dim);
+  }
+  .post-top .post-read{ color: var(--ink-faint); }
+  .post-media{
+    position: relative;
+    aspect-ratio: 16 / 10;
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--glass);
+    border: 1px solid var(--line);
+  }
+  .post-media img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .6s var(--ease, cubic-bezier(.2,0,0,1));
+  }
+  .post:hover .post-media img{ transform: scale(1.04); }
+  .post-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 22px 0 16px;
+  }
+  .post-tags span{
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-dim);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    padding: 5px 14px;
+    transition: color .18s ease, border-color .18s ease;
+  }
+  .post:hover .post-tags span:first-child{
+    color: var(--brand-soft);
+    border-color: rgba(184,0,196,.4);
+  }
+  .post-title{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(22px, 1.9vw, 28px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 14px;
+    text-wrap: balance;
+    transition: color .18s ease;
+  }
+  .post:hover .post-title{ color: var(--brand-soft); }
+  html[data-theme="light"] .post:hover .post-title{ color: var(--brand); }
+  .post-excerpt{
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-dim);
+    margin: 0 0 22px;
+    max-width: 46ch;
+  }
+  .post-by{
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .post-by img{
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line-2);
+  }
+  .post-by .by-name{
+    font-family: var(--font-ui);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .post-by .by-role{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .blog-empty{
+    grid-column: 1 / -1;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 16px;
+    color: var(--ink-faint);
+    padding: 60px 0;
+  }
+  .blog-empty[hidden]{ display: none; }
+
+  /* ---- Entrance reveal (scoped) ---- */
+  .blog-hero{ opacity: 0; transform: translateY(24px); }
+  .blog.is-lit .blog-hero{
+    opacity: 1; transform: none;
+    transition: opacity .8s cubic-bezier(.2,0,0,1), transform .8s cubic-bezier(.2,0,0,1);
+  }
+  .post{ opacity: 0; transform: translateY(28px); }
+  .post.revealed{
+    opacity: 1; transform: none;
+    transition: opacity .65s cubic-bezier(.2,0,0,1), transform .65s cubic-bezier(.2,0,0,1);
+    transition-delay: var(--rd, 0ms);
+  }
+  .no-js .blog-hero,
+  .no-js .post{ opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce){
+    .blog-hero,
+    .post{ opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+
+  @media (max-width: 1100px){
+    .blog-grid{ grid-template-columns: repeat(2, 1fr); column-gap: 32px; }
+  }
+  @media (max-width: 900px){
+    .blog{ padding: 124px 0 80px; }
+    .blog-inner{ padding: 0 28px; }
+    .blog-grid{ grid-template-columns: 1fr; row-gap: 52px; }
+    .blog-hero{ margin-bottom: 64px; }
+    .blog-hero-row{ flex-direction: column; align-items: flex-start; gap: 24px; }
+    .blog-search{ width: 100%; }
+  }
+  @media (max-width: 560px){
+    .blog-inner{ padding: 0 20px; }
+    .post-top{ font-size: 14px; }
+  }
+
+</style>
+</head>
+<body>
+<!-- SmileLoader overlay -->
+<div id="sl-backdrop"></div>
+<div id="sl-logo-wrap">
+  <div id="sl-logo-inner">
+    <svg viewBox="0 0 200 242" width="92" height="111" style="display:block;overflow:visible" aria-hidden="true">
+      <circle id="sl-dot-l" class="sl-dot-l" cx="34"  cy="44" r="22" fill="#E07AE9" style="transform-origin:34px 44px"/>
+      <circle id="sl-dot-r" class="sl-dot-r" cx="166" cy="44" r="22" fill="#E07AE9" style="transform-origin:166px 44px"/>
+      <path   id="sl-u"     class="sl-u" d="M 34,96 L 34,152 A 66,66 0 0 0 166,152 L 166,96"
+              stroke="#B800C4" stroke-width="40" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+</div>
+
+<div class="page-bg" aria-hidden="true">
+  <div class="pg-grid"></div>
+  <div class="pg-grid fine"></div>
+  <div class="pg-stars"></div>
+</div>
+<!-- NAV -->
+<div class="nav-wrap">
+  <a class="nav-logo" href="index.html" aria-label="YOUGotaGift">
+    <img src="assets/yougotagift-logo.png" alt="YOUGotaGift" />
+  </a>
+  <nav class="nav">
+    <div class="brand">
+      <a class="brand-tag" href="index.html" style="text-decoration:none;">Engineering</a>
+    </div>
+    <div class="nav-links">
+      <a href="Stories.html" class="current">Stories</a>
+      <a>Status</a>
+      <a href="Stack%20v2.html">Stack</a>
+      <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
+      <a href="Trust%20Center.html">Trust Center</a>
+      <a href="Newsroom%20v3.html">Newsroom</a>
+    </div>
+    <div class="nav-cta">
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</div>
+<!-- Top-right floating controls -->
+<div class="top-right-controls">
+  <div class="status-pill">
+    <span class="status-dot-lg"></span>
+    <span class="status-text">
+      <span class="status-title">MyRewards</span>
+      <span class="status-sub">100% uptime</span>
+    </span>
+  </div>
+  <span class="controls-divider"></span>
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+  </button>
+</div>
+<!-- Mobile nav drawer -->
+<div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <nav class="mobile-drawer-links">
+    <a href="Stories.html" class="current">Stories</a>
+    <a>Status</a>
+    <a href="Stack%20v2.html">Stack</a>
+    <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
+    <a href="Trust%20Center.html">Trust Center</a>
+    <a href="Newsroom%20v3.html">Newsroom</a>
+    <a href="index.html">Home</a>
+  </nav>
+</div>
+<div class="page-breadcrumb">
+  <a href="index.html">Engineering</a>
+  <span class="sep">/</span>
+  <span class="here">Stories</span>
+</div>
+<section id="stories" class="blog subpage-section" data-screen-label="Stories">
+  <div class="blog-inner">
+
+    <header class="blog-hero">
+      <div class="blog-hero-row">
+        <div class="blog-hero-left">
+          <div class="blog-eyebrow"><span class="dot"></span> Stories &amp; Field Notes</div>
+          <h1 class="blog-title">Engineering, told in <em>our own words.</em></h1>
+        </div>
+        <div class="blog-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="blogSearch" placeholder="Search stories…" aria-label="Search stories" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="blog-filters" id="blogFilters">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="engineering">Engineering</button>
+        <button class="chip" data-filter="frontend">Front End</button>
+        <button class="chip" data-filter="devops">DevOps</button>
+        <button class="chip" data-filter="qa">QA</button>
+        <button class="chip" data-filter="pm">Project Management</button>
+      </div>
+    </header>
+
+    <div class="blog-grid" id="blogGrid">
+
+      <!-- 1. Project Management — Dec 22, 2025 -->
+      <!-- CLAUDE CODE: href below points to a static prototype page.
+           In production replace with href="/blog/{slug}" where slug
+           comes from the API response. Remove target/_blank too. -->
+      <a class="post" data-category="pm" data-tags="project management process delivery squads" href="blogs/project-management-zen.html">
+        <div class="post-top"><span class="post-date">Dec 22, 2025</span><span class="post-read">6 min read</span></div>
+        <div class="post-media">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/project_management_5_02106120cc.png" alt="Project management at YOUGotaGift" loading="lazy"/>
+        </div>
+        <div class="post-tags"><span>Project Management</span><span>Process</span></div>
+        <h3 class="post-title">From "Wait, who's tracking this?" to project-management zen.</h3>
+        <p class="post-excerpt">How we traded scattered spreadsheets and "who owns this?" chaos for a calm, predictable delivery rhythm across every squad.</p>
+        <div class="post-by">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/T74_BP_44_N8_U04_SQMFM_0_TS_19acfb227626_512_8d27ea2284.jpeg" alt="" loading="lazy"/>
+          <span><span class="by-name">Aneesha Ali</span><br/><span class="by-role">Project Management</span></span>
+        </div>
+      </a>
+
+      <!-- 2. QA — Jun 27, 2025 -->
+      <!-- CLAUDE CODE: href below points to a static prototype page.
+           In production replace with href="/blog/{slug}". -->
+      <a class="post" data-category="qa" data-tags="qa quality automation testing e-gifting pipeline" href="blogs/scalable-quality-qa.html">
+        <div class="post-top"><span class="post-date">Jun 27, 2025</span><span class="post-read">8 min read</span></div>
+        <div class="post-media">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/Jira_Zephyr_2_32e8426047.png" alt="QA journey at YOUGotaGift" loading="lazy"/>
+        </div>
+        <div class="post-tags"><span>QA</span><span>Automation</span></div>
+        <h3 class="post-title">From scrappy launches to scalable quality.</h3>
+        <p class="post-excerpt">Scaling quality from a handful of manual checks to an automated, gated pipeline that keeps e-gifting reliable at volume.</p>
+        <div class="post-by">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/thumbnail_T74_BP_44_N8_UEQQ_0_RT_18_170e62b74da1_512_05d9a9561f_20c22dddc6.png" alt="" loading="lazy"/>
+          <span><span class="by-name">Sarin Babu</span><br/><span class="by-role">Quality Assurance</span></span>
+        </div>
+      </a>
+
+      <!-- 3. DevOps — Mar 31, 2025 -->
+      <!-- CLAUDE CODE: href below points to a static prototype page.
+           In production replace with href="/blog/{slug}". -->
+      <a class="post" data-category="devops" data-tags="devops infrastructure reliability failover scaling" href="blogs/shipping-through-the-storm.html">
+        <div class="post-top"><span class="post-date">Mar 31, 2025</span><span class="post-read">10 min read</span></div>
+        <div class="post-media">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/Chat_GPT_Image_Apr_2_2025_2_ce2807e954.png" alt="Infrastructure story" loading="lazy"/>
+        </div>
+        <div class="post-tags"><span>DevOps</span><span>Infrastructure</span></div>
+        <h3 class="post-title">Shipping through the storm: the infra story.</h3>
+        <p class="post-excerpt">The behind-the-scenes of keeping YOUGotaGift online through traffic spikes, region failovers and peak-season storms.</p>
+        <div class="post-by">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/Image_Gen_Apr_2_2025_09_58_53_AM_332bbd4caf.png" alt="" loading="lazy"/>
+          <span><span class="by-name">Shameem Khalid</span><br/><span class="by-role">DevOps</span></span>
+        </div>
+      </a>
+
+      <!-- 4. Frontend — Sep 20, 2024 -->
+      <!-- CLAUDE CODE: href below points to a static prototype page.
+           In production replace with href="/blog/{slug}". -->
+      <a class="post" data-category="frontend" data-tags="frontend front end architecture storefront gifting react" href="blogs/frontend-journey.html">
+        <div class="post-top"><span class="post-date">Sep 20, 2024</span><span class="post-read">7 min read</span></div>
+        <div class="post-media">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/blog_image_new_1_20d427b197.png" alt="Frontend journey" loading="lazy"/>
+        </div>
+        <div class="post-tags"><span>Front End</span><span>Architecture</span></div>
+        <h3 class="post-title">Building the future of gifting: our frontend journey.</h3>
+        <p class="post-excerpt">Why we rebuilt our storefront, the architecture choices behind it, and how we ship delightful gifting experiences fast.</p>
+        <div class="post-by">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/Blog_IMG_a6b87f96ff.png" alt="" loading="lazy"/>
+          <span><span class="by-name">Ahammed K M</span><br/><span class="by-role">Front End</span></span>
+        </div>
+      </a>
+
+      <!-- 5. Engineering — Mar 22, 2024 -->
+      <!-- CLAUDE CODE: href below points to a static prototype page.
+           In production replace with href="/blog/{slug}". -->
+      <a class="post" data-category="engineering" data-tags="engineering culture digital gift cards platform founder" href="blogs/magic-of-digital-gift-cards.html">
+        <div class="post-top"><span class="post-date">Mar 22, 2024</span><span class="post-read">9 min read</span></div>
+        <div class="post-media">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/Blog_IMG_3_6153aa3fae.png" alt="The magic of engineering digital gift cards" loading="lazy"/>
+        </div>
+        <div class="post-tags"><span>Engineering</span><span>Culture</span></div>
+        <h3 class="post-title">The magic of engineering digital gift cards.</h3>
+        <p class="post-excerpt">A founder's look at the engineering that turns a single tap into a gift delivered instantly, anywhere in the region.</p>
+        <div class="post-by">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/cto_e250c8b76f.png" alt="" loading="lazy"/>
+          <span><span class="by-name">Ashin KN</span><br/><span class="by-role">Engineering</span></span>
+        </div>
+      </a>
+
+      <!-- 6. Archive CTA -->
+      <a class="post" data-category="engineering frontend devops qa pm" data-tags="archive all stories blog" href="https://yougotagift.tech/blog" target="_blank" rel="noopener">
+        <div class="post-top"><span class="post-date">Archive</span><span class="post-read">Everything</span></div>
+        <div class="post-media">
+          <img src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/Blog_IMG_a6b87f96ff.png" alt="The YOUGotaGift engineering archive" loading="lazy"/>
+        </div>
+        <div class="post-tags"><span>All Stories</span></div>
+        <h3 class="post-title">Read the full archive.</h3>
+        <p class="post-excerpt">Every story from the team — engineering, product, infrastructure and culture, in one place.</p>
+        <div class="post-by">
+          <span class="by-name" style="color:var(--brand-soft)">Browse all stories →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <p class="blog-empty" id="blogEmpty" hidden>No stories match your search.</p>
+
+  </div>
+</section>
+
+<footer class="site-footer" data-screen-label="Footer">
+  <div class="footer-card">
+    <canvas id="footerGlobe" aria-hidden="true"></canvas>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="assets/yougotagift-logo.png" alt="YOUGotaGift" style="object-fit: contain; object-position: left center;" />
+        <p class="footer-brand-tagline">Building the future of branded payments — infrastructure, rewards, and gifting across the globe.</p>
+        <div class="footer-social-row">
+          <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:currentColor"/></svg>
+          </a>
+          <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-col-links">
+          <li><a href="#">For Businesses</a></li>
+          <li><a href="#">Buy eGift Cards</a></li>
+          <li><a href="#">Start a Group Gift</a></li>
+          <li><a href="#">Buy Gaming Cards</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Policy &amp; Info</p>
+        <ul class="footer-col-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Media Centre</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Engineering</p>
+        <ul class="footer-col-links">
+          <li><a href="Stack%20v2.html">Stack</a></li>
+          <li><a>Status</a></li>
+          <li><a href="Newsroom%20v3.html">Newsroom</a></li>
+          <li><a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
+          <li><a href="Trust%20Center.html">Trust Center</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p class="footer-bar-copy">&#169; 2026 YOUGotaGift.com Ltd. &nbsp;&middot;&nbsp; UAE | Saudi Arabia | Qatar | Bahrain | Oman | Kuwait | India</p>
+      <div class="footer-bar-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-wordmark-wrap" aria-hidden="true">
+    <div class="footer-wordmark"><span>E</span><span>n</span><span>g</span><span class="wm-brand">i</span><span>n</span><span>e</span><span class="wm-brand">e</span><span>r</span><span>i</span><span class="wm-brand">n</span><span>g</span></div>
+  </div>
+</footer>
+<script src="site-shared.js"></script>
+<script src="js/stories.js"></script>
+
+
+<!--
+  ============================================================
+  CLAUDE CODE — DEVELOPER INSTRUCTIONS (Stories Index Page)
+  ============================================================
+
+  DYNAMIC BLOG LIST
+  -----------------
+  This page currently renders blog cards as static HTML.
+  In production, replace all <a class="post" ...> cards in
+  #blogGrid with dynamically fetched data from the backend.
+
+  1. On page load, fetch the blog list:
+       GET /api/blogs?sort=publishedAt:desc&populate=author,tags,cover
+
+     Optional query params:
+       &filters[category][$eq]={activeFilter}   // for chip filtering
+       &filters[$or][0][title][$containsi]={q}  // for search
+       &pagination[page]=1&pagination[pageSize]=12
+
+  2. Expected response shape per blog:
+       {
+         id:          string,
+         slug:        string,        // used to build the detail page URL
+         title:       string,
+         excerpt:     string,
+         category:    string,        // "pm" | "qa" | "devops" | "frontend" | "engineering"
+         tags:        string[],
+         publishedAt: string,        // ISO 8601
+         readTime:    number,
+         coverImage:  { url: string, alt: string },
+         author: {
+           name:   string,
+           role:   string,
+           avatar: { url: string }
+         }
+       }
+
+  3. Render each blog as a .post card and set:
+       href="/blog/{slug}"           // routes to the dynamic detail page
+       data-category="{category}"    // used by the existing chip filter JS
+       data-tags="{tags.join(' ')}"  // used by the existing search JS
+
+  4. The existing chip filter and search logic in js/stories.js will
+     work automatically as long as data-category and data-tags are
+     set correctly on each rendered .post element.
+
+  USER-CREATED BLOGS
+  ------------------
+  When an internal user (admin/author) publishes a new blog post
+  via the CMS or internal tool:
+    - The post is saved to the DB and assigned a slug
+    - On next page load (or via WebSocket/SSE push), this list
+      re-fetches and the new card appears automatically
+    - The card href="/blog/{slug}" routes to the shared dynamic
+      detail page (blogs/[slug].html) which fetches and renders
+      the post content from the backend
+    - No static HTML file needs to be created per post
+
+  FILTER CHIPS
+  ------------
+  Wire the chip buttons to re-fetch with the category filter param,
+  OR filter client-side if the full list is fetched at once.
+  The existing .chip.active + .is-hidden logic in js/stories.js
+  can remain unchanged if you set data-category on each card.
+
+  SEARCH
+  ------
+  Debounce the #blogSearch input (300ms) and either:
+    a) Re-fetch with the $containsi filter, or
+    b) Filter the already-fetched card list client-side (current behaviour)
+
+  ============================================================
+-->
+</body>
+</html>
