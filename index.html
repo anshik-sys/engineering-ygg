@@ -205,7 +205,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 5px 6px 5px 12px;
+    padding: 5px 6px;
     border-radius: 999px;
     background: linear-gradient(180deg, rgba(20,21,18,.78), rgba(14,15,12,.78));
     border: 1px solid var(--line-2);
@@ -263,6 +263,43 @@
     color: var(--ink-faint);
     letter-spacing: .01em;
     margin-top: 1px;
+  }
+
+  /* Right-cluster nav links */
+  .ctrl-nav-links{
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    font-family: var(--font-ui);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink-dim);
+    padding: 0 6px;
+  }
+  .ctrl-nav-links a{
+    color: inherit;
+    text-decoration: none;
+    padding: 7px 13px;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: color .18s ease, background .18s ease;
+  }
+  .ctrl-nav-links a:hover{
+    color: var(--ink);
+    background: rgba(255,255,255,.05);
+  }
+  html[data-theme="light"] .ctrl-nav-links a:hover{
+    background: rgba(26,14,28,.05);
+  }
+  @media (max-width: 1200px){
+    .ctrl-nav-links{ font-size: 12.5px; }
+    .ctrl-nav-links a{ padding: 7px 10px; }
+  }
+  @media (max-width: 900px){
+    .ctrl-nav-links{ display: none; }
+  }
+  @media (max-width: 900px){
+    .mobile-menu-btn{ display: flex; }
   }
 
   /* Theme toggle */
@@ -692,51 +729,37 @@
     -webkit-background-clip: text; background-clip: text;
     color: transparent;
   }
-  .filter{
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 11px 22px;
-    border-radius: 999px;
-    background: var(--brand);
-    border: 1px solid transparent;
-    color: #fff;
-    font-family: var(--font-ui);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    text-decoration: none;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-    box-shadow: 0 4px 20px -6px rgba(184,0,196,.5);
-  }
-  .filter:hover{
-    filter: brightness(1.1);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px -6px rgba(184,0,196,.65);
-  }
-  html[data-theme="light"] .filter{ color: #fff; }
-  html[data-theme="light"] .filter:hover{ background: var(--brand); color: #fff; box-shadow: 0 8px 30px -6px rgba(184,0,196,.55); }
+  .filter{ cursor: pointer; white-space: nowrap; }
 
-  .stories-view-all{
-    display: inline-flex; align-items: center; gap: 9px;
-    font-family: var(--font-ui);
-    font-size: 14px; font-weight: 600;
-    color: #fff;
-    padding: 11px 22px;
-    border-radius: 999px;
-    border: 1px solid transparent;
-    background: var(--brand);
-    text-decoration: none;
-    letter-spacing: -0.01em;
-    white-space: nowrap;
-    transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-    box-shadow: 0 4px 20px -6px rgba(184,0,196,.5);
+  .stories-view-all{ white-space: nowrap; }
+  @keyframes arrowSlide{
+    0%  { transform: translateX(0); }
+    55% { transform: translateX(9px); }
+    78% { transform: translateX(4px); }
+    100%{ transform: translateX(7px); }
   }
-  .stories-view-all:hover{ filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 8px 30px -6px rgba(184,0,196,.65); }
-  html[data-theme="light"] .stories-view-all{ color: #fff; }
-  html[data-theme="light"] .stories-view-all:hover{ filter: brightness(1.1); }
+  /* Arrow animation for all CTA buttons */
+  .stories-view-all .btn-arrow,
+  .trust-btn-primary svg,
+  .newsroom-cta svg,
+  .sht-cta svg,
+  .culture-card-cta svg,
+  .filter svg,
+  .status-link-btn svg {
+    display: inline-block;
+    flex-shrink: 0;
+    transition: transform .25s cubic-bezier(.2,0,0,1);
+  }
+  .stories-view-all:hover .btn-arrow,
+  .trust-btn-primary:hover svg,
+  .newsroom-cta:hover svg,
+  .sht-cta:hover svg,
+  .culture-card-cta:hover svg,
+  .filter:hover svg,
+  .status-link-btn:hover svg {
+    animation: arrowSlide .45s cubic-bezier(.2,0,0,1) both;
+  }
+  /* .stories-view-all:hover covered by shared glass-magenta block */
 
   /* ====================== STORIES — Stage layout ====================== */
   .story-stage{
@@ -1103,8 +1126,19 @@
     .story-card.is-prev,
     .story-card.is-next{ opacity: 0; pointer-events: none; }
     .stories-title{ font-size: clamp(30px, 7vw, 44px); }
-    .stage-doodle{ display: none; }
     .stage-footer{ gap: 20px; }
+    /* Doodle arrows → compact circle tap targets (44 × 44 min touch area) */
+    .doodle-btn{
+      display: inline-flex;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      align-items: center; justify-content: center;
+      padding: 0; overflow: hidden;
+      opacity: .80;
+    }
+    .doodle-btn svg{ width: 48px; height: 22px; flex-shrink: 0; }
   }
 
   /* ====================== MOBILE HAMBURGER & DRAWER ====================== */
@@ -1185,6 +1219,7 @@
       bottom: 60px;
     }
     .stats-row{
+      display: flex;
       flex-wrap: nowrap;
       min-width: max-content;
       padding: 0 16px;
@@ -1286,6 +1321,28 @@
 
 <style>
   html { scroll-behavior: auto; }
+</style>
+
+<style>
+/* ===== Mobile: align logo with right controls ===== */
+@media (max-width: 768px) {
+  /* Give the collapsed (empty) nav pill a fixed height so the logo centers correctly */
+  .nav { min-height: 44px; }
+  /* Shift right controls up to match nav-wrap top, match pill height */
+  .top-right-controls { top: 22px; padding-top: 6px; padding-bottom: 6px; }
+  /* Pin logo vertically to match the right controls center */
+  .nav-logo { top: 50%; transform: translateY(-50%); }
+}
+/* Remove border from hamburger button in top-right controls */
+.top-right-controls .mobile-menu-btn {
+  border: none;
+  background: transparent;
+}
+/* Logo shows/hides with right controls — not hidden by nav-compact */
+.nav-wrap:not(.nav-hidden) .nav-logo {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
 </style>
 
 <script>
@@ -1394,6 +1451,129 @@
   }
 </style>
 
+<style>
+/* nav pill removed — give nav-wrap explicit height so logo stays centered */
+.nav-wrap { min-height: 52px; }
+</style>
+
+<style>
+/* ===== Shared glass-magenta CTA button — single source of truth ===== */
+.filter, .stories-view-all, .status-link-btn,
+.culture-card-cta, .trust-btn-primary, .newsroom-cta, .sht-cta {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 26px; border-radius: 999px;
+  background: linear-gradient(180deg, rgba(184,0,196,.14), rgba(184,0,196,.07));
+  border: 1px solid rgba(184,0,196,.35); color: var(--ink);
+  font-family: var(--font-ui); font-size: 14px; font-weight: 500;
+  letter-spacing: -0.01em; text-decoration: none;
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  box-shadow: 0 0 0 1px rgba(184,0,196,.08) inset, 0 8px 24px -12px rgba(184,0,196,.3);
+}
+.filter:hover, .stories-view-all:hover, .status-link-btn:hover,
+.culture-card-cta:hover, .trust-btn-primary:hover, .newsroom-cta:hover, .sht-cta:hover {
+  background: linear-gradient(180deg, rgba(184,0,196,.22), rgba(184,0,196,.12));
+  border-color: rgba(184,0,196,.55);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(184,0,196,.14) inset, 0 12px 30px -8px rgba(184,0,196,.4);
+}
+html[data-theme="light"] .filter,
+html[data-theme="light"] .stories-view-all,
+html[data-theme="light"] .status-link-btn,
+html[data-theme="light"] .culture-card-cta,
+html[data-theme="light"] .trust-btn-primary,
+html[data-theme="light"] .newsroom-cta,
+html[data-theme="light"] .sht-cta {
+  background: linear-gradient(180deg, rgba(184,0,196,.12), rgba(184,0,196,.06));
+  border-color: rgba(184,0,196,.3); color: var(--ink);
+}
+html[data-theme="light"] .filter:hover,
+html[data-theme="light"] .stories-view-all:hover,
+html[data-theme="light"] .status-link-btn:hover,
+html[data-theme="light"] .culture-card-cta:hover,
+html[data-theme="light"] .trust-btn-primary:hover,
+html[data-theme="light"] .newsroom-cta:hover,
+html[data-theme="light"] .sht-cta:hover {
+  background: linear-gradient(180deg, rgba(184,0,196,.18), rgba(184,0,196,.10));
+  border-color: rgba(184,0,196,.45);
+}
+</style>
+<style>
+/* Fix: closed mobile drawer must not intercept clicks */
+.mobile-drawer:not(.open) { pointer-events: none; }
+/* Mobile nav: hide pill at ≤900px, hamburger in top-right */
+@media (max-width: 900px) {
+  .nav { display: none !important; }
+  .status-pill { display: none !important; }
+  .controls-divider { display: none !important; }
+}
+/* Mobile: hide the Engineering wordmark entirely */
+@media (max-width: 900px) {
+  .footer-wordmark-wrap { display: none !important; }
+}
+/* Mobile: show only B2B APIs, YOUGotaGift.com, Payment Processing in status grid */
+@media (max-width: 768px) {
+  .status-card:nth-child(3),
+  .status-card:nth-child(5),
+  .status-card:nth-child(6) { display: none !important; }
+}
+/* Mobile: footer fills full width — remove side padding */
+@media (max-width: 768px) {
+  .site-footer { padding: 0 !important; }
+  .footer-card { border-radius: 0 !important; }
+  .footer-top { display: none !important; }
+  .footer-bar { display: none !important; }
+  .mobile-footer-simple { display: flex !important; }
+}
+
+/* Mobile minimal footer */
+.mobile-footer-simple {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 24px 32px;
+  background: var(--bg);
+  text-align: center;
+}
+.mf-logo {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1);
+}
+.mf-social {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.mf-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.mf-links a {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: rgba(255,255,255,.45);
+  text-decoration: none;
+  transition: color .18s;
+}
+.mf-links a:hover { color: rgba(255,255,255,.85); }
+html[data-theme="light"] .mf-links a { color: rgba(0,0,0,.45); }
+html[data-theme="light"] .mf-links a:hover { color: rgba(0,0,0,.85); }
+.mf-copy {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: rgba(255,255,255,.28);
+  margin: 0;
+}
+html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
+</style>
 </head>
 <body>
 
@@ -1425,22 +1605,13 @@
     <div class="brand">
       <a class="brand-tag" href="#" style="text-decoration:none;">Engineering</a>
     </div>
-
     <div class="nav-links">
       <a href="Stories%20v2.html">Stories</a>
-      <a>Status</a>
+      <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
       <a href="Stack%20v2.html">Stack</a>
       <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
       <a href="Trust%20Center.html">Trust Center</a>
       <a href="Newsroom%20v3.html">Newsroom</a>
-    </div>
-
-    <div class="nav-cta">
-
-      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-
     </div>
   </nav>
 </div>
@@ -1454,6 +1625,9 @@
     </span>
   </div>
   <span class="controls-divider"></span>
+  <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <button class="theme-toggle" aria-label="Toggle theme">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="4"/>
@@ -1465,7 +1639,7 @@
 <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <nav class="mobile-drawer-links">
     <a href="Stories%20v2.html">Stories</a>
-    <a>Status</a>
+    <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
     <a href="Stack%20v2.html">Stack</a>
     <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
     <a href="Trust%20Center.html">Trust Center</a>
@@ -1553,8 +1727,9 @@
     if (!navWrap) return;
     var ctrls = document.querySelector('.top-right-controls');
     var THRESHOLD = 80; // px scrolled before hiding kicks in
+    var lastY = window.scrollY;
 
-    // Wheel intent — immune to smooth-scroll easing oscillations
+    // Wheel intent — immune to smooth-scroll easing oscillations (desktop)
     window.addEventListener('wheel', function(e){
       if (window.scrollY < THRESHOLD) {
         navWrap.classList.remove('nav-hidden');
@@ -1571,12 +1746,24 @@
       }
     }, { passive: true });
 
-    // Restore full nav when back at very top
+    // Scroll listener — restores nav at top AND drives touch-scroll hide/show
     window.addEventListener('scroll', function(){
-      if (window.scrollY < THRESHOLD) {
+      var scrollY = window.scrollY;
+      if (scrollY < THRESHOLD) {
         navWrap.classList.remove('nav-hidden', 'nav-compact');
         if (ctrls) ctrls.classList.remove('controls-hidden');
+      } else if ('ontouchstart' in window) {
+        var delta = scrollY - lastY;
+        if (delta > 6) {
+          navWrap.classList.add('nav-hidden');
+          if (ctrls) ctrls.classList.add('controls-hidden');
+        } else if (delta < -6) {
+          navWrap.classList.remove('nav-hidden');
+          navWrap.classList.add('nav-compact');
+          if (ctrls) ctrls.classList.remove('controls-hidden');
+        }
       }
+      lastY = scrollY;
     }, { passive: true });
   })();
 
@@ -1645,10 +1832,10 @@
 
     <div class="stories-head">
       <div>
-        <div class="stories-eyebrow"><span class="dot"></span> Stories &amp; Field Notes</div>
+        <div class="stories-eyebrow">stories</div>
         <h2 class="stories-title">Engineering, told in <em>our own words.</em></h2>
       </div>
-      <a class="stories-view-all" href="Stories%20v2.html" style="text-decoration:none">View all stories →</a>
+      <a class="stories-view-all" href="Stories%20v2.html" style="text-decoration:none">View all stories <span class="btn-arrow">→</span></a>
     </div>
 
     <div class="story-stage">
@@ -1896,24 +2083,9 @@
     justify-content: flex-end;
   }
   .status-link-btn{
-    display: inline-flex; align-items: center; gap: 9px;
-    font-family: var(--font-ui);
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    background: var(--brand);
-    border: 1px solid transparent;
-    padding: 11px 22px;
-    border-radius: 999px;
-    text-decoration: none;
     white-space: nowrap;
-    transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-    box-shadow: 0 4px 20px -6px rgba(184,0,196,.5);
   }
   .status-link-btn svg{ width: 14px; height: 14px; }
-  .status-link-btn:hover{ filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 8px 30px -6px rgba(184,0,196,.65); }
-  html[data-theme="light"] .status-link-btn{ color: #fff; }
-  html[data-theme="light"] .status-link-btn:hover{ background: var(--brand); color: #fff; box-shadow: 0 8px 30px -6px rgba(184,0,196,.55); }
   .status-link-btn.primary{
     background: #FFFFFF; color: #0E0F0C; border-color: transparent;
     box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 6px 18px -8px rgba(255,255,255,.25);
@@ -2067,8 +2239,8 @@
         <p class="status-meta">Live as of <b id="statusTime">—</b> · <b>31</b> services across <b>9</b> groups · <b>99.9%</b> uptime over the last 90 days</p>
       </div>
       <div class="status-actions">
-        <a class="status-link-btn">
-          View full status page
+        <a class="status-link-btn" href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">
+          Status page
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
         </a>
       </div>
@@ -2403,6 +2575,7 @@
   @media (max-width: 1024px){ .ts-col:nth-child(n+4){ display:none; } }
 
   @media (max-width: 860px){
+    .techstack{ min-height: auto; }
     .ts-split{
       grid-template-columns: 1fr;
       min-height: auto;
@@ -2444,19 +2617,16 @@
     <div class="ts-left">
       <div class="ts-eyebrow"><span class="dot"></span> Tech Stack · Engineering</div>
       <h2 class="ts-title">The toolkit behind <em>every gift.</em></h2>
-      <p class="ts-meta"><b>70+ technologies</b> across product, platform, data, QA and design — the stack our teams ship on every day, from first commit to live reward.</p>
-      <div class="ts-foot">
-        <span class="pulse"></span>
-        <span>Live production stack</span>
-        <span class="b"></span>
-        <span><b>17</b> domains</span>
-        <span class="b"></span>
-
-      </div>
+      <p class="ts-meta reveal-left">The Technologies currently using within our organization</p>
+      <a href="Stack%20v2.html" class="culture-card-cta" style="text-decoration:none; margin-top: 8px; display: inline-flex;">
+        Explore the Stack <span class="btn-arrow">→</span>
+      </a>
     </div>
 
     <div class="ts-cols" id="cols"></div>
   </div>
+  <!-- Mobile-only horizontal ticker strip -->
+  <div class="ts-mobile-strip" id="ts-mobile-strip" aria-hidden="true"></div>
 </section>
 
 <script>
@@ -2962,6 +3132,22 @@
       if (e.key === 'ArrowRight') go(+1);
     });
 
+    // Touch swipe — primary navigation method on mobile
+    (function(){
+      var stageEl = track.closest('.story-stage') || track;
+      var tx = 0, ty = 0;
+      stageEl.addEventListener('touchstart', function(e){
+        tx = e.touches[0].clientX;
+        ty = e.touches[0].clientY;
+      }, { passive: true });
+      stageEl.addEventListener('touchend', function(e){
+        var dx = tx - e.changedTouches[0].clientX;
+        var dy = ty - e.changedTouches[0].clientY;
+        // Only fire if horizontal swipe dominates and is long enough
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 44) go(dx > 0 ? 1 : -1);
+      }, { passive: true });
+    })();
+
     render();
 
     // Pause autoplay only while the cursor is over a story card (not the
@@ -3308,40 +3494,7 @@
 
   /* Learn more CTA */
   .culture-card-cta{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    padding: 11px 22px;
-    border-radius: 999px;
-    background: var(--brand);
-    border: 1px solid transparent;
-    color: #fff;
-    font-family: var(--font-ui);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    text-decoration: none;
-    align-self: flex-start;
-    cursor: pointer;
-    box-shadow: 0 4px 20px -6px rgba(184,0,196,.5);
-    transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-  }
-  .culture-card-cta:hover{
-    filter: brightness(1.1);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px -6px rgba(184,0,196,.65);
-  }
-  html[data-theme="light"] .culture-card-cta{
-    background: var(--brand);
-    border-color: transparent;
-    color: #fff;
-    box-shadow: 0 4px 20px -6px rgba(184,0,196,.4);
-  }
-  html[data-theme="light"] .culture-card-cta:hover{
-    background: rgba(184,0,196,.14);
-    border-color: rgba(184,0,196,.55);
-    color: var(--brand-deep);
+    justify-content: center; align-self: flex-start; cursor: pointer;
   }
 
   /* ---- Entrance reveal (scoped) ---- */
@@ -3662,29 +3815,8 @@
     flex-shrink: 0;
   }
   .trust-btn-primary{
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 11px 22px;
-    background: var(--brand);
-    color: #fff;
-    border: 1px solid transparent;
-    border-radius: 999px;
-    font-family: var(--font-ui);
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    letter-spacing: -0.01em;
     white-space: nowrap;
-    transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-    box-shadow: 0 4px 20px -6px rgba(184,0,196,.5);
   }
-  .trust-btn-primary:hover{
-    filter: brightness(1.1);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px -6px rgba(184,0,196,.65);
-  }
-
 
   /* Divider */
   .trust-divider{
@@ -4184,24 +4316,9 @@
   html[data-theme="light"] .newsroom-sub{ color: var(--muted-foreground); }
 
   .newsroom-cta{
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 11px 22px;
-    border-radius: 999px;
-    background: var(--brand);
-    border: 1px solid transparent;
-    color: #fff;
-    font-family: var(--font-ui);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    text-decoration: none;
     white-space: nowrap;
-    transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-    box-shadow: 0 4px 20px -6px rgba(184,0,196,.5);
   }
-  .newsroom-cta:hover{ filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 8px 30px -6px rgba(184,0,196,.65); }
+  .newsroom-cta:hover{ filter: brightness(1.12); }
 
   /* ---- Right: horizontal timeline ---- */
   .newsroom-timeline{
@@ -4539,26 +4656,7 @@
     text-shadow: 0 0 24px rgba(184,0,196,.22);
   }
   .sht-cta{
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 11px 22px;
-    border-radius: 999px;
-    background: var(--brand);
-    border: 1px solid transparent;
-    color: #fff;
-    font-family: var(--font-ui);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    text-decoration: none;
-    box-shadow: 0 4px 20px -6px rgba(184,0,196,.5);
-    transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-  }
-  .sht-cta:hover{
-    filter: brightness(1.1);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px -6px rgba(184,0,196,.65);
+    /* shared glass-magenta style */
   }
   .sht-cta svg{ flex-shrink: 0; }
   @media (max-width: 768px){
@@ -4576,6 +4674,7 @@
     <div class="sht-eyebrow"><span class="dot"></span> Join us</div>
     <p class="sht-text" id="shtText">We're looking for [ACCENT]builders[/ACCENT] — people who care deeply about craft and thrive on [ACCENT]hard problems[/ACCENT]. At YOUGotaGift you won't maintain a product you'll [ACCENT]shape it[/ACCENT]. Bring your ambition and help us redefine what [ACCENT]gifting means[/ACCENT] for millions of people around the world.</p>
     <a class="sht-cta" href="#careers">Join Us
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>
   </div>
 </section>
@@ -4900,8 +4999,8 @@
     var r = p.scale(), t = p.translate(), cx = t[0], cy = t[1];
     var light = false;
 
-    /* Atmosphere — only draw in dark mode */
-    if (!light) {
+    /* Atmosphere — only draw in dark mode (uses real theme check) */
+    if (!isLight()) {
       for (var i=4; i>=1; i--) {
         var rr = r*(1+i*0.18);
         var ag = ctx.createRadialGradient(cx,cy,r*0.85,cx,cy,rr);
@@ -4911,6 +5010,16 @@
         ctx.beginPath(); ctx.arc(cx,cy,rr,0,PI*2);
         ctx.fillStyle=ag; ctx.fill();
       }
+    }
+
+    /* Light mode: soft neutral shadow ring for depth */
+    if (isLight()) {
+      ctx.beginPath(); ctx.arc(cx,cy,r+24,0,PI*2);
+      ctx.strokeStyle='rgba(20,14,28,0.06)'; ctx.lineWidth=32; ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx,cy,r+8,0,PI*2);
+      ctx.strokeStyle='rgba(20,14,28,0.09)'; ctx.lineWidth=14; ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx,cy,r+2,0,PI*2);
+      ctx.strokeStyle='rgba(20,14,28,0.11)'; ctx.lineWidth=4; ctx.stroke();
     }
 
     /* Ocean */
@@ -4951,30 +5060,9 @@
     }
     ctx.beginPath(); ctx.arc(cx,cy,r,0,PI*2); ctx.fillStyle=sg; ctx.fill();
 
-    /* Edge glow */
-    if (!light) {
-      ctx.beginPath(); ctx.arc(cx,cy,r+32,0,PI*2);
-      ctx.strokeStyle='rgba(70,40,110,0.07)'; ctx.lineWidth=28; ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx,cy,r+10,0,PI*2);
-      ctx.strokeStyle='rgba(110,70,160,0.12)'; ctx.lineWidth=18; ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx,cy,r+4,0,PI*2);
-      ctx.strokeStyle='rgba(150,100,200,0.24)'; ctx.lineWidth=6; ctx.stroke();
-    } else {
-      ctx.beginPath(); ctx.arc(cx,cy,r+30,0,PI*2);
-      ctx.strokeStyle='rgba(120,95,210,0.07)'; ctx.lineWidth=30; ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx,cy,r+12,0,PI*2);
-      ctx.strokeStyle='rgba(130,100,215,0.13)'; ctx.lineWidth=18; ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx,cy,r+4,0,PI*2);
-      ctx.strokeStyle='rgba(140,105,220,0.22)'; ctx.lineWidth=7; ctx.stroke();
-    }
-    ctx.beginPath(); ctx.arc(cx,cy,r+1,0,PI*2);
-    ctx.strokeStyle='rgba(180,140,225,0.42)'; ctx.lineWidth=2.5; ctx.stroke();
-    ctx.beginPath(); ctx.arc(cx,cy,r,0,PI*2);
-    ctx.strokeStyle = light ? 'rgba(175,145,240,0.75)' : 'rgba(200,170,240,0.70)';
-    ctx.lineWidth=1.2; ctx.stroke();
 
-    /* Horizon gradient */
-    if (!light) {
+    /* Horizon gradient — dark mode only */
+    if (!isLight()) {
       var horizGrad = ctx.createRadialGradient(cx, cy, r*0.95, cx, cy, r*1.5);
       horizGrad.addColorStop(0, 'rgba(80,40,130,0.16)');
       horizGrad.addColorStop(0.35, 'rgba(60,25,95,0.09)');
@@ -5465,6 +5553,18 @@
         </ul>
       </div>
 
+      <!-- Engineering -->
+      <div class="footer-col">
+        <p class="footer-col-title">Engineering</p>
+        <ul class="footer-col-links">
+          <li><a href="#techstack">Stack</a></li>
+          <li><a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a></li>
+          <li><a href="#newsroom">Newsroom</a></li>
+          <li><a href="#culture">Life at YOUGotaGift</a></li>
+          <li><a href="#trust">Trust Center</a></li>
+        </ul>
+      </div>
+
       <!-- Policy & Info -->
       <div class="footer-col">
         <p class="footer-col-title">Policy &amp; Info</p>
@@ -5476,18 +5576,31 @@
         </ul>
       </div>
 
-      <!-- Engineering -->
-      <div class="footer-col">
-        <p class="footer-col-title">Engineering</p>
-        <ul class="footer-col-links">
-          <li><a href="#techstack">Stack</a></li>
-          <li><a href="#status">Status</a></li>
-          <li><a href="#newsroom">Newsroom</a></li>
-          <li><a href="#culture">Life at YOUGotaGift</a></li>
-          <li><a href="#trust">Trust Center</a></li>
-        </ul>
-      </div>
+    </div>
 
+    <!-- Mobile-only minimal footer -->
+    <div class="mobile-footer-simple">
+      <img src="assets/yougotagift-logo.png" alt="YOUGotaGift" class="mf-logo" />
+      <div class="mf-social">
+        <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:currentColor"/></svg>
+        </a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="X / Twitter">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+      <div class="mf-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+      <p class="mf-copy">&#169; 2026 YOUGotaGift.com Ltd.</p>
     </div>
 
     <div class="footer-bar">
@@ -5518,6 +5631,10 @@
 html, body { overflow-x: clip; max-width: 100vw; }
 
 /* ---- Nav ---- */
+@media (max-width: 768px) {
+  /* Nudge controls cluster to match tighter mobile padding */
+  .top-right-controls { right: 16px; }
+}
 @media (max-width: 480px) {
   /* Status pill: show dot only, hide text */
   .status-pill .status-text { display: none; }
@@ -5641,8 +5758,8 @@ html, body { overflow-x: clip; max-width: 100vw; }
   .sht-text    { font-size: clamp(20px, 5.5vw, 28px); line-height: 1.35; }
 }
 
-
-  .footer-bar   { padding: 18px 20px !important; flex-direction: column; gap: 10px; text-align: center; }
+@media (max-width: 520px) {
+  .footer-bar { padding: 18px 20px !important; flex-direction: column; gap: 10px; text-align: center; }
 }
 
 /* Light theme tweaks carry through — no extra rules needed since --bg is
@@ -5700,8 +5817,8 @@ html, body { overflow-x: clip; max-width: 100vw; }
     ctx.clearRect(0, 0, w, h);
 
     var cx = w * 0.5;
-    var cy = h * 0.75;
-    var r  = w * 0.38;
+    var cy = h * 0.62;
+    var r  = w * 0.58;
 
     // Globe glow
     var grd = ctx.createRadialGradient(cx, cy, r*0.2, cx, cy, r);
@@ -5790,7 +5907,38 @@ html, body { overflow-x: clip; max-width: 100vw; }
 })();
 </script>
 
-<!-- SmileLoader script -->
+<script>
+/* fix — footer globe: remove pulsing magenta dots on all viewports.
+   Patches the canvas context's arc/fill so arcs with radius ≤ 26px
+   (the dot glow + dot center) are skipped; the large globe glow
+   (radius ≈ canvas_width * 0.38) is unaffected. */
+(function() {
+  function removeFooterGlobeDots() {
+    var canvas = document.getElementById('footerGlobe');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    if (ctx.__dotsRemoved) return;
+    ctx.__dotsRemoved = true;
+
+    var lastArcRadius = Infinity;
+    var origArc  = ctx.arc.bind(ctx);
+    var origFill = ctx.fill.bind(ctx);
+
+    ctx.arc = function(x, y, radius) {
+      lastArcRadius = radius;
+      origArc.apply(this, arguments);
+    };
+    ctx.fill = function() {
+      if (lastArcRadius <= 26) { lastArcRadius = Infinity; return; }
+      origFill.apply(this, arguments);
+    };
+  }
+
+  removeFooterGlobeDots();
+  setTimeout(removeFooterGlobeDots, 200);
+  setTimeout(removeFooterGlobeDots, 800);
+})();
+</script>
 <script>
 (function(){
   var bd  = document.getElementById('sl-backdrop');
@@ -5820,6 +5968,533 @@ html, body { overflow-x: clip; max-width: 100vw; }
 </body>
 </html>
 
+
+<style id="nav-mobile-fix">
+/* ── Nav: hide links + label, strip pill chrome at all mobile/tablet widths ── */
+@media (max-width: 1080px) {
+  .nav-links { display: none !important; }
+  .brand-tag  { display: none !important; }
+  /* Remove the pill background — just float the hamburger button */
+  nav.nav {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 4px !important;
+    gap: 0 !important;
+  }
+}
+</style>
+
+<script id="headline-mobile-swap">
+(function(){
+  if (window.innerWidth > 600) return;
+  var h1 = document.querySelector('h1.headline');
+  if (!h1) return;
+  h1.innerHTML =
+    '<span class="line">Engineering the Future of </span>' +
+    '<span class="line"><span class="grad">Branded Payments.</span></span>';
+})();
+</script>
+
+<style id="hero-text-mobile-fix">
+/* ── Hero: headline fits 3 lines, pushed a bit lower ── */
+@media (max-width: 600px) {
+  h1.headline {
+    font-size: clamp(28px, 7.5vw, 38px) !important;
+    letter-spacing: -0.02em !important;
+    max-width: 100% !important;
+    line-height: 1.15 !important;
+    margin-top: 48px !important;
+  }
+  .sub {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    max-width: 100% !important;
+  }
+  /* Remove forced line break — let it wrap naturally */
+  .sub br { display: none !important; }
+}
+</style>
+
+<style id="loader-mobile-fix">
+/* ── SmileLoader: smaller SVG on mobile ── */
+@media (max-width: 600px) {
+  #sl-logo-inner svg {
+    width: 60px !important;
+    height: 72px !important;
+  }
+}
+</style>
+
+<script id="techstack-mobile-horizontal">
+(function(){
+  if (window.innerWidth > 600) return;
+
+  var populated = false;
+
+  function populateStrip(){
+    if (populated) return;
+    var strip = document.getElementById('ts-mobile-strip');
+    if (!strip) return;
+
+    /* Read unique chips/cats from the built .ts-stage coltracks */
+    var coltracks = Array.from(document.querySelectorAll('#cols .ts-coltrack'));
+    if (!coltracks.length){ setTimeout(populateStrip, 200); return; }
+
+    var allItems = [];
+    coltracks.forEach(function(track){
+      var kids = Array.from(track.children);
+      kids.slice(0, Math.floor(kids.length / 2)).forEach(function(el){
+        /* Skip category labels — only include chip tiles */
+        if (el.classList.contains('ts-cat')) return;
+        allItems.push(el.cloneNode(true));
+      });
+    });
+    if (!allItems.length){ setTimeout(populateStrip, 200); return; }
+
+    strip.innerHTML = '';
+    var dirs = ['left','right','left'];
+    var per  = Math.ceil(allItems.length / 3);
+    for (var r = 0; r < 3; r++){
+      var slice = allItems.slice(r * per, (r + 1) * per);
+      if (!slice.length) break;
+      var row = document.createElement('div');
+      row.className = 'ts-hrow ' + dirs[r];
+      [0,1].forEach(function(){
+        slice.forEach(function(el){ row.appendChild(el.cloneNode(true)); });
+      });
+      strip.appendChild(row);
+    }
+    populated = true;
+    if (typeof loadLogos === 'function') setTimeout(loadLogos, 0);
+  }
+
+  setTimeout(populateStrip, 250);
+})();
+</script>
+
+<style id="techstack-mobile-fix">
+/* ── Tech Stack: compact, design-system-aligned mobile layout ── */
+@media (max-width: 600px) {
+  .techstack {
+    padding: 56px 0 48px !important;
+  }
+  .ts-split {
+    padding: 52px 22px 0 !important;
+  }
+  .ts-eyebrow { margin-bottom: 14px !important; }
+  .ts-title {
+    font-size: clamp(30px, 8vw, 40px) !important;
+    margin-bottom: 14px !important;
+    line-height: 1.05 !important;
+  }
+  .ts-meta { font-size: 13.5px !important; margin-bottom: 18px !important; }
+
+  /* Horizontal ticker container replaces vertical columns */
+  .ts-cols {
+    height: auto !important;
+    margin: 28px -22px 0 !important;
+    overflow: hidden !important;
+    -webkit-mask-image:
+      linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%) !important;
+    mask-image:
+      linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%) !important;
+  }
+  /* Horizontal row */
+  .ts-hrow {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 5px 0;
+    width: max-content;
+    will-change: transform;
+  }
+  .ts-hrow.left  { animation: tsHLeft  55s linear infinite; }
+  .ts-hrow.right { animation: tsHRight 65s linear infinite; }
+  @keyframes tsHLeft  { from{ transform:translateX(0); }    to{ transform:translateX(-50%); } }
+  @keyframes tsHRight { from{ transform:translateX(-50%); } to{ transform:translateX(0); } }
+
+  /* Chips in horizontal mode — no rotation */
+  .ts-hrow .ts-chip {
+    transform: none !important;
+    flex-shrink: 0;
+    padding: 7px 12px 7px 7px !important;
+    gap: 8px !important;
+    border-radius: 12px !important;
+  }
+  .ts-hrow .ts-logo {
+    width: 30px !important; height: 30px !important;
+    border-radius: 9px !important;
+  }
+  .ts-hrow .ts-logo img, .ts-hrow .ts-logo .mark {
+    width: 17px !important; height: 17px !important;
+  }
+  .ts-hrow .ts-name { font-size: 12px !important; }
+  .ts-hrow .ts-cat  { min-height: 40px !important; font-size: 9px !important; padding: 8px 12px !important; }
+
+  /* Hide vertical stage on mobile, show horizontal strip */
+  .ts-stage { display: none !important; }
+  .ts-mobile-strip {
+    display: block !important;
+    overflow: hidden;
+    margin: 28px 0 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+  .ts-cols { height: 0 !important; margin: 0 !important; }
+
+  /* Reset rotation inherited from vertical column CSS */
+  .ts-mobile-strip .ts-chip,
+  .ts-mobile-strip .ts-cat {
+    transform: none !important;
+    margin-bottom: 0 !important;
+    flex-shrink: 0 !important;
+  }
+  .ts-mobile-strip .ts-chip {
+    padding: 7px 12px 7px 7px !important;
+    gap: 8px !important;
+    border-radius: 12px !important;
+    width: auto !important;
+    min-width: max-content !important;
+  }
+  .ts-mobile-strip .ts-logo {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 9px !important;
+  }
+  .ts-mobile-strip .ts-logo img,
+  .ts-mobile-strip .ts-logo .mark {
+    width: 17px !important;
+    height: 17px !important;
+  }
+  .ts-mobile-strip .ts-name { font-size: 12px !important; }
+  .ts-mobile-strip .ts-cat  {
+    min-height: 38px !important;
+    font-size: 9px !important;
+    padding: 8px 12px !important;
+    width: auto !important;
+    min-width: max-content !important;
+  }
+}
+@media (min-width: 601px) {
+  .ts-mobile-strip { display: none; }
+}
+</style>
+
+<style id="status-mobile-fix">
+/* ── Status grid: single column on mobile ── */
+@media (max-width: 600px) {
+  .status-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .status-card {
+    padding: 14px 14px 12px !important;
+  }
+  .card-name {
+    font-size: 13px !important;
+    gap: 6px !important;
+  }
+  .card-count {
+    font-size: 9px !important;
+  }
+  .card-foot b {
+    font-size: 11px !important;
+  }
+  .uptime-bar {
+    height: 22px !important;
+  }
+
+  /* ── Status head: button inline with headline ── */
+  .status-head {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    align-items: start !important;
+    gap: 12px !important;
+    margin-bottom: 24px !important;
+  }
+  .status-headline {
+    font-size: clamp(26px, 7vw, 34px) !important;
+  }
+  .status-actions {
+    margin-top: 62px !important; /* align button with "operational." second line */
+    justify-content: flex-end !important;
+  }
+  /* Hide meta line on mobile */
+  .status-meta { display: none !important; }
+  .status-link-btn {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+}
+</style>
+
+<style id="stories-mobile-fix">
+/* ── Story cards: smaller on mobile ── */
+@media (max-width: 600px) {
+  .story-stage {
+    height: 440px !important;
+    padding-top: 80px !important;
+  }
+  .story-card {
+    width: 230px !important;
+    margin-left: -115px !important;
+    height: 340px !important;
+    border-radius: 22px !important;
+  }
+  .story-title-link {
+    font-size: 18px !important;
+  }
+}
+</style>
+
+<style id="stats-mobile-fix">
+/* ── Stats bar mobile fix: 2×2 wrap grid, no horizontal scroll ── */
+@media (max-width: 600px) {
+  .stats-wrap {
+    overflow-x: visible !important;
+    padding: 0 18px !important;
+    bottom: 48px !important;
+  }
+  .stats-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    min-width: 0 !important;
+    gap: 18px 0 !important;
+    padding: 0 !important;
+  }
+  .stat {
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 0 14px !important;
+    border-left: 1px solid rgba(255,255,255,.10) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .stat:nth-child(odd)  { padding-left: 0 !important; border-left: none !important; }
+  .stat + .stat::before { display: none !important; }
+  .stat-value { font-size: clamp(26px, 7vw, 36px) !important; }
+  .stat-label { font-size: 9px !important; letter-spacing: .14em !important; }
+  .stats-rule { margin-bottom: 14px !important; }
+}
+</style>
+
+<style>
+/* mobile fix — globe: cancel the old CSS translateY (was creating a black gap);
+   globe is now shifted via JS context transform below instead */
+@media (max-width: 768px) {
+  #globeCanvas {
+    transform: none !important;
+  }
+}
+</style>
+
+<script>
+/* mobile fix — globe: shift drawing upward inside canvas on mobile.
+   Patches the already-obtained context object directly (getContext always returns
+   the same object), then triggers a synthetic resize so the globe re-applies
+   setTransform with the shift baked in. Canvas stays inset:0 — no gap. */
+(function() {
+  if (window.innerWidth > 768) return;
+
+  function applyGlobeMobilePatch() {
+    var SHIFT = window.innerHeight * 0.20; /* 20vh upward */
+    var canvas = document.getElementById('globeCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d'); /* same object the globe holds */
+    if (ctx.__mobilePatchApplied) return;
+    ctx.__mobilePatchApplied = true;
+    var origST = ctx.setTransform.bind(ctx);
+    ctx.setTransform = function(a, b, c, d, e, f) {
+      origST(a, b, c, d, e, f - SHIFT * (a || 1));
+    };
+    /* Re-trigger resize so globe calls the now-patched setTransform */
+    window.dispatchEvent(new Event('resize'));
+  }
+
+  /* Try immediately (D3 loaded synchronously via <script src>) */
+  applyGlobeMobilePatch();
+  /* Fallback retries in case D3 was still loading */
+  setTimeout(applyGlobeMobilePatch, 200);
+  setTimeout(applyGlobeMobilePatch, 800);
+})();
+</script>
+
+<style>
+/* mobile fix — reduce all CTA button sizes to match the stories button */
+@media (max-width: 768px) {
+  .status-link-btn,
+  .trust-btn-primary,
+  .newsroom-cta,
+  .culture-card-cta,
+  .sht-cta,
+  .filter {
+    font-size: 12px !important;
+    padding: 8px 14px !important;
+    gap: 5px !important;
+  }
+}
+</style>
+
+<style>
+/* mobile fix — stories head: title left + button right on same row */
+@media (max-width: 768px) {
+  .stories-head {
+    grid-template-columns: 1fr auto !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  .stories-view-all {
+    font-size: 11px;
+    padding: 7px 14px;
+    gap: 6px;
+    width: fit-content;
+    justify-self: end;
+    align-self: center;
+    white-space: nowrap;
+  }
+}
+</style>
+
+<style>
+/* mobile fix — footer: brand block spans full width, links in 2-col below */
+@media (max-width: 600px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px 16px !important;
+  }
+  .footer-brand {
+    grid-column: 1 / -1 !important;
+  }
+  .footer-brand-tagline {
+    font-size: 12.5px !important;
+    max-width: 28ch !important;
+  }
+  .footer-col-title {
+    font-size: 11px !important;
+  }
+  .footer-col-links a {
+    font-size: 13px !important;
+  }
+}
+</style>
+
+<style>
+/* mobile fix — newsroom milestones: force 2-column grid on all mobile sizes */
+@media (max-width: 600px) {
+  .newsroom-milestones {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  .nm-title { font-size: 12px !important; }
+  .nm-card  { padding: 14px !important; }
+}
+</style>
+
+<style>
+/* mobile fix — trust policy grid: force 2-column on all mobile sizes */
+@media (max-width: 480px) {
+  .trust-policy-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .trust-policy-name {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+  }
+}
+</style>
+
+<style>
+/* mobile fix — culture cards: force 2-column grid on all mobile sizes */
+@media (max-width: 480px) {
+  .culture-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  .culture-card h3 {
+    font-size: 13px !important;
+  }
+  .culture-card p {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+}
+</style>
+
+<style>
+/* mobile fix — add more space between text content and ticker strip */
+@media (max-width: 768px) {
+  .ts-mobile-strip {
+    margin-top: 72px !important;
+  }
+  /* also push via the split's bottom padding to ensure gap shows */
+  .ts-split {
+    padding-bottom: 40px !important;
+  }
+}
+</style>
+
+<style>
+/* mobile fix — tech stack: reduce top padding to move content up */
+@media (max-width: 768px) {
+  .techstack {
+    padding-top: 28px !important;
+  }
+}
+</style>
+
+<style>
+/* mobile fix — slow down tech stack horizontal ticker */
+@media (max-width: 768px) {
+  .ts-hrow.left  { animation-duration: 100s !important; }
+  .ts-hrow.right { animation-duration: 120s !important; }
+}
+</style>
+
+<script>
+/* fix — tech stack logos: SVGs have naturalWidth=0 so the existing probe
+   wrongly falls back to monogram. This script re-attempts any failed logos
+   using fetch() which correctly detects a valid SVG response. */
+(function(){
+  var SI_VER = "13";
+  var SI_URL = function(slug){ return "https://cdn.jsdelivr.net/npm/simple-icons@" + SI_VER + "/icons/" + slug + ".svg"; };
+
+  function applyMark(el, slug) {
+    /* remove monogram content */
+    el.classList.remove("mono");
+    el.textContent = "";
+    var mark = document.createElement("i");
+    mark.className = "mark";
+    mark.style.setProperty("--m", 'url("' + SI_URL(slug) + '")');
+    /* use existing background colour if set, else a neutral */
+    var existingColor = el.style.getPropertyValue("--c");
+    if (!existingColor) mark.style.setProperty("--c", "#6060A0");
+    el.appendChild(mark);
+  }
+
+  function retryLogos() {
+    /* find logos that fell back to monogram but still have a slug */
+    var failed = [...document.querySelectorAll(".ts-logo.mono[data-slug]")];
+    if (!failed.length) return;
+    failed.forEach(function(el) {
+      var slug = el.dataset.slug;
+      fetch(SI_URL(slug), { method: "HEAD" })
+        .then(function(r){ if (r.ok) applyMark(el, slug); })
+        .catch(function(){});
+    });
+  }
+
+  /* run after existing loadLogos has had a chance to finish */
+  setTimeout(retryLogos, 1200);
+  setTimeout(retryLogos, 3000);
+})();
+</script>
 
 <style id="__om-edit-overrides">
 :is(h1,h2,h3,h4,h5,h6) >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >:is(h1,h2,h3,h4,h5,h6) { background-color: rgb(37, 33, 33) !important }

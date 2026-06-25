@@ -75,6 +75,46 @@
 @media(max-width:900px){ .article-section{ padding:120px 0 80px; } .article-inner{ padding:0 28px; } }
 @media(max-width:560px){ .article-inner{ padding:0 20px; } .art-body p{ font-size:16px; } }
 
+/* Mobile: minimal footer */
+@media (max-width: 768px) {
+  .site-footer { padding: 0 !important; }
+  .footer-card { border-radius: 0 !important; }
+  .footer-top { display: none !important; }
+  .footer-bar { display: none !important; }
+  .footer-wordmark-wrap { display: none !important; }
+  .mobile-footer-simple { display: flex !important; }
+}
+.mobile-footer-simple { display: none; flex-direction: column; align-items: center; gap: 20px; padding: 40px 24px 32px; background: var(--bg); text-align: center; }
+.mf-logo { height: 36px; width: auto; object-fit: contain; }
+.mf-social { display: flex; gap: 10px; align-items: center; justify-content: center; }
+.mf-links { display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.mf-links a { font-family: var(--font-ui); font-size: 13px; color: rgba(255,255,255,.45); text-decoration: none; transition: color .18s; }
+.mf-links a:hover { color: rgba(255,255,255,.85); }
+html[data-theme="light"] .mf-links a { color: rgba(0,0,0,.45); }
+html[data-theme="light"] .mf-links a:hover { color: rgba(0,0,0,.85); }
+.mf-copy { font-family: var(--font-ui); font-size: 12px; color: rgba(255,255,255,.28); margin: 0; }
+html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
+</style>
+<style>
+/* Mobile nav: hamburger in top-right controls */
+.mobile-drawer:not(.open) { pointer-events: none; }
+@media (max-width: 900px) {
+  .nav { display: none !important; }
+  .status-pill { display: none !important; }
+  .controls-divider { display: none !important; }
+}
+.top-right-controls .mobile-menu-btn { border: none; background: transparent; display: none; }
+@media (max-width: 900px) {
+  .top-right-controls .mobile-menu-btn { display: flex; }
+}
+</style>
+<style>
+/* Mobile: fix logo vertical alignment */
+@media (max-width: 900px) {
+  .nav-wrap { min-height: 52px !important; }
+  .nav-logo { top: calc(50% + 6px) !important; transform: translateY(-50%) !important; }
+}
+.nav-wrap:not(.nav-hidden) .nav-logo { opacity: 1 !important; pointer-events: auto !important; }
 </style>
 </head>
 <body>
@@ -99,15 +139,13 @@
     <div class="brand"><a class="brand-tag" href="../index.html" style="text-decoration:none;">Engineering</a></div>
     <div class="nav-links">
       <a href="../Stories%20v2.html" class="current">Stories</a>
-      <a>Status</a>
+      <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
       <a href="../Stack.html">Stack</a>
       <a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
       <a href="../Trust%20Center.html">Trust Center</a>
       <a href="../Newsroom.html">Newsroom</a>
     </div>
-    <div class="nav-cta">
-      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
+
   </nav>
 </div>
 <div class="top-right-controls">
@@ -116,6 +154,7 @@
     <span class="status-text"><span class="status-title">MyRewards</span><span class="status-sub">100% uptime</span></span>
   </div>
   <span class="controls-divider"></span>
+  <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <button class="theme-toggle" aria-label="Toggle theme">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
@@ -125,7 +164,7 @@
 <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <nav class="mobile-drawer-links">
     <a href="../Stories%20v2.html" class="current">Stories</a>
-    <a>Status</a>
+    <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
     <a href="../Stack.html">Stack</a>
     <a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
     <a href="../Trust%20Center.html">Trust Center</a>
@@ -266,13 +305,30 @@
         <ul class="footer-col-links">
           <li><a href="../Stories%20v2.html">Stories</a></li>
           <li><a href="../Stack.html">Stack</a></li>
-          <li><a>Status</a></li>
+          <li><a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a></li>
           <li><a href="../Newsroom.html">Newsroom</a></li>
           <li><a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
           <li><a href="../Trust%20Center.html">Trust Center</a></li>
         </ul>
       </div>
     </div>
+    <!-- Mobile-only minimal footer -->
+    <div class="mobile-footer-simple">
+      <img src="../assets/yougotagift-logo.png" alt="YOUGotaGift" class="mf-logo" />
+      <div class="mf-social">
+        <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:currentColor"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="X / Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </div>
+      <div class="mf-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+      <p class="mf-copy">&#169; 2026 YOUGotaGift.com Ltd.</p>
+    </div>
+
     <div class="footer-bar">
       <p class="footer-bar-copy">&#169; 2026 YOUGotaGift.com Ltd. &nbsp;&middot;&nbsp; UAE | Saudi Arabia | Qatar | Bahrain | Oman | Kuwait | India</p>
       <div class="footer-bar-links">

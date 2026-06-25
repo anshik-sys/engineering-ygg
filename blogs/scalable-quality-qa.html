@@ -36,7 +36,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>From scrappy launches to scalable quality — YOUGotaGift Engineering</title>
+<title>From scrappy launches to scalable quality: our eGifting QA journey — YOUGotaGift Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
@@ -87,6 +87,46 @@
 @media(max-width:900px){ .article-section{ padding:120px 0 80px; } .article-inner{ padding:0 28px; } }
 @media(max-width:560px){ .article-inner{ padding:0 20px; } .art-body p,.art-body ul{ font-size:16px; } }
 
+/* Mobile: minimal footer */
+@media (max-width: 768px) {
+  .site-footer { padding: 0 !important; }
+  .footer-card { border-radius: 0 !important; }
+  .footer-top { display: none !important; }
+  .footer-bar { display: none !important; }
+  .footer-wordmark-wrap { display: none !important; }
+  .mobile-footer-simple { display: flex !important; }
+}
+.mobile-footer-simple { display: none; flex-direction: column; align-items: center; gap: 20px; padding: 40px 24px 32px; background: var(--bg); text-align: center; }
+.mf-logo { height: 36px; width: auto; object-fit: contain; }
+.mf-social { display: flex; gap: 10px; align-items: center; justify-content: center; }
+.mf-links { display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.mf-links a { font-family: var(--font-ui); font-size: 13px; color: rgba(255,255,255,.45); text-decoration: none; transition: color .18s; }
+.mf-links a:hover { color: rgba(255,255,255,.85); }
+html[data-theme="light"] .mf-links a { color: rgba(0,0,0,.45); }
+html[data-theme="light"] .mf-links a:hover { color: rgba(0,0,0,.85); }
+.mf-copy { font-family: var(--font-ui); font-size: 12px; color: rgba(255,255,255,.28); margin: 0; }
+html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
+</style>
+<style>
+/* Mobile nav: hamburger in top-right controls */
+.mobile-drawer:not(.open) { pointer-events: none; }
+@media (max-width: 900px) {
+  .nav { display: none !important; }
+  .status-pill { display: none !important; }
+  .controls-divider { display: none !important; }
+}
+.top-right-controls .mobile-menu-btn { border: none; background: transparent; display: none; }
+@media (max-width: 900px) {
+  .top-right-controls .mobile-menu-btn { display: flex; }
+}
+</style>
+<style>
+/* Mobile: fix logo vertical alignment */
+@media (max-width: 900px) {
+  .nav-wrap { min-height: 52px !important; }
+  .nav-logo { top: calc(50% + 6px) !important; transform: translateY(-50%) !important; }
+}
+.nav-wrap:not(.nav-hidden) .nav-logo { opacity: 1 !important; pointer-events: auto !important; }
 </style>
 </head>
 <body>
@@ -111,15 +151,13 @@
     <div class="brand"><a class="brand-tag" href="../index.html" style="text-decoration:none;">Engineering</a></div>
     <div class="nav-links">
       <a href="../Stories%20v2.html" class="current">Stories</a>
-      <a>Status</a>
+      <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
       <a href="../Stack.html">Stack</a>
       <a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
       <a href="../Trust%20Center.html">Trust Center</a>
       <a href="../Newsroom.html">Newsroom</a>
     </div>
-    <div class="nav-cta">
-      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
+
   </nav>
 </div>
 <div class="top-right-controls">
@@ -128,6 +166,7 @@
     <span class="status-text"><span class="status-title">MyRewards</span><span class="status-sub">100% uptime</span></span>
   </div>
   <span class="controls-divider"></span>
+  <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <button class="theme-toggle" aria-label="Toggle theme">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
@@ -137,7 +176,7 @@
 <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <nav class="mobile-drawer-links">
     <a href="../Stories%20v2.html" class="current">Stories</a>
-    <a>Status</a>
+    <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
     <a href="../Stack.html">Stack</a>
     <a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
     <a href="../Trust%20Center.html">Trust Center</a>
@@ -161,10 +200,12 @@
       <span class="art-tag">QA</span>
       <span class="art-tag">Automation</span>
       <span class="art-tag">Testing</span>
+      <span class="art-tag">Security</span>
+      <span class="art-tag">Mobile</span>
     </div>
 
-    <h1 class="art-title">From scrappy launches to scalable quality.</h1>
-    <p class="art-excerpt">Scaling quality from a handful of manual checks to an automated, gated pipeline that keeps e-gifting reliable at volume.</p>
+    <h1 class="art-title">From scrappy launches to scalable quality: our eGifting QA journey.</h1>
+    <p class="art-excerpt">How our QA practice evolved from firefighting to strategic enablement — and why quality became the safeguard of every gifting moment.</p>
 
     <div class="art-meta">
       <img class="art-meta-avatar" src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/thumbnail_T74_BP_44_N8_UEQQ_0_RT_18_170e62b74da1_512_05d9a9561f_20c22dddc6.png" alt="Sarin Babu" loading="lazy" />
@@ -184,45 +225,114 @@
 
     <div class="art-body">
 
-      <p>When I joined the team, our release process looked like this: a squad would finish a feature, someone would run through a checklist on staging, and if nothing obviously broke, we shipped. It worked — until it didn't.</p>
+      <p>In the fast-paced world of eGifting solutions, we weren't just building features; we were delivering moments. Every click, tap, or scroll on our platform could lead to someone's birthday surprise, a heartfelt thank-you, or a thoughtful gesture delivered in seconds.</p>
 
-      <p>E-gifting is a domain where quality isn't optional. A broken gift card redemption flow isn't a UX inconvenience; it's a direct financial impact on a customer who may be sending a birthday gift in the next hour. When something fails silently, you don't always know until the support tickets land.</p>
+      <p>In eGifting, quality is emotional. That's why Quality Assurance (QA) became more than testing for us; it became the safeguard of joy, ensuring every tap delivers delight.</p>
 
-      <h2>Where we started</h2>
+      <p>Here's how our QA journey evolved from firefighting to strategic enablement.</p>
 
-      <p>Our initial QA practice was manual and instinct-driven. We had checklists for critical paths — checkout, redemption, balance check — but coverage was uneven and entirely dependent on the person running the tests. Knowledge lived in heads, not systems.</p>
+      <h2>From Scrappy Launches to Scalable Quality: Our eGifting QA Journey</h2>
 
-      <p>As the team grew, the problem compounded. More features meant more combinations to test. More squads meant more concurrent releases. We couldn't hire our way out of it; manual testing doesn't scale linearly with complexity.</p>
+      <p>Back in 2013, our journey in the eGifting space began with just a handful of passionate developers, one bold idea, and zero formal QA. At the time, we were a lean startup laser-focused on speed and innovation. With limited resources, every team member wore multiple hats. There was no dedicated tester, no structured test cases, and certainly no automation. We built features, tested them on the fly, and shipped — all in the same breath. It wasn't about perfection, it was about momentum. And while that came with its own challenges, it allowed us to move fast, learn quickly, and lay the groundwork for everything that came next.</p>
 
-      <blockquote>
-        <p>"Automation isn't about replacing human judgment. It's about protecting your human energy for the decisions that actually need it."</p>
-      </blockquote>
+      <p>Mistakes happened, of course. A birthday gift that didn't get sent, a redemption code that failed to work. But every bug became a lesson. We fixed things fast and, more importantly, we learned even faster. Each misstep helped us build something better, more reliable, and more thoughtful for our users.</p>
 
-      <h2>The build-out</h2>
+      <p>Customer feedback became our most valuable QA tool. If someone flagged a glitch, we jumped on it — day or night. It wasn't scalable, but it was scrappy, and it worked for that phase.</p>
 
-      <p>We started with the highest-value, highest-risk flows: gift card purchase, delivery, and redemption. These became our core regression suite, written in Playwright and integrated into the CI pipeline. Every pull request runs them. A failure blocks the merge.</p>
+      <p>But as our user base grew, so did the stakes. We couldn't afford any failed workflow; we couldn't let a broken redemption flow ruin someone's special moment. That's when we knew it was time to bring in a dedicated QA specialist.</p>
 
-      <p>The architecture we settled on is layered:</p>
+      <p>We hired our first QA, defined test coverage, brought in tools like JIRA and Zephyr, and slowly built a proper testing lifecycle. We moved from reaction to prevention — from fire-fighting to quality ownership.</p>
+
+      <h2>The Early Days: Just Jira and Bug Reports</h2>
+
+      <p>We started using Jira primarily for task tracking. There were no test cases, no formal test plans — just ad-hoc testing and bug reporting. We were testing in parallel while writing the test cases. It was enough to get by, but not enough to scale.</p>
+
+      <p>At that time, the QA role wasn't fully established; the task was to build a QA process from the ground up.</p>
+
+      <p>Tight release cycles are a familiar beast in the tech world. We had our fair share of all-nighters. The pressure mounted, deadlines loomed, and the team rallied to push a feature or update live. Testing during those late-night hours required extra focus and dedication — a balancing act between thoroughness and time constraints, ensuring critical issues were caught without delaying the launch.</p>
+
+      <p>Our small QA team needed to grow. It became clear that scaling up was crucial to meet increasing demands. We gradually expanded by hiring new team members, and a separate team was set up for specific projects. This approach helped us build a well-rounded QA function, eventually evolving into specialised Functional and Non-Functional teams.</p>
+
+      <p>Alongside team growth, we also moved toward more structured QA practices. Initially, we started small with TestLink to manage test cases. As our processes matured, we transitioned to Zephyr, which offered tighter integration with our Agile workflows. This shift brought QA closer to the core of our sprints, enabling more efficient test planning, execution, and reporting. With these tools in place, we gained the visibility and consistency needed to track quality metrics and continuously improve.</p>
+
+      <h2>Scaling QA: Process Evolution and Growth</h2>
+
+      <p>Once the chaos of the early days gave way to a steady rhythm, it became clear that sustainable growth required more than just bug fixes and test scripts. We needed process maturity — a deliberate approach to how we planned, executed, and communicated quality across the organisation.</p>
+
+      <p>We began by introducing structure: strategic planning before releases, consistent test cycles, and lightweight yet effective QA guides. As our Agile process matured, QA embedded itself deeper into the development lifecycle. Test cases were no longer an afterthought — they were written alongside user stories, reviewed before sprint closures, and executed in well-defined cycles aligned with sprint reviews and releases.</p>
+
+      <p>As the product evolved, complexity followed. Functional testing alone could no longer meet the demands of scale, security, and performance.</p>
+
       <ul>
-        <li><strong>Unit tests</strong> — fast, scoped to individual functions and components, run on every commit</li>
-        <li><strong>Integration tests</strong> — validate API contracts and service interactions, run on PR</li>
-        <li><strong>E2E tests</strong> — full browser automation across critical user journeys, run on PR and before any production deploy</li>
-        <li><strong>Exploratory sessions</strong> — human-led, time-boxed, focused on edge cases and new features where automation hasn't yet been written</li>
+        <li><strong>Security</strong> became a top priority. We introduced regular manual assessments and static and dynamic scanning tools into our workflows to catch vulnerabilities before they could impact end users.</li>
+        <li><strong>Performance testing</strong> followed, handled by dedicated team members who used JMeter and LoadRunner to ensure our systems didn't just work — but worked well under pressure.</li>
+        <li><strong>Automation</strong> became a powerful ally. We built frameworks that covered regression, smoke, and integration tests — all hooked into our CI/CD pipelines, drastically shortening feedback loops and lowering release risk.</li>
       </ul>
 
-      <h2>The hard lessons</h2>
+      <p>Beyond testing, we turned our focus to operational excellence. We streamlined our workflows through Jira automations and custom dashboards. QA subtasks now generate automatically when development tickets move to "In Progress." Bugs marked "Ready for Retest" trigger alerts via Slack. Test case statuses update automatically when linked stories close. What once demanded manual coordination now happens effortlessly.</p>
 
-      <p>We made the classic mistake of optimising for coverage percentage early on. We hit 70% and celebrated. Then we noticed the tests weren't catching real bugs — they were covering code that never breaks, and missing the boundary conditions that do.</p>
+      <p>Our dashboards became command centres — real-time views of sprint test coverage, trends showing open vs. resolved bugs, QA workload across projects, and release readiness scores based on test outcomes and issue severity. All of this gave us something every QA team strives for: clarity.</p>
 
-      <p>We shifted to <strong>risk-based testing</strong>: coverage is a vanity metric; what matters is whether the right things are covered. Every quarter, we review our most common support issues and production incidents and ask: do our tests catch these? If not, why not?</p>
+      <p>But the real differentiator was culture. We fostered a QA mindset where quality wasn't just a department — it was everyone's job. Peer reviews became routine. Knowledge-sharing turned into habit. And open feedback was encouraged at every level.</p>
 
-      <p>Test data management was the other painful lesson. Automated tests that rely on live data or shared staging environments are fragile. We moved to isolated test environments with seeded data, so every test run starts from a known state.</p>
+      <h2>Embracing Automation Testing: A Strategic Leap</h2>
 
-      <h2>Where we are now</h2>
+      <p>Our application was evolving rapidly — new features, integrations, edge cases, UI updates every sprint. But while our product grew stronger, our manual testing process began to fall behind. Regression cycles ballooned. QA was stretched thin. Releases began to feel more like bets than deliveries.</p>
 
-      <p>Our automation coverage on critical paths sits at around 85%. Release cycles that used to require two days of manual regression now run in under 40 minutes end-to-end. We deploy multiple times per week with confidence.</p>
+      <p>We didn't start with grand plans. We began small with our B2C product — a handful of scripts, a basic test suite covering the gift purchase flow and page navigations. Every time a release came up, we ran the automation and saved hours. It was simple. But it worked.</p>
 
-      <p>More importantly, the QA function has changed. We spend less time on repetitive verification and more time on exploratory testing, accessibility, and understanding what our users actually experience. Quality engineering is not a phase at the end of development — it's woven into how we build.</p>
+      <p>As our product matured, so did our challenges. The environment shifted, the UI kept changing, test data evolved. So we created a dedicated Automation Team for our B2C and B2B products — not just a QA extension, but a team of engineers with strong coding fundamentals and a mindset for building resilient systems.</p>
+
+      <p>We started where it mattered most: high-impact flows. Smoke tests. Sanity checks. Core regressions. We automated what broke the most, and what was used the most.</p>
+
+      <p>Our technology stack evolved too. Selenium was our foundation, but we added Cucumber to bridge the gap between business logic and test behaviour. And then came <strong>Playwright</strong> — bringing stability, speed, and cross-browser capabilities that were once a pain point.</p>
+
+      <p>As our frameworks matured and CI/CD pipelines absorbed our test suites, something remarkable happened: regression cycles shrank, bugs surfaced earlier — sometimes before QA even laid eyes on the feature — developers started shipping with confidence, and releases became smoother, safer, and faster.</p>
+
+      <h2>Mobile Testing Mayhem: Surviving Rapid Releases and Device Diversity</h2>
+
+      <p>The app was young, the team was small, and the expectations were sky high. In those early days, everything was manual. Each build meant scrolling through the Android app, then grabbing the office iPhone to do it all again. Tap, swipe, back. Repeat. Regression testing felt like Groundhog Day — hours checking the same flows: search, personalise, checkout, notify. The test cases kept growing, but the team stayed the same.</p>
+
+      <h3>Mobile Automation: The First Lifeline</h3>
+
+      <p>We began experimenting with Appium and Selenium late at night after wrapping up manual testing. Our first attempt at automation was humble — a simple gift search and checkout flow. But when that script ran and passed on its own, it felt like magic.</p>
+
+      <p>That small success gave us the boost we needed. We began building more scripts, covering critical journeys like payments and personalisation. With each one, our testing load got lighter, and releases started to feel less overwhelming.</p>
+
+      <p>But as our user base expanded, so did the complexity. Different devices, browsers, operating systems — what looked flawless on one setup would break entirely on another. It became clear: emulator testing wasn't enough anymore. We needed to test on real devices.</p>
+
+      <p>Setting up our own lab wasn't realistic. Instead, we turned to the cloud — and <strong>BrowserStack</strong> was the perfect fit. With BrowserStack, we could run our automation scripts across a wide range of real devices and OS combinations without buying or managing any hardware. It seamlessly integrated into our release pipeline, giving us instant coverage and instant feedback. The result? Fewer bugs slipped through. Our confidence in every release grew.</p>
+
+      <h2>Securing from Scratch: Building Our Security QA Team</h2>
+
+      <p>When our product gained significant traction, we experienced growth in users and partnerships. However, this success also made us a target for security threats. Initially, we observed automated scripts and suspicious login attempts. Over time, both the frequency and sophistication of these attacks increased — highlighting that our application had become the primary attack vector.</p>
+
+      <p>Our response involved identifying core application security requirements, defining team roles, hiring security engineers, and establishing secure development processes.</p>
+
+      <p>As part of our ongoing commitment to secure development practices, we include dedicated tasks for security testing in every sprint. This proactive approach helps us identify potential vulnerabilities early — whether it's common issues like OWASP Top 10 risks or subtle security flaws — ensuring our product remains robust and resilient against threats.</p>
+
+      <p>Using industry-standard tools such as <strong>Burp Suite</strong> and static application security testing (SAST) platforms, we caught issues early and at scale. We integrated these tools into our CI/CD pipeline to enable continuous security testing — every pull request triggered automatic scans for known vulnerabilities, insecure code patterns, and exposed secrets.</p>
+
+      <p>We also performed quarterly in-depth internal security audits, reviewing all major application components against a structured checklist based on OWASP and NIST standards, supplemented with periodic penetration testing engagements from external security firms.</p>
+
+      <h2>Empowering Through Mindset, Not Just Methods</h2>
+
+      <p>Very early in our journey, we learned that great QA isn't just about tools or processes — it's the people, their judgment, curiosity, and mindset, that actually find bugs, ask the right questions, and protect the user experience. The biggest leap forward came when we started investing in mindset and mentorship. We didn't just hire testers; we guided them, coached them, and aligned them with a common vision: quality is everyone's responsibility.</p>
+
+      <p>Upskilling wasn't an afterthought — it was a strategy. Whether it was learning automation frameworks, exploring performance tuning, or understanding secure coding, we made sure our team had the direction, support, and clarity they needed to grow with the product.</p>
+
+      <p>Today, innovation and learning are built into our DNA. From hosting internal workshops and sharing playbooks, to encouraging pair testing and collaborative retrospectives, we continue to build a QA team that's not only skilled, but deeply empowered.</p>
+
+      <p>As we move forward, we remain focused on:</p>
+      <ul>
+        <li>Scaling automation across platforms and services</li>
+        <li>Embracing AI-assisted testing for smarter risk detection</li>
+        <li>Advancing real-time performance monitoring and alerting</li>
+        <li>Deepening our security posture through proactive assessments</li>
+        <li>Fostering a quality-first mindset across every team</li>
+      </ul>
+
+      <blockquote><p>Our QA journey is far from over — but what grounds us is clear: when people grow, quality follows. And when quality leads, trust is built tap by tap, gift by gift.</p></blockquote>
 
     </div>
 
@@ -275,13 +385,30 @@
         <ul class="footer-col-links">
           <li><a href="../Stories%20v2.html">Stories</a></li>
           <li><a href="../Stack.html">Stack</a></li>
-          <li><a>Status</a></li>
+          <li><a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a></li>
           <li><a href="../Newsroom.html">Newsroom</a></li>
           <li><a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
           <li><a href="../Trust%20Center.html">Trust Center</a></li>
         </ul>
       </div>
     </div>
+    <!-- Mobile-only minimal footer -->
+    <div class="mobile-footer-simple">
+      <img src="../assets/yougotagift-logo.png" alt="YOUGotaGift" class="mf-logo" />
+      <div class="mf-social">
+        <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:currentColor"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="X / Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </div>
+      <div class="mf-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+      <p class="mf-copy">&#169; 2026 YOUGotaGift.com Ltd.</p>
+    </div>
+
     <div class="footer-bar">
       <p class="footer-bar-copy">&#169; 2026 YOUGotaGift.com Ltd. &nbsp;&middot;&nbsp; UAE | Saudi Arabia | Qatar | Bahrain | Oman | Kuwait | India</p>
       <div class="footer-bar-links">

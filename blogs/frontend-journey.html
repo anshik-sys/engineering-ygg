@@ -31,7 +31,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Building the future of gifting: our frontend journey — YOUGotaGift Engineering</title>
+<title>Our frontend tech stack: from monolith to micro frontend — YOUGotaGift Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
@@ -75,6 +75,46 @@
 @media(max-width:900px){ .article-section{ padding:120px 0 80px; } .article-inner{ padding:0 28px; } }
 @media(max-width:560px){ .article-inner{ padding:0 20px; } .art-body p{ font-size:16px; } }
 
+/* Mobile: minimal footer */
+@media (max-width: 768px) {
+  .site-footer { padding: 0 !important; }
+  .footer-card { border-radius: 0 !important; }
+  .footer-top { display: none !important; }
+  .footer-bar { display: none !important; }
+  .footer-wordmark-wrap { display: none !important; }
+  .mobile-footer-simple { display: flex !important; }
+}
+.mobile-footer-simple { display: none; flex-direction: column; align-items: center; gap: 20px; padding: 40px 24px 32px; background: var(--bg); text-align: center; }
+.mf-logo { height: 36px; width: auto; object-fit: contain; }
+.mf-social { display: flex; gap: 10px; align-items: center; justify-content: center; }
+.mf-links { display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.mf-links a { font-family: var(--font-ui); font-size: 13px; color: rgba(255,255,255,.45); text-decoration: none; transition: color .18s; }
+.mf-links a:hover { color: rgba(255,255,255,.85); }
+html[data-theme="light"] .mf-links a { color: rgba(0,0,0,.45); }
+html[data-theme="light"] .mf-links a:hover { color: rgba(0,0,0,.85); }
+.mf-copy { font-family: var(--font-ui); font-size: 12px; color: rgba(255,255,255,.28); margin: 0; }
+html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
+</style>
+<style>
+/* Mobile nav: hamburger in top-right controls */
+.mobile-drawer:not(.open) { pointer-events: none; }
+@media (max-width: 900px) {
+  .nav { display: none !important; }
+  .status-pill { display: none !important; }
+  .controls-divider { display: none !important; }
+}
+.top-right-controls .mobile-menu-btn { border: none; background: transparent; display: none; }
+@media (max-width: 900px) {
+  .top-right-controls .mobile-menu-btn { display: flex; }
+}
+</style>
+<style>
+/* Mobile: fix logo vertical alignment */
+@media (max-width: 900px) {
+  .nav-wrap { min-height: 52px !important; }
+  .nav-logo { top: calc(50% + 6px) !important; transform: translateY(-50%) !important; }
+}
+.nav-wrap:not(.nav-hidden) .nav-logo { opacity: 1 !important; pointer-events: auto !important; }
 </style>
 </head>
 <body>
@@ -99,15 +139,13 @@
     <div class="brand"><a class="brand-tag" href="../index.html" style="text-decoration:none;">Engineering</a></div>
     <div class="nav-links">
       <a href="../Stories%20v2.html" class="current">Stories</a>
-      <a>Status</a>
+      <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
       <a href="../Stack.html">Stack</a>
       <a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
       <a href="../Trust%20Center.html">Trust Center</a>
       <a href="../Newsroom.html">Newsroom</a>
     </div>
-    <div class="nav-cta">
-      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
+
   </nav>
 </div>
 <div class="top-right-controls">
@@ -116,6 +154,7 @@
     <span class="status-text"><span class="status-title">MyRewards</span><span class="status-sub">100% uptime</span></span>
   </div>
   <span class="controls-divider"></span>
+  <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <button class="theme-toggle" aria-label="Toggle theme">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
@@ -125,7 +164,7 @@
 <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <nav class="mobile-drawer-links">
     <a href="../Stories%20v2.html" class="current">Stories</a>
-    <a>Status</a>
+    <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
     <a href="../Stack.html">Stack</a>
     <a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
     <a href="../Trust%20Center.html">Trust Center</a>
@@ -149,10 +188,12 @@
       <span class="art-tag">Front End</span>
       <span class="art-tag">Architecture</span>
       <span class="art-tag">React</span>
+      <span class="art-tag">TypeScript</span>
+      <span class="art-tag">Next.js</span>
     </div>
 
-    <h1 class="art-title">Building the future of gifting: our frontend journey.</h1>
-    <p class="art-excerpt">Why we rebuilt our storefront, the architecture choices behind it, and how we ship delightful gifting experiences fast.</p>
+    <h1 class="art-title">Our frontend tech stack: from monolith to micro frontend.</h1>
+    <p class="art-excerpt">A detailed look at the frontend technologies powering YOUGotaGift — why we chose them, how our stack evolved, and how they help us deliver an exceptional gifting experience.</p>
 
     <div class="art-meta">
       <img class="art-meta-avatar" src="https://ygg-strapi-prod-tf.s3.me-central-1.amazonaws.com/Blog_IMG_a6b87f96ff.png" alt="Ahammed K M" loading="lazy" />
@@ -172,45 +213,113 @@
 
     <div class="art-body">
 
-      <p>Every gifting moment carries a small emotional charge. Someone is thinking of another person, picking something they'll actually want, and trusting our platform to deliver it perfectly. The frontend is where that emotional moment lives. It had to be fast, beautiful, and reliable — and for a while, it was none of those things.</p>
+      <p>At YOUGotaGift, we are committed to enhancing the gifting experience through the seamless integration of technology. As the leading platform in the gifting industry, our frontend tech stack is designed to ensure scalability, robustness, and an exceptional user experience. In this blog, we will take a detailed look at the frontend technologies we use, why we chose them, how our stack has evolved, and how these technologies help us achieve our business goals.</p>
 
-      <p>Our original storefront was built during the company's early growth phase, optimising for speed-to-market rather than long-term maintainability. It worked, and it got us to a scale where its limitations became expensive. Page load times crept up. Adding new brand integrations required careful archaeology through tightly coupled code. A/B testing was nearly impossible without risking breakage.</p>
+      <h2>Our Frontend Technologies: The Beginning</h2>
 
-      <h2>Why we rebuilt</h2>
+      <p>In the initial stages of our frontend development journey, we proudly relied on Django and its built-in template system (DTL) to construct our web pages. With the precision of skilled craftsmen, we used HTML and CSS for content structuring and styling, while JavaScript breathed life into our applications with interactivity. Operating within a monolithic app framework, we seamlessly served multiple products, showcasing our technical prowess.</p>
 
-      <p>The decision to rebuild wasn't made lightly. A full rewrite carries real risk — you can introduce new bugs, delay features, and disrupt users who've adapted to the existing experience. We spent three months in a design phase before writing a line of production code, asking: what do we actually need this architecture to do?</p>
+      <p>However, as our application grew in complexity, managing multiple products under a single framework became challenging. The monolithic structure imposed several limitations: every change required testing the entire application, increasing release time, leading to broader access permissions, longer development cycles, reduced flexibility, increased downtime risk, complicating scaling, causing deployment delays, and making fault isolation difficult.</p>
 
-      <p>The answers were clear:</p>
+      <h2>Frontend: Evolution and Separation</h2>
+
+      <p>To address the challenges of monolithic architecture and align with cutting-edge technology standards, we undertook a comprehensive overhaul of our tech stack, prioritising aesthetic design, user experience, security and SEO-friendliness.</p>
+
+      <p>This led us to transition to a microservices architecture and the adoption of micro frontend systems. We were able to develop independently deployable frontend modules, scale our systems more efficiently, increased flexibility, reduced complexity, faster development cycles and improved resilience, positioning us to better meet the evolving demands of modern technology standards.</p>
+
+      <p>In summary, our transition from a monolithic to a microservices-based architecture marked a significant milestone in our frontend development approach. By separating frontend and backend concerns, we were able to swiftly respond to product requirements, leveraged state-of-the-art technologies, and ensured the ongoing evolution and success of our products.</p>
+
+      <h2>Enhancing Micro Frontend Experience: SSO and Unified Payment Solutions</h2>
+
+      <p>When transitioning to a micro frontend architecture, one of the primary considerations we addressed was ensuring seamless authentication across the various micro frontend applications. In a traditional monolithic setup, authentication is often handled centrally, making it relatively straightforward. However, with micro frontends, each application operates independently, complicating the authentication process.</p>
+
+      <p>To address authentication requirements, we integrated Single Sign-On (SSO), simplifying user access across applications. Leveraging Amazon Cognito, our SSO solution provides secure authentication — including MFA, role-based access control, bot detection, compromised credential protection, risk-based adaptive authentication, and easy integration with third-party providers such as Google, Apple and Facebook — allowing users to seamlessly navigate between micro frontend apps. This unified approach enhances both user experience and security by centralising authentication processes and ensuring smooth access across our platform.</p>
+
+      <p>To streamline payment processes and eliminate the need for repetitive integrations across various products, we introduced <strong>YOUPay</strong> — a comprehensive payment solution designed to centralise and enhance payment management. As a result, all products can offer diverse payment options tailored to their needs through a single integration with YOUPay. Additionally, any new payment gateways integrated into YOUPay become instantly available to all connected products. YOUPay has become increasingly robust, now supporting a range of payment options including multiple payment gateways, digital wallets, points-based payment systems, Apple Pay and BNPL solutions.</p>
+
+      <p>In summary, SSO improves user access, while YOUPay simplifies payment integration, effectively solving challenges in user authentication and payment management across micro frontends.</p>
+
+      <h2>Frontend Development Milestones: Custom Packages and Design System</h2>
+
+      <p>In our pursuit of excellence in frontend development, we have achieved significant milestones through the integration of custom packages and a well-structured design system. By leveraging GitHub custom packages, stored in private repositories with semantic versioning, we have ensured that our shared code is both reusable and maintainable across multiple projects. This approach has promoted consistency and reduced duplication, making our development process more effective and organised.</p>
+
+      <p>A key achievement has been the development of a comprehensive design system using Storybook, incorporating top UI libraries such as Material-UI and Ant Design, and adhering to best practices in component design. This system aligns with our design guidelines and enables us to create and document UI components independently, ensuring they are reusable and consistent across all applications.</p>
+
+      <h2>Enhancing Application Security: Our Comprehensive Approach</h2>
+
+      <p>In today's digital landscape, robust security across all applications is not just necessary — it's imperative. Our approach combines advanced tools and rigorous practices to safeguard our applications, building trust with our clients regarding our technology's reliability and safety.</p>
+
+      <h3>Code Quality and Vulnerability Scanning</h3>
+      <p>To maintain high standards of code quality and security, we leverage <strong>SonarQube</strong> for continuous inspection. This tool performs automatic reviews with static code analysis to detect bugs, vulnerabilities, and code smells in our applications. By integrating SonarQube into our development process, we ensure that our codebase remains clean and secure.</p>
+
+      <h3>Proactive Monitoring with GitHub Security Alerts</h3>
+      <p>We integrate <strong>GitHub Security Alerts</strong> into our development workflows. This feature automatically scans our repositories for known vulnerabilities in dependencies. When a potential threat is detected, GitHub notifies our team, allowing for swift action to update the affected dependencies and mitigate any risks.</p>
+
+      <h3>Real-Time Error Tracking and Management</h3>
+      <p><strong>Sentry</strong> is an essential tool in our security arsenal. It provides real-time error tracking and gives insights into issues as they happen in production. By using Sentry, we can not only detect and rectify errors quickly but also prevent them from escalating into security vulnerabilities.</p>
+
+      <h3>In-House QA Security Testing</h3>
+      <p>Our dedicated in-house Quality Assurance (QA) team conducts thorough security testing as part of the software development lifecycle. By simulating various attack scenarios, they help identify and address security weaknesses before the software reaches production.</p>
+
+      <h3>Sophisticated Security Testing by Red Team</h3>
+      <p>To bolster the integrity and resilience of our applications, we collaborate with top-tier security researchers (The Red Team). This team tests our security measures against real-world threats. This external insight is crucial for uncovering potential vulnerabilities and refining our defence strategies, ensuring our clients can trust the integrity of our solutions.</p>
+
+      <h2>The Frontend Tools We Rely On and Why They Matter</h2>
+
+      <p>Our frontend stack is carefully chosen to balance innovation with reliability, ensuring that we can rapidly develop features without sacrificing quality or performance.</p>
+
+      <h3>React</h3>
+      <p>At the heart of our frontend applications is React. This JavaScript library, developed by Meta (formerly Facebook), offers a component-based architecture which makes it easy to reuse code and manage state across large applications. Its virtual DOM implementation ensures that our app remains fast even when rendering large amounts of data.</p>
+
+      <h3>TypeScript</h3>
+      <p>To enhance the reliability of our React applications, we use TypeScript — a superset of JavaScript that adds static type definitions. These definitions allow us to catch errors early in the development process, leading to more robust code that's easier to refactor and maintain.</p>
+
+      <h3>Next.js</h3>
+      <p>We use Next.js for server-side rendering (SSR) and Static Site Generation (SSG). This React framework helps us manage SEO, automatic code splitting for efficient loading, and simplified data fetching for seamless page-specific data management.</p>
+
+      <h3>Redux</h3>
+      <p>By centralising state management, Redux ensures our React applications remain scalable and maintainable, even as they grow in complexity. Its middleware ecosystem allows for advanced features like persistence and asynchronous actions, further enhancing our development capabilities.</p>
+
+      <h3>ViteJS</h3>
+      <p>With ViteJS, our development workflow is streamlined, allowing for quick iteration and seamless integration of new features. Its blazing-fast hot module replacement (HMR) and native ES module support contribute to rapid development cycles and improved developer productivity.</p>
+
+      <h3>GraphQL</h3>
+      <p>GraphQL is a query language for APIs that allows the frontend to request exactly the data it needs, reducing over-fetching and under-fetching. It provides a flexible and efficient way to interact with server data by defining a schema with types and queries. We use <strong>Apollo Client</strong> to interact with GraphQL — its caching and client-side state management capabilities optimise performance and reduce unnecessary network requests, resulting in a smoother user experience.</p>
+
+      <h3>Material-UI (MUI)</h3>
+      <p>MUI's extensive collection of components and theming capabilities empower us to create visually cohesive and user-friendly interfaces with ease. Its comprehensive documentation, active community support, and consistent updates ensure that we stay up-to-date with the latest design trends and best practices.</p>
+
+      <h3>Ionic Framework</h3>
+      <p>Ionic's cross-platform capabilities enable us to deliver consistent experiences across web and mobile platforms, reducing development time and effort. Its built-in UI components, native plugin integrations, and live reloading functionality streamline the mobile web development process, providing users with a seamless mobile app-like experience.</p>
+
+      <h3>Ant Design</h3>
+      <p>With Ant Design's customisable and well-documented components, we can rapidly prototype and deploy polished interfaces that meet our users' needs. Its comprehensive design system — including layout grids, icons, and typography — accelerates the frontend development process.</p>
+
+      <h2>Supporting Tools and Technologies</h2>
+
+      <p>To complement our main technologies, we utilise a range of supporting tools:</p>
       <ul>
-        <li>Sub-second initial load on mobile, even on slower connections common across our markets</li>
-        <li>Independent deployability for different product surfaces (B2C storefront, B2B portal, white-label)</li>
-        <li>Component library shared across surfaces with zero duplication</li>
-        <li>Feature flags and A/B testing as first-class primitives, not afterthoughts</li>
+        <li><strong>Styled-Components:</strong> For scoped and reusable CSS, enhancing our component styling without the headaches of global CSS.</li>
+        <li><strong>Webpack:</strong> Bundles our assets, scripts, and CSS with extensive customisation options.</li>
+        <li><strong>Babel:</strong> Ensures compatibility with older browsers by transforming newer JavaScript and TypeScript code into a version that browsers can understand.</li>
+        <li><strong>ESLint and Prettier:</strong> These tools help us maintain code quality and consistency, ensuring that all developers adhere to the same coding standards.</li>
       </ul>
 
-      <blockquote>
-        <p>"We weren't just rebuilding a website. We were building the infrastructure for how we'd ship experiences for the next five years."</p>
-      </blockquote>
+      <h2>Continuous Integration and Deployment</h2>
 
-      <h2>The architecture decisions</h2>
+      <p>Our CI/CD pipeline, built with GitHub Actions, automates testing, building, and deployment. This automation accelerates the release process, ensuring that code changes are quickly and reliably validated before reaching production. By reducing manual steps and catching issues early, we enhance code quality, minimise disruptions, and deliver updates faster, ultimately improving overall efficiency.</p>
 
-      <p>We chose Next.js for the storefront, with a clear server/client component boundary. Pages that don't require interactivity are fully server-rendered and cached at the CDN layer — the gift card catalogue, brand pages, static content. Interactive components — the cart, personalisation, checkout — are client-rendered and hydrated selectively.</p>
+      <h2>Conclusion</h2>
 
-      <p>Our design system lives in a separate package, versioned and published internally. Every surface consumes it as a dependency. When we update a component — a button, a card, an input — it propagates across all surfaces through a standard release process rather than manual copy-paste.</p>
+      <p>At YOUGotaGift, our frontend tech stack isn't just a toolkit — it's the heart of our mission to transform the gifting experience. By embracing cutting-edge technologies and a micro frontend approach, we unlock greater flexibility, accelerate development cycles, and enhance scalability, ensuring every interaction is smooth, intuitive, and delightful.</p>
 
-      <p>State management is deliberately minimal. Server state is handled by React Query, which gives us caching, background refetching, and optimistic updates without a global store. UI state that doesn't need to persist lives in component-local state. This keeps the mental model simple and the bundle small.</p>
+      <p>React, TypeScript, and Next.js serve as the backbone of our platform, while MUI and Ant Design create stunning, user-friendly interfaces. Ionic elevates our mobile experience with seamless cross-platform consistency.</p>
 
-      <h2>The migration</h2>
+      <p>Our robust CI/CD pipeline guarantees rapid, reliable updates, and our comprehensive security measures safeguard our applications from vulnerabilities.</p>
 
-      <p>We ran old and new in parallel for six months. We used feature flags to gradually shift traffic — 5%, then 20%, then 50%, then all — giving us real signal on performance and conversion before full cutover. The old codebase was kept warm as a fallback, which meant we could roll back to it in under a minute if anything went wrong.</p>
+      <blockquote><p>As we continue to innovate and evolve, our tech stack embodies our commitment to excellence — making every gifting moment extraordinary and secure.</p></blockquote>
 
-      <p>Nothing went seriously wrong. The gradual rollout meant our team caught issues at low traffic volumes, where the cost of a mistake is low and the debugging context is high.</p>
-
-      <h2>What changed</h2>
-
-      <p>Largest Contentful Paint on mobile dropped from 4.2s to 1.1s. Time-to-interactive on catalogue pages dropped similarly. Developer velocity improved — our feature cycle time (from design handoff to production) shortened from an average of three weeks to ten days.</p>
-
-      <p>The less measurable change: engineers enjoy working in the codebase now. That matters more than any metric. Happy engineers ship better software, faster.</p>
+      <p>By staying ahead of technological trends, we ensure our products are always cutting-edge, meeting the dynamic needs of our users with confidence.</p>
 
     </div>
 
@@ -263,13 +372,30 @@
         <ul class="footer-col-links">
           <li><a href="../Stories%20v2.html">Stories</a></li>
           <li><a href="../Stack.html">Stack</a></li>
-          <li><a>Status</a></li>
+          <li><a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a></li>
           <li><a href="../Newsroom.html">Newsroom</a></li>
           <li><a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
           <li><a href="../Trust%20Center.html">Trust Center</a></li>
         </ul>
       </div>
     </div>
+    <!-- Mobile-only minimal footer -->
+    <div class="mobile-footer-simple">
+      <img src="../assets/yougotagift-logo.png" alt="YOUGotaGift" class="mf-logo" />
+      <div class="mf-social">
+        <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:currentColor"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="X / Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </div>
+      <div class="mf-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+      <p class="mf-copy">&#169; 2026 YOUGotaGift.com Ltd.</p>
+    </div>
+
     <div class="footer-bar">
       <p class="footer-bar-copy">&#169; 2026 YOUGotaGift.com Ltd. &nbsp;&middot;&nbsp; UAE | Saudi Arabia | Qatar | Bahrain | Oman | Kuwait | India</p>
       <div class="footer-bar-links">

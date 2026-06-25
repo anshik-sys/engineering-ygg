@@ -223,6 +223,46 @@ html[data-theme="light"] .art-body code{ background:rgba(26,14,28,.06); }
   .art-body p,.art-body ul,.art-body ol{ font-size:16px; }
 }
 
+/* Mobile: minimal footer */
+@media (max-width: 768px) {
+  .site-footer { padding: 0 !important; }
+  .footer-card { border-radius: 0 !important; }
+  .footer-top { display: none !important; }
+  .footer-bar { display: none !important; }
+  .footer-wordmark-wrap { display: none !important; }
+  .mobile-footer-simple { display: flex !important; }
+}
+.mobile-footer-simple { display: none; flex-direction: column; align-items: center; gap: 20px; padding: 40px 24px 32px; background: var(--bg); text-align: center; }
+.mf-logo { height: 36px; width: auto; object-fit: contain; }
+.mf-social { display: flex; gap: 10px; align-items: center; justify-content: center; }
+.mf-links { display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.mf-links a { font-family: var(--font-ui); font-size: 13px; color: rgba(255,255,255,.45); text-decoration: none; transition: color .18s; }
+.mf-links a:hover { color: rgba(255,255,255,.85); }
+html[data-theme="light"] .mf-links a { color: rgba(0,0,0,.45); }
+html[data-theme="light"] .mf-links a:hover { color: rgba(0,0,0,.85); }
+.mf-copy { font-family: var(--font-ui); font-size: 12px; color: rgba(255,255,255,.28); margin: 0; }
+html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
+</style>
+<style>
+/* Mobile nav: hamburger in top-right controls */
+.mobile-drawer:not(.open) { pointer-events: none; }
+@media (max-width: 900px) {
+  .nav { display: none !important; }
+  .status-pill { display: none !important; }
+  .controls-divider { display: none !important; }
+}
+.top-right-controls .mobile-menu-btn { border: none; background: transparent; display: none; }
+@media (max-width: 900px) {
+  .top-right-controls .mobile-menu-btn { display: flex; }
+}
+</style>
+<style>
+/* Mobile: fix logo vertical alignment */
+@media (max-width: 900px) {
+  .nav-wrap { min-height: 52px !important; }
+  .nav-logo { top: calc(50% + 6px) !important; transform: translateY(-50%) !important; }
+}
+.nav-wrap:not(.nav-hidden) .nav-logo { opacity: 1 !important; pointer-events: auto !important; }
 </style>
 </head>
 <body>
@@ -254,17 +294,13 @@ html[data-theme="light"] .art-body code{ background:rgba(26,14,28,.06); }
     </div>
     <div class="nav-links">
       <a href="../Stories%20v2.html" class="current">Stories</a>
-      <a>Status</a>
+      <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
       <a href="../Stack.html">Stack</a>
       <a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
       <a href="../Trust%20Center.html">Trust Center</a>
       <a href="../Newsroom.html">Newsroom</a>
     </div>
-    <div class="nav-cta">
-      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+
   </nav>
 </div>
 <div class="top-right-controls">
@@ -276,6 +312,7 @@ html[data-theme="light"] .art-body code{ background:rgba(26,14,28,.06); }
     </span>
   </div>
   <span class="controls-divider"></span>
+  <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <button class="theme-toggle" aria-label="Toggle theme">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="4"/>
@@ -286,7 +323,7 @@ html[data-theme="light"] .art-body code{ background:rgba(26,14,28,.06); }
 <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <nav class="mobile-drawer-links">
     <a href="../Stories%20v2.html" class="current">Stories</a>
-    <a>Status</a>
+    <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
     <a href="../Stack.html">Stack</a>
     <a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
     <a href="../Trust%20Center.html">Trust Center</a>
@@ -337,44 +374,118 @@ html[data-theme="light"] .art-body code{ background:rgba(26,14,28,.06); }
     <!-- Body -->
     <div class="art-body">
 
-      <p>There is a very specific kind of anxiety that sets in when you realise you've shipped the wrong feature twice, because two squads were building the same thing in parallel and nobody knew. That was us, about two years ago.</p>
-
-      <p>We were growing fast — more engineers, more product lines, more markets. And our project management approach had not scaled with us. It was a patchwork of shared Google Sheets, Slack threads, verbal commitments in standups, and a Jira board so overgrown that searching it felt like archaeology.</p>
-
-      <h2>The state of the art (before)</h2>
-
-      <p>Every squad had its own informal system. The backend team ran weekly syncs. The frontend team used a whiteboard. Mobile had their own Notion page. And across all of it, nobody had a single view of what was in flight, what was blocked, and what was actually done versus "almost done" (which, as any engineer will tell you, can mean anywhere from five minutes to five weeks).</p>
-
-      <p>Delivery was unpredictable. Stakeholders would ask for timelines and we'd give them our best guess, qualified with so many caveats that the estimates were nearly meaningless. The most common meeting in the engineering calendar was an unplanned firefight.</p>
-
-      <blockquote>
-        <p>"We didn't have a project management problem. We had a visibility problem — and visibility is the foundation everything else is built on."</p>
-      </blockquote>
-
-      <h2>The tipping point</h2>
-
-      <p>The moment that forced our hand was a missed product launch. Two squads had been working on adjacent features that depended on each other. Neither knew where the other was. The integration point arrived, nothing fitted together, and we pushed the launch by three weeks.</p>
-
-      <p>Three weeks doesn't sound catastrophic, but in a gifting platform, timing is everything. That launch was tied to a regional campaign. The opportunity cost was real and measurable. More importantly, the trust cost — with the business, with our own teams — was what stung the most.</p>
-
-      <h2>What we built</h2>
-
-      <p>We didn't implement a new tool and call it done. We rebuilt how we think about delivery. A few principles emerged:</p>
+      <p>Let us take you back to the early days of YOUGotaGift.</p>
+      <p>It was a simpler time. A quieter time.</p>
+      <p>There were two or three heroic developers. These noble beings didn't just wear multiple hats. They wore the whole wardrobe.</p>
 
       <ul>
-        <li><strong>Squads own outcomes, not tasks.</strong> Every squad has a clearly defined outcome for each sprint. Tasks are how they get there, not what they're accountable to.</li>
-        <li><strong>One Jira, one source of truth.</strong> We migrated everything into a structured Jira setup with consistent naming, status flows, and squad-level boards that roll up into a programme-level view.</li>
-        <li><strong>Dependency mapping is not optional.</strong> Before any sprint starts, cross-squad dependencies are identified, named, and tracked explicitly. A dependency without an owner is a risk.</li>
-        <li><strong>Ceremonies with intent.</strong> We kept standups short and async-first. The meetings that matter are refinement (did everyone agree on the shape of this work?) and retrospective (what would we change?).</li>
+        <li>Front-end? Yes</li>
+        <li>Back-end? Yes</li>
+        <li>QA, Devops, Designer, IT Support, Office DJ, Office furniture mover? Yes, Yes, Yes, Yes and Yes.</li>
       </ul>
 
-      <h2>The results</h2>
+      <p>They would code, test and release everything by themselves, possibly while restarting the WiFi router, debugging the printer, and explaining for the fifth time that "Have you tried turning it off and on again?" is a valid solution. They even approved their own leaves, I heard.</p>
+      <p>In the beginning, things were chill. There were, like, 5 tasks. Everyone remembered everything. Life was good.</p>
+      <p>But then, the company did something wild: it started to grow. Suddenly there were 20 tasks in the pipeline, 10 things in progress and 3 stakeholders asking, "Where is my feature?" and that's when the chaos hit — beautiful, legendary chaos. But Chaos, nonetheless.</p>
 
-      <p>Within two quarters, the change was tangible. Sprint completion rate — the percentage of committed work that ships within the sprint — went from around 58% to consistently above 82%. Stakeholder updates moved from reactive ("here's why it's late") to proactive ("here's what's coming next sprint and here are the risks we're watching").</p>
+      <h2>Act 1: Chaos Begins</h2>
+      <p>As the task list grew longer than our office coffee bill, things started to fall through the cracks. The developers were drowning in code and couldn't keep track of everything. The tech lead, who was also buried under development work, tried to juggle it all, but juggling flaming swords while blindfolded would have been easier.</p>
+      <p>Stakeholders started noticing that their precious requests were vanishing into the void (aka forgotten Slack messages) and developers began to suffer from chronic deadline amnesia.</p>
 
-      <p>Perhaps the most meaningful signal: the unplanned firefight meeting has almost disappeared from our calendar. When you can see a problem forming two weeks out, you rarely need to scramble on the day it explodes.</p>
+      <h2>Act 2: Enter the Wise CTO</h2>
+      <p>Our CTO looked at this glorious mess and asked the all-important question:</p>
+      <blockquote><p>"If we can't track 20 tasks now, how will we survive with 50 or more developers in the future?"</p></blockquote>
+      <p>So under his leadership, the company started looking for "The Way". The Sacred Path. The thing other companies seem to do but we weren't doing. And that's when someone whispered the holy word: <strong>Project Management</strong>.</p>
 
-      <p>None of this is magic. Good project management is just clear communication with structure around it. The structure doesn't do the work — the people do. But the structure makes the work visible, and visibility is where everything starts.</p>
+      <h2>Act 3: The Agile Awakening</h2>
+      <p>We started our deep dive into this mythical land called Agile. It said cool things like "Sprint" and "Scrum" and "iterations" and "burndown charts" (which we initially thought were something to do with Office snacks). We had no idea what any of it meant.</p>
+      <p>Turns out we weren't alone in our struggles. So, we did what all great minds do: we Googled, we YouTubed and we stalked people from other companies and asked them — "How are you not panicking every day? Spill the tea."</p>
+
+      <h3>Enter: JIRA</h3>
+      <p>Ah, JIRA. <em>"Jira is simple, Jira is powerful, Jira is safe."</em> — Said no one ever, while drowning in 38 open tickets, 3 missing subtasks, and a rogue epic that just reappeared out of nowhere.</p>
+      <p>Yes, Jira is simple, also confusing enough to make us question our life choices. So naturally we started small. We had just bought a shiny new JIRA subscription and were very excited about it — like adults buying a treadmill and immediately feeling healthier. The problem? We absolutely had no idea how to use it efficiently. Or correctly. Or confidently. JIRA felt less like a project management tool and more like a Jigsaw puzzle designed by someone who enjoys adding extra pieces just to watch you suffer.</p>
+      <p>We didn't start running sprints immediately. Oh no. That would have required knowledge. Our grand adventure began with creating stories and updating work items using JIRA's default statuses. Click. Drag. Feel productive. Repeat.</p>
+      <p>We read about estimates too. It looked way too easy. Finally, our chance to confidently guess and look smart doing it. We guessed timelines like weather forecasts — boldly, publicly and wrong about 50% of the time. Some tasks took longer. Some took much longer. A few seemed to age gracefully while still "almost done".</p>
+      <p>We thought adding tasks and estimates would solve everything. Spoiler: it did not. So, like any responsible team in mild panic, we Googled again. We watched videos again (Eternally grateful to Google, random bloggers and that one YouTube guy with 12 views who somehow saved us). And then, like a plot twist in a sitcom, we stumbled upon something called a Sprint. That's when we dug deeper, learned the ropes, and slowly, very slowly — started implementing sprints in our own quirky, but ever-improving way.</p>
+
+      <h2>Act 4: One Problem Solved, 10 More Appeared</h2>
+      <p>At YOUGotaGift, we don't just send presents — we also receive problems. Daily. With Love.</p>
+      <p>As our features grew, so did the plot twists. We planned Sprints in advance (big step) but Sprint plans were getting ruined by surprise "urgent" tasks like uninvited guests at a gift exchange. So we assigned a dedicated engineer just to handle all those "Hey, can you just do this small thing?" mid-sprint requests.</p>
+      <p>Our estimates? Gloriously wrong. Turns out you can't squeeze 160 hours of work into a 40-hour week, no matter how optimistic the JIRA labels are. So we brought in a Capacity Tracker. PRDs that read like riddles from a confused wizard got their own JIRA statuses. And bit by bit, slowly, we started trapping these problems. It was a thing of beauty.</p>
+
+      <h2>Act 5: Project Management Gets Serious</h2>
+      <p>At this point, our developers were spending more time figuring out JIRA than writing code. It was killing productivity. So we birthed a new legendary team: <strong>Project Management Administration (PMA)</strong> — our JIRA Wizards, Slack ninjas, and general saviors of sanity — "The Gift Wrappers" of all our messy processes. They didn't come with a superhero cape, but with a Trello board and a Confluence doc template.</p>
+      <p>The PMA heroes took over JIRA setup, made tools talk to each other, and generally made the developers stop weeping over workflows. Some of their behind-the-scenes magic includes:</p>
+
+      <h3>JIRA Automations</h3>
+      <ul>
+        <li>No PRD on Confluence? You're not creating a story.</li>
+        <li>Trying to sneak in a post-grooming PRD update? Nice try. The ticket is sealed tighter than grandma's Tupperware.</li>
+        <li>Forgot to make QA subtasks? Not anymore — it's automatic now.</li>
+        <li>Designs kept changing mid-sprint? Adding versioned design links to the PRD was made mandatory.</li>
+      </ul>
+
+      <h3>Smarter Workflows</h3>
+      <p>PMA introduced logic into our JIRA workflows with our CTO's supervision. No more floating tickets or existential status labels like "Review-ish." Every movement now makes sense — even to people who read nothing but the Slack thread.</p>
+
+      <h3>Confluenced Everything</h3>
+      <p>Everything lives on Confluence now — because if it's not written down, it doesn't exist. Thanks to PMA, this documentation paradise now includes: Product admin guides, Feature walkthroughs, Operational Playbooks, Jira workflows, Architecture Diagrams, and yes, that one doc we pretend to update every quarter but mostly don't.</p>
+      <p>And yes, it's all searchable. We have recently published all these guides on our portals with AI search — so finding the right document is now faster than a developer blaming the server for their code not working.</p>
+
+      <h3>GitHub, But Make It Orderly</h3>
+      <p>All code is stored on GitHub, where it's beautifully versioned, secure, and traceable from commit to production. PMA doesn't write the code, but they make sure no one gets lost between the branches. Literally.</p>
+
+      <h3>Slack: Where Everything Happens, but Properly</h3>
+      <p>Slack isn't just a chat app — it's our central nervous system. Project initiation? In threads. Stakeholder questions? Tagged and tracked. PMA doesn't answer your Slack questions. They just make sure the process for how to ask, answer, and escalate exists. Which, let's be honest, is even better.</p>
+      <p>Thanks to them, our tools — Slack, Confluence, JIRA, GitHub, Trello — don't just sit around looking pretty. They actually work. Together. In harmony. Well, most of the time.</p>
+
+      <h2>Act 6: Summon the PM Superstars → Project Management Office (PMO)</h2>
+      <p>Project Managers entered the YOUGotaGift scene like gift cards during the holidays — unexpected, shiny and exactly what we needed. Trained in the ancient arts of timelines, follow-ups, and "Why is this still in To Do?", they were here to enforce the processes we spent years evolving.</p>
+
+      <p>Their job?</p>
+      <ul>
+        <li>Make sure Sprints are actually finished.</li>
+        <li>Ensure teams followed structure.</li>
+        <li>Help track developer capacity without creepily stalking their calendars.</li>
+        <li>Prevent random urgent tasks from derailing the entire roadmap.</li>
+        <li>Remove blockers like "We can't start because the button hasn't been approved yet".</li>
+        <li>Be the official status announcer for all Stakeholders.</li>
+        <li>Make sure timelines don't stretch into the next century.</li>
+        <li>Give training to project teams.</li>
+        <li>And finally — ask "Is this task updated on JIRA, is your time logged?" 52 times a day.</li>
+      </ul>
+
+      <p>The PMO team isn't about the daily ticket drama. They are the ones setting the stage, building the rules, and making sure no one runs off with the production server. They set standards, support project teams, align every project with YOUGotaGift's big picture goals, handle strategic planning, resource balancing and governance (a fancy word for "please follow the process!"), manage risks, issues and occasional emotional breakdowns (usually over timelines), and oversee formal project closure — because "it's done" means more than pushing to prod.</p>
+
+      <h3>When PMO Dreamed, PMA Delivered</h3>
+      <p>The PMO team and the PMA team worked together in perfect harmony, assembling processes like IKEA furniture — with enough instructions that even developers could follow it. The PMO team listened patiently to every product tweak, every tech blocker, and every stakeholder's "urgent-but-not-urgent" escalation. Then they analysed it all and translated it into something the PMA team could build into real processes. One workflow at a time, things got smoother, smarter, and finally — it made sense.</p>
+
+      <h2>Final Act: The Present Day — A New Hope</h2>
+      <p>Today we are a whole new beast — a beautiful, well-oiled, slightly caffeinated machine. So how do we run a larger engineering team now? With a mix of:</p>
+      <ul>
+        <li>Clear ownership across product, tech, and project teams</li>
+        <li>Tools like JIRA, Confluence, Slack, Trello and Miro</li>
+        <li>Centralized documentation and workflows</li>
+        <li>Secure, traceable deployment flows via GitHub</li>
+        <li>Priority based escalation channels, not vibes</li>
+        <li>Sprint Management that (mostly) works</li>
+        <li>Proper incident management system</li>
+        <li>Clear PRDs with versioned designs</li>
+        <li>A full fledged Project Management department that keeps the ship sailing</li>
+      </ul>
+
+      <p>Now, there are no more accidental deployments, no more floating PRDs, and definitely no more "where's the Figma link?" Best of all — our developers can finally develop, and the rest of us can stop asking, "Wait, who is supposed to do this again?"</p>
+
+      <p>And behind every successful sprint is a PMO quietly updating the Stakeholder, fixing the blocker, and yelling in their head: <em>"WHY IS THE STATUS OF THIS TASK STILL NOT CHANGED?!"</em></p>
+
+      <p>Well, we now have a knowledge base so powerful, it's like a second brain that answers questions in minutes, gives instant summaries, and remembers a decade's worth of our glorious mistakes. Over the years, our accumulated docs, defined PRDs, and processes have all gained AI superpowers.</p>
+
+      <blockquote><p>And yes, just like that, we have gone from "YOUGotaGift… of chaos" to "YOUGotaGift… of solid Project Management".</p></blockquote>
+
+      <p>And yes, while we still occasionally miss deadlines, at least now we know why. Because it's documented. On JIRA. With a comment thread. And a status. And a sub-task. And a Confluence link to the PRD. And probably a smiling emoji.</p>
+
+      <p>Got a team in havoc? Want to go from sticky notes to scalable workflows? We've been there. We survived. And we gift-wrapped the survival guide for you.</p>
+      <p><strong>Want to know how we did it? Ping us. Pick our brains. Or just tag us in your favourite "Agile gone wrong" meme.</strong></p>
 
     </div>
 
@@ -444,13 +555,30 @@ html[data-theme="light"] .art-body code{ background:rgba(26,14,28,.06); }
         <ul class="footer-col-links">
           <li><a href="../Stories%20v2.html">Stories</a></li>
           <li><a href="../Stack.html">Stack</a></li>
-          <li><a>Status</a></li>
+          <li><a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a></li>
           <li><a href="../Newsroom.html">Newsroom</a></li>
           <li><a href="../Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
           <li><a href="../Trust%20Center.html">Trust Center</a></li>
         </ul>
       </div>
 
+    </div>
+
+    <!-- Mobile-only minimal footer -->
+    <div class="mobile-footer-simple">
+      <img src="../assets/yougotagift-logo.png" alt="YOUGotaGift" class="mf-logo" />
+      <div class="mf-social">
+        <a class="footer-social-icon" href="https://linkedin.com/company/yougotagift" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:currentColor"/></svg></a>
+        <a class="footer-social-icon" href="#" target="_blank" rel="noopener" aria-label="X / Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </div>
+      <div class="mf-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+      <p class="mf-copy">&#169; 2026 YOUGotaGift.com Ltd.</p>
     </div>
 
     <div class="footer-bar">

@@ -182,7 +182,7 @@
     var w = canvas.width, h = canvas.height;
     if (!w || !h){ raf = requestAnimationFrame(draw); return; }
     ctx.clearRect(0, 0, w, h);
-    var cx = w * 0.5, cy = h * 0.75, r = w * 0.38;
+    var cx = w * 0.5, cy = h * 0.62, r = w * 0.58;
     var grd = ctx.createRadialGradient(cx, cy, r*0.2, cx, cy, r);
     grd.addColorStop(0, 'rgba(184,0,196,.18)'); grd.addColorStop(1, 'rgba(184,0,196,0)');
     ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.fillStyle = grd; ctx.fill();
