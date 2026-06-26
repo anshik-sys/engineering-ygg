@@ -664,6 +664,14 @@ html[data-theme="light"] .ctrl-nav-links a:hover{ background:rgba(26,14,28,.05);
   .status-pill { display: none !important; }
   .controls-divider { display: none !important; }
 }
+/* Mobile: images below content (from Core Values onwards) */
+@media (max-width: 900px) {
+  .lf-feature-media { order: 2 !important; }
+  .lf-feature-copy { order: 1 !important; }
+  .lf-core-visual { order: 2 !important; }
+  .lf-core-copy { order: 1 !important; }
+}
+
 /* Mobile: minimal footer */
 @media (max-width: 768px) {
   .site-footer { padding: 0 !important; }
@@ -750,13 +758,13 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
 <!-- Mobile drawer -->
 <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <nav class="mobile-drawer-links">
+    <a href="index.html">Home</a>
     <a href="Stories%20v2.html">Stories</a>
     <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
     <a href="Stack%20v2.html">Stack</a>
     <a href="Life%20at%20YOUGotaGift%20v2.html" class="current">Life at YOUGotaGift</a>
     <a href="Trust%20Center.html">Trust Center</a>
     <a href="Newsroom%20v3.html">Newsroom</a>
-    <a href="index.html">Home</a>
   </nav>
 </div>
 
@@ -852,12 +860,12 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
       <div class="lf-core">
         <div class="lf-core-copy lf-rv-l">
           <h2 class="lf-title">Our <em>core values.</em></h2>
-          <p class="lf-lead">At the heart of everything we do are values that guide not just what we build, but how we treat each other. We have no time-up-for-our-own's-sake team, and we exist to make building a platform that protects and value what makes for people to express themselves, connect deeply, and stay true through the power of giving.</p>
-          <p class="lf-lead" style="margin-top:14px;">We're passionate about making giving more thoughtful, personal, and effortless — so they reach the moments that matter most.</p>
+          <p class="lf-lead">At the heart of everything we do are values that guide not just what we create, but how we show up—for our users, our team, and the world. We believe in building a platform and products that make it easier for people to express themselves, connect deeply, and share joy through the power of giving.</p>
+          <p class="lf-lead" style="margin-top:14px;">We're passionate about making gifting more thoughtful, personal, and effortless—turning everyday moments into lasting memories. Our work is rooted in empathy, ensuring we understand and honor the emotions behind every gift, recognising that even the smallest gestures can have the biggest impact.</p>
           <div class="lf-chips">
             <span class="lf-chip">Empathy</span>
             <span class="lf-chip">Thankfulness</span>
-            <span class="lf-chip">Curiosity</span>
+            <span class="lf-chip">Connection</span>
             <span class="lf-chip">Gratitude</span>
           </div>
         </div>
@@ -886,7 +894,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
         <div class="lf-feature-copy lf-rv-l">
           <p class="lf-feature-kicker">Growth</p>
           <h2>Working and <em>thriving.</em></h2>
-          <p>We invest in a wide range of benefits designed to help our team feel their best both in and out of the workplace. From comprehensive insurance and mental-wellness support to flexible time off and space to grow, we make sure you have everything you need to maintain a healthy mind and body — to thrive both personally and professionally.</p>
+          <p>We're proud to offer a wide range of benefits designed to help our team feel their best—both in and out of the workplace. From comprehensive resources and mental wellness support to flexible time off and space to recharge, we ensure what you need to maintain a healthy mind and body, to thrive both personally and professionally.</p>
         </div>
         <div class="lf-feature-media lf-rv-r">
           <figure class="lf-feature-photo">
@@ -900,7 +908,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
         <div class="lf-feature-copy lf-rv-r">
           <p class="lf-feature-kicker">Together</p>
           <h2>Internal <em>events.</em></h2>
-          <p>From offsites to team lunches and birthday celebrations, we create moments that bring people together — and turn coworkers into friends. A calm rhythm of shared rituals keeps the culture warm and the connections real, far beyond the everyday flow of work.</p>
+          <p>From Monthly team building sessions and birthday celebrations to cultural events, we create moments that bring joy, strengthen bonds, and build a true sense of belonging. By celebrating every occasion, we honour the unique backgrounds and cultures within our team, fuelling creativity, enthusiasm, and deeper connections that make our workplace vibrant and inclusive.</p>e warm and the connections real, far beyond the everyday flow of work.</p>
           <div class="lf-tags">
             <span class="lf-tag">Team Lunches</span>
             <span class="lf-tag">Outings</span>
@@ -927,7 +935,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
         <div class="lf-feature-copy lf-rv-l">
           <p class="lf-feature-kicker">Engagement</p>
           <h2>Employee engagement <em>activities.</em></h2>
-          <p>Our continuous engagement initiatives are thoughtfully designed to please connection, collaboration, and encourage personal growth. By strengthening the bonds between team members, we create a workplace where everyone feels valued, connected, and inspired to bring their best selves forward — where these connections flourish, our collective effectiveness moves with them.</p>
+          <p>Our employee engagement initiatives are thoughtfully designed to deepen connections, foster collaboration, and encourage personal growth. By strengthening the bonds between team members, we create a workplace where everyone feels valued, motivated, and inspired to bring their best selves. When these connections flourish, our collective effectiveness and success follow.</p>
         </div>
         <div class="lf-feature-media lf-rv-r">
           <div class="lf-ph-panel">
@@ -955,7 +963,8 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
         <div class="lf-feature-copy lf-rv-r">
           <p class="lf-feature-kicker">Care</p>
           <h2>Employee <em>benefits.</em></h2>
-          <p>Dedicated to creating an environment where people feel supported, respected, and equipped to do their best work. Our benefits go beyond the basics — with comprehensive medical coverage, generous protected leave, high-quality equipment, and a flexible workspace that once again both keeps and stretches your productivity. At the core is a culture of openness and trust: every benefit was designed to make work and life better.</p>
+          <p>Dedicated to creating an environment where people feel supported, inspired, and equipped to do their best work. Our benefits go beyond the basics–with comprehensive medical coverage, generous parental leave, high-quality equipments, and a flexible workspace that encourages both focus and creativity.</p>
+          <p style="margin-top:14px;">At the core is a culture of openness and trust, where transparent communication and honest feedback are embraced. Every voice matters, and every team member is genuinely valued, because we believe when people are cared for, they don’t just work, they thrive.</p>
         </div>
         <div class="lf-feature-media lf-rv-l">
           <div class="lf-visual">
@@ -976,7 +985,8 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
         <div class="lf-feature-copy lf-rv-l">
           <p class="lf-feature-kicker">Empowerment</p>
           <h2>Female <em>engagement.</em></h2>
-          <p>Passionate about building a truly inclusive workplace, we are committed to supporting our expanding women-in-tech community at every stage of their journey. From mentorship and a dedicated network to equal growth opportunities and a culture where every woman is heard, we strive to create a workplace where talent thrives, leads, and is supported.</p>
+          <p>Passionate about building a truly inclusive workplace, we are committed to supporting and empowering women at every stage of their journey. From flexible working hours and FOP (First Day of Period) leave to maternity leave and other gender-responsive policies, our initiatives are designed to meet real needs with empathy and care.</p>
+          <p style="margin-top:14px;">We strive to create a culture where women feel seen, heard, and supported.</p>
         </div>
         <div class="lf-feature-media lf-rv-r">
           <div class="lf-ph-panel">
@@ -1017,9 +1027,9 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
-          <p class="lf-review-q">"A place that truly invests in its people."</p>
-          <p class="lf-review-b">Great work culture with supportive leadership and the freedom to own meaningful problems from day one.</p>
-          <p class="lf-review-meta">Software Engineer · Glassdoor</p>
+          <p class="lf-review-q">"Positive Tech Culture"</p>
+          <p class="lf-review-b">Teams work well together across functions, with open knowledge sharing. New ideas and creative problem-solving are supported and welcomed.</p>
+          <p class="lf-review-meta">Current Employee · Technical Consultant</p>
         </div>
         <div class="lf-review lf-rv" data-d="2">
           <div class="lf-stars" aria-label="5 out of 5">
@@ -1029,15 +1039,16 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
-          <p class="lf-review-q">"Outstanding onboarding experience."</p>
-          <p class="lf-review-b">Teams work across functas really with mutual respect and an open communication. Design is valued from the start, not just bought in at the end.</p>
-          <p class="lf-review-meta">Product Designer · Glassdoor</p>
+          <p class="lf-review-q">"Outstanding Onboarding experience"</p>
+          <p class="lf-review-b">Teams work cross-functionally with mutual respect and open communication. Design is valued from the start, not just brought in at the end.</p>
+          <p class="lf-review-meta">Current Employee · Associate Technical Consultant</p>
         </div>
+      </div>
+      <div style="display:flex; justify-content:center; margin-top:36px;">
+        <a href="https://www.glassdoor.com/Reviews/YOUGotaGift-Reviews-E1520668.htm" target="_blank" rel="noopener" class="lf-btn" style="display:inline-flex; align-items:center; gap:8px;">Read More on Glassdoor <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
       </div>
     </div>
   </section>
-
-  <!-- ═══ JOIN ═══ -->
   <section class="lf-section" id="open-roles" data-screen-label="Join CTA">
     <div class="lf-inner">
       <div class="lf-join lf-rv">

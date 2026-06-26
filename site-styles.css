@@ -1231,6 +1231,7 @@
   }
   .mobile-drawer-links a:last-child{ border-bottom: none; }
   .mobile-drawer-links a:active{ color: var(--brand, #B800C4); }
+  .mobile-drawer-links a.current{ display: none; }
 
   /* Stats bar — horizontal scroll on mobile */
   @media (max-width: 600px){

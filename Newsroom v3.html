@@ -477,7 +477,8 @@ html[data-theme="light"] .nr-tabs { border-bottom-color: rgba(26,14,28,.1); }
   .nr-filter-list li button { padding: 6px 14px; font-size: 12.5px; }
   .nr-filter-count { display: none; }
   .nr-featured { grid-template-columns: 1fr; min-height: auto; }
-  .nr-featured-img { min-height: 200px; }
+  .nr-featured-img { min-height: 200px; order: 2; }
+  .nr-featured-content { order: 1; }
 }
 /* ── Layout ── */
 .nr-section {
@@ -611,14 +612,39 @@ html[data-theme="light"] .nr-hero {
   box-shadow: 0 0 0 1px rgba(184,0,196,.18) inset, 0 12px 32px -8px rgba(0,0,0,.5), 0 0 40px -8px rgba(184,0,196,.55);
 }
 
+/* Mobile: image below content in cards */
+@media (max-width: 768px) {
+  .nr-card-img {
+    order: 2 !important;
+    margin: 20px 0 0 !important;
+    width: 100% !important;
+    height: 200px !important;
+    aspect-ratio: unset !important;
+    border-radius: 16px !important;
+  }
+  .nr-card-meta,
+  .nr-card-headline,
+  .nr-card-excerpt { order: 1 !important; }
+  .nr-card-footer {
+    order: 3 !important;
+    margin-top: 20px !important;
+    padding-top: 16px !important;
+    border-top: none !important;
+  }
+  .nr-card {
+    padding-bottom: 30px !important;
+  }
+}
+@media (max-width: 700px) {
+  .nr-card-img { height: 180px !important; }
+}
+
 /* ── Grid ── */
 .nr-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
-
-/* ── Card image ── */
 .nr-card-img {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -761,7 +787,10 @@ html[data-theme="light"] .nr-card:hover .nr-card-headline { color: var(--brand);
 @media (max-width: 700px) {
   .nr-section { padding: 60px 0 80px; }
   .nr-inner { padding: 0 20px; }
-  .nr-grid { grid-template-columns: 1fr; }
+  .nr-grid { grid-template-columns: 1fr; gap: 24px; }
+  .nr-card { margin-bottom: 20px !important; }
+  .nr-card:hover::before { opacity: 0 !important; }
+  .nr-card:hover { transform: none !important; }
   .nr-header { margin-bottom: 44px; }
 }
 </style>
@@ -886,13 +915,13 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
 <!-- Mobile nav drawer -->
 <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <nav class="mobile-drawer-links">
+    <a href="index.html">Home</a>
     <a href="Stories%20v2.html">Stories</a>
     <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
     <a href="Stack%20v2.html">Stack</a>
     <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
     <a href="Trust%20Center.html">Trust Center</a>
     <a href="Newsroom%20v3.html" class="current">Newsroom</a>
-    <a href="index.html">Home</a>
   </nav>
 </div>
 
