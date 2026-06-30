@@ -1615,12 +1615,12 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
       <a class="brand-tag" href="#" style="text-decoration:none;">Engineering</a>
     </div>
     <div class="nav-links">
-      <a href="Stories%20v2.html">Stories</a>
+      <a href="stories.html">Stories</a>
       <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
-      <a href="Stack%20v2.html">Stack</a>
-      <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
-      <a href="Trust%20Center.html">Trust Center</a>
-      <a href="Newsroom%20v3.html">Newsroom</a>
+      <a href="stack.html">Stack</a>
+      <a href="life.html">Life at YOUGotaGift</a>
+      <a href="trust.html">Trust Center</a>
+      <a href="newsroom.html">Newsroom</a>
     </div>
   </nav>
 </div>
@@ -1648,12 +1648,12 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
 <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <nav class="mobile-drawer-links">
     <a href="index.html" class="current">Home</a>
-    <a href="Stories%20v2.html">Stories</a>
+    <a href="stories.html">Stories</a>
     <a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a>
-    <a href="Stack%20v2.html">Stack</a>
-    <a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a>
-    <a href="Trust%20Center.html">Trust Center</a>
-    <a href="Newsroom%20v3.html">Newsroom</a>
+    <a href="stack.html">Stack</a>
+    <a href="life.html">Life at YOUGotaGift</a>
+    <a href="trust.html">Trust Center</a>
+    <a href="newsroom.html">Newsroom</a>
   </nav>
 </div>
 
@@ -1845,7 +1845,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
         <div class="stories-eyebrow">stories</div>
         <h2 class="stories-title">Engineering, told in <em>our own words.</em></h2>
       </div>
-      <a class="stories-view-all" href="Stories%20v2.html" style="text-decoration:none">View all stories <span class="btn-arrow">→</span></a>
+      <a class="stories-view-all" href="stories.html" style="text-decoration:none">View all stories <span class="btn-arrow">→</span></a>
     </div>
 
     <div class="story-stage">
@@ -1957,7 +1957,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
         </a>
 
         <!-- 6. CTA Card -->
-        <a class="story-card cta" data-read="Archive" href="Stories%20v2.html">
+        <a class="story-card cta" data-read="Archive" href="stories.html">
           <span class="side-label"><span class="side-eyebrow"></span><span class="side-name">All Stories</span></span>
           <span class="cta-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -2628,7 +2628,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
       <div class="ts-eyebrow"><span class="dot"></span> Tech Stack · Engineering</div>
       <h2 class="ts-title">The toolkit behind <em>every gift.</em></h2>
       <p class="ts-meta reveal-left">The Technologies currently using within our organization</p>
-      <a href="Stack%20v2.html" class="culture-card-cta" style="text-decoration:none; margin-top: 8px; display: inline-flex;">
+      <a href="stack.html" class="culture-card-cta" style="text-decoration:none; margin-top: 8px; display: inline-flex;">
         Explore the Stack <span class="btn-arrow">→</span>
       </a>
     </div>
@@ -2881,12 +2881,13 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
   };
 
   function loadLogos(){
-    const els = [...document.querySelectorAll(".ts-logo[data-slug]")];
+    const els = [...document.querySelectorAll(".ts-logo[data-slug]")].filter(el => !el.querySelector(".mark"));
     const bySlug = {};
     els.forEach(el => { (bySlug[el.dataset.slug] = bySlug[el.dataset.slug] || []).push(el); });
     const slugs = Object.keys(bySlug);
 
     const fill = (slug, src) => bySlug[slug].forEach(el => {
+      if (el.querySelector(".mark")) return;
       const mark = document.createElement("i");
       mark.className = "mark";
       mark.style.setProperty("--m", 'url("' + src + '")');
@@ -3653,7 +3654,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
     </div>
 
     <div style="display:flex; justify-content:flex-end; margin-top:20px;">
-      <a class="culture-card-cta" href="Life%20at%20YOUGotaGift%20v2.html" style="font-size:14px; padding:11px 26px;">Learn more <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px; vertical-align:middle;"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="culture-card-cta" href="life.html" style="font-size:14px; padding:11px 26px;">Learn more <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px; vertical-align:middle;"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
 
   </div>
@@ -4021,7 +4022,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
         <p class="trust-sub">We maintain clear policies, rigorous controls, and transparent processes to protect your data, ensure reliability, and operate with integrity.</p>
       </div>
       <div class="trust-actions">
-        <a href="Trust Center.html" class="trust-btn-primary">
+        <a href="trust.html" class="trust-btn-primary">
           Explore Trust Center
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -4076,7 +4077,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
     <!-- Popular Policies -->
     <div class="trust-policies-head">
       <h3 class="trust-policies-title">Popular policies</h3>
-      <a href="Trust%20Center.html#policies" class="trust-view-all">View all policies <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="trust.html#policies" class="trust-view-all">View all policies <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
 
     <div class="trust-policy-grid">
@@ -4485,7 +4486,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
         <div class="newsroom-eyebrow"><span class="dot"></span> Newsroom</div>
         <h2 class="newsroom-headline">Latest <em>News</em></h2>
         <p class="newsroom-sub">From compliance to global partnerships, every milestone brings us closer to our vision of simplifying gifting worldwide.</p>
-        <a href="Newsroom%20v3.html" class="newsroom-cta">Explore all news <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="newsroom.html" class="newsroom-cta">Explore all news <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
 
       <!-- Right: timeline -->
@@ -4496,7 +4497,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
           <div class="nm-card">
             <h3 class="nm-title">Tech Evolution</h3>
             <div class="nm-img">
-              <a href="Newsroom%20v3.html"><img src="assets/news-tech-evolution.webp" alt="Tech Evolution of YOUGotaGift" loading="lazy" /></a>
+              <a href="newsroom.html"><img src="assets/news-tech-evolution.webp" alt="Tech Evolution of YOUGotaGift" loading="lazy" /></a>
             </div>
           </div>
 
@@ -4504,7 +4505,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
           <div class="nm-card">
             <h3 class="nm-title">New Kochi Office</h3>
             <div class="nm-img">
-              <a href="Newsroom%20v3.html"><img src="assets/news-kochi-office.webp" alt="New Kochi Office" loading="lazy" /></a>
+              <a href="newsroom.html"><img src="assets/news-kochi-office.webp" alt="New Kochi Office" loading="lazy" /></a>
             </div>
           </div>
 
@@ -4512,7 +4513,7 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
           <div class="nm-card">
             <h3 class="nm-title">Team Giftee Visit</h3>
             <div class="nm-img">
-              <a href="Newsroom%20v3.html"><img src="assets/news-team-giftee-visit.webp" alt="Team Giftee Visit" loading="lazy" /></a>
+              <a href="newsroom.html"><img src="assets/news-team-giftee-visit.webp" alt="Team Giftee Visit" loading="lazy" /></a>
             </div>
           </div>
 
@@ -5545,11 +5546,11 @@ html[data-theme="light"] .mf-copy { color: rgba(0,0,0,.35); }
       <div class="footer-col">
         <p class="footer-col-title">Engineering</p>
         <ul class="footer-col-links">
-          <li><a href="Stack%20v2.html">Stack</a></li>
+          <li><a href="stack.html">Stack</a></li>
           <li><a href="https://yougotagift.statuspage.io/" target="_blank" rel="noopener">Status</a></li>
-          <li><a href="Newsroom%20v3.html">Newsroom</a></li>
-          <li><a href="Life%20at%20YOUGotaGift%20v2.html">Life at YOUGotaGift</a></li>
-          <li><a href="Trust%20Center.html">Trust Center</a></li>
+          <li><a href="newsroom.html">Newsroom</a></li>
+          <li><a href="life.html">Life at YOUGotaGift</a></li>
+          <li><a href="trust.html">Trust Center</a></li>
         </ul>
       </div>
 
@@ -6032,11 +6033,18 @@ html, body { overflow-x: clip; max-width: 100vw; }
     if (!coltracks.length){ setTimeout(populateStrip, 200); return; }
 
     var allItems = [];
+    var seen = {};
     coltracks.forEach(function(track){
       var kids = Array.from(track.children);
       kids.slice(0, Math.floor(kids.length / 2)).forEach(function(el){
         /* Skip category labels — only include chip tiles */
         if (el.classList.contains('ts-cat')) return;
+        /* Dedup by slug (same slug = same icon = visually identical) */
+        var slug = el.querySelector('.ts-logo') ? el.querySelector('.ts-logo').dataset.slug : null;
+        var nameEl = el.querySelector('.ts-name');
+        var key = (slug && slug !== 'undefined') ? slug : (nameEl ? nameEl.textContent.trim() : el.textContent.trim());
+        if (seen[key]) return;
+        seen[key] = true;
         allItems.push(el.cloneNode(true));
       });
     });
