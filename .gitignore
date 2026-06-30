@@ -1,6 +1,7 @@
 uploads/
 screenshots/
 .DS_Store
+.thumbnail
 
 # Old/unused page versions
 Hero v8.html
